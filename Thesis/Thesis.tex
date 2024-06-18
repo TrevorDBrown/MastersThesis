@@ -1,0 +1,108 @@
+%
+%	Thesis.tex
+%	(c)2024 Trevor D. Brown. All rights reserved.
+%
+
+% WKUCSManuscript document class and AMMALanguages styles
+\documentclass[letterpaper,12pt]{./Support/WKUCSManuscript}
+\usepackage{./Support/Styles/AMMALanguages}
+
+% Packages used within LaTeX solution.
+\usepackage[english]{babel}
+\usepackage[final]{microtype}
+\usepackage{csquotes}
+\usepackage{textcomp}
+\usepackage{upquote}
+\usepackage{listings}
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[page,title,toc]{appendix}
+\usepackage{framed}
+\usepackage{subfig}
+\usepackage{textcase}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+\usepackage{epigraph}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{etoolbox}
+\usepackage{biblatex}
+\addbibresource{./Support/References.bib}
+
+% Thesis Properties - text, representations, etc. that are meta to the document.
+\newcommand{\ThesisTitle}{Working Title To Be Finalized Later}
+\newcommand{\ThesisAuthor}{Trevor Dylan Brown}
+\newcommand{\ThesisDate}{December 2024}
+\newcommand{\ThesisCommitteeChairOne}{Dr. Michael Galloway}
+\newcommand{\ThesisCommitteeMemberOne}{Dr. Rong Yang}
+\newcommand{\ThesisCommitteeMemberTwo}{Dr. Qi Li}
+\newcommand{\ThesisCommitteeMemberThree}{Dr. Gregory Arbuckle}
+\newcommand{\PageCount}{X}
+\newcommand{\AcademicInstitution}{Western Kentucky University}
+\newcommand{\AcademicDepartment}{School of Engineering and Applied Sciences}
+\newcommand{\AcademicProgram}{Computer Science}
+
+\begin{document}
+
+	\IntentionallyBlankPage
+	\maketitle
+
+	\begin{signatures}
+		\input{./Sections/Signatures.tex}
+	\end{signatures}
+
+%	\begin{dedication}
+%		\input{./Sections/Dedication.tex}
+%	\end{dedication}
+
+% 	\begin{acknowledgments}
+% 		\input{./Sections/Acknowledgments.tex}
+% 	\end{acknowledgments}
+
+    \begin{toc}
+	    \tableofcontents
+	\end{toc}
+
+    % \begin{tables}
+    %     \listoftables
+    % \end{tables}
+
+	\begin{figures}
+	    \listoffigures
+    \end{figures}
+
+% 	\begin{symbols}
+% 	  \listofsymbols
+% 	\end{symbols}
+
+	% Begin the actual Thesis
+	\begin{abstract}
+		\input{./Sections/Abstract.tex}
+	\end{abstract}
+
+	\begin{body}
+		\input{./Sections/Chapter1.tex}
+		\input{./Sections/Chapter2.tex}
+%		\input{./Sections/Chapter3.tex}
+%       \input{./Sections/Chapter4.tex}
+% 		\input{./Sections/Chapter5.tex}
+% 		\input{./Sections/Chapter6.tex}
+	\end{body}
+
+	\begin{references}
+        \input{./Sections/References.tex}
+    \end{references}
+
+% 	\begin{appendices}
+% 		\input{./Sections/Appendices.tex}
+% 	\end{appendices}
+
+\end{document}

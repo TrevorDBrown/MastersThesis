@@ -1,0 +1,184 @@
+\def\filedate{2006/05/16}
+\def\fileversion{1.02}
+\ProvidesPackage{./Support/Styles/AMMALanguages}
+             [\filedate\space\fileversion\space(Davide Di Ruscio and Fr�d�ric Jouault)]
+\typeout{}
+\typeout{----------------------}
+\typeout{AMMA Languages Formatting Package}
+\typeout{----------------------}
+\typeout{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ 
+\usepackage{listings}
+\usepackage{color}
+%\usepackage{times}
+
+\newcommand{\KeywordsATL}{\lstset{keywords={}}}
+
+
+\definecolor{lightgrey}{gray}{0.8}
+\definecolor{gray}{rgb}{0.95,0.95,0.95}
+\definecolor{blue}{rgb}{0,0,0.5}
+
+ \lstset{
+%   backgroundcolor=\color{gray},
+%   breaklines=true,
+   frame=single,
+   framerule=0pt,
+%   language=,
+%   numbers=right,
+%   numbersep=5pt,
+   showspaces=false,
+%   showtabs=false,
+%   tabsize=4,
+%   basicstyle=\ttfamily\scriptsize,
+%   commentstyle=\ttfamily\itshape,
+%   identifierstyle=\ttfamily\scriptsize\bfseries,
+%   numberstyle=\ttfamily\tiny,
+ }
+
+
+\definecolor{keywordColor}{rgb}{.5, 0, .33}
+%\definecolor{keywordColor}{rgb}{0, 0, 0}
+\definecolor{commentColor}{rgb}{0, .5, 0}
+\definecolor{emphColor}{rgb}{.16, 0, 1}
+\definecolor{numberColor}{rgb}{0, 0, 0}
+  %[breaklines,mathescape,rulesepcolor=\color{black}]
+\lstdefinestyle{AMMA}{
+        backgroundcolor=\color{lightgrey},
+        basicstyle=\scriptsize,
+%        keywordstyle=\color{[rgb]{.5, 0, .33}}\bfseries,
+        keywordstyle=\color{keywordColor}\bfseries,
+        stringstyle=\color{blue}\ttfamily,
+%       commentstyle=\color{[rgb]{0, 0.5, 0}}\ttfamily,
+        commentstyle=\color{commentColor}\ttfamily,
+        emphstyle=\color{emphColor},
+        numberstyle=\tiny\color{numberColor},
+        numbers=left,
+        numbersep=1pt,
+        tabsize=2,
+        frame=,
+        breaklines=true,
+        showstringspaces=false,
+%       postbreak={(*@$\hookrightarrow$@*)},
+%       postbreak={(*@$\nearrow$@*)},
+%       postbreak=\mbox{{\color{red}\tiny$\rightarrow$}},
+        postbreak=\mbox{{\color{red}\tiny$\hookrightarrow$}},
+}
+
+\lstdefinelanguage{TCS}{
+        morekeywords={main,template,isDefined,addToContext,primitiveTemplate,for,default,using,context},
+        morekeywords={operators,priority,operatorTemplate,source,storeOpTo,storeRightTo},
+        morekeywords={symbols,leftSpace,rightSpace,leftNone,rightNone},
+        morekeywords={nbNL,indentIncr},
+        morekeywords={as,refersTo,separator},
+        sensitive=true,
+        morecomment=[l]{--},
+        morestring=[b]",
+}
+
+
+	
+
+
+\lstdefinelanguage{KM3}{
+        morekeywords={package,class,oppositeOf,container,ordered,abstract,extends,reference,attribute,enumeration,literal,datatype},
+        emph={Boolean,Integer,String},
+        sensitive=true,
+        morecomment=[l]{--},
+        morestring=[b]",
+}
+
+\lstdefinelanguage{ATL}{
+        morekeywords={rule,module,from,to,create,uses, , module,create,from,rule,to,and,not,if,then,helper,endif,else,context,def,using,do},
+        emph={Boolean,Integer,String,Sequence},
+        sensitive=true,
+        morecomment=[l]{--},
+        morestring=[b]',
+        morestring=[b]",
+}
+
+
+\lstdefinelanguage{XTEXT}{
+        morekeywords={STRING, ID,LETTER, grammar,package,generate},
+% we use emph for (some) terminals
+        emph={LCURLY,RCURLY,},
+        sensitive=true,
+        morecomment=[l]{//},
+        morestring=[b]",
+        morestring=[b]',
+         literate=
+      {:}{{{\color{keywordColor}{:}}}}{1},
+}
+\lstdefinelanguage{ANTLR}{
+        morekeywords={grammar,package,new,@lexer,parser,returns,EOF,@header,@init},
+% we use emph for (some) terminals
+        emph={LCURLY,RCURLY,},
+        sensitive=true,
+        morecomment=[l]{//},
+        morestring=[b]',
+         literate=
+      {:}{{{\color{keywordColor}{:}}}}{1},
+}
+
+\lstdefinelanguage{SPL}{
+        morekeywords={service,processing,registration,return,forward,incoming},
+        emph={uri,response},
+        sensitive=true,
+        morecomment=[l]{//},
+        morestring=[b]',
+}
+
+\lstdefinelanguage{XASM}{
+        morekeywords={asm,endasm,is,choose,in,do,forall,and,or,then,endchoose,enddo,if,endif,then,else,universes,universe,function,exists,not,extend,endextend,with,init,endinit},
+        emph={Boolean,Integer,String,Sequence},
+        sensitive=true,
+        morecomment=[l]{--},
+        morestring=[b]',
+}
+
+\lstdefinelanguage{BASH}{
+ 		morekeywords={kernel,in,vector,scalar,constant,read, write, endkernel,generate},
+        morekeywords={\#pragma,\#ifdef },
+        emph={CUDA, SUM,ACCURATE,MPI, OCL, OMP, AVERAGE, FAST},
+        sensitive=true,
+        morecomment=[l]{\#},
+        morestring=[b]"
+}
+
+
+
+
+\lstdefinelanguage{PPModel}{
+        morekeywords={declare,execute,map, in,out},
+        morekeywords={\#pragma,\#ifdef },
+        emph={CUDA, MPI, OMP, LCURLY, RCURLY},
+        sensitive=true,
+        morecomment=[l]{//},
+        morecomment=[s]{/*}{*/},
+        morestring=[b]'
+}
+\lstdefinelanguage{MAPREDOOP}{
+        morekeywords={metaelements,metaelement,mapreduce,loop,program,extend},
+        morekeywords={after,call before,int,long, float,double,text},
+        emph={map,reduce,read,write},
+        sensitive=true,
+        morecomment=[l]{//},
+        morecomment=[s]{/*}{*/},
+        morestring=[b]'
+}
+
+\lstdefinelanguage{WSDL}{
+        morekeywords={in,out,service,define,as,at,with-key,cmd,with,call,till,after,
+	resource,use,doc,workflow,list},
+        emph={LCURLY, RCURLY, NAME},
+        sensitive=true,
+        morecomment=[l]{//},
+        morestring=[b]",
+        morestring=[b]',
+        showstringspaces=false,
+        morecomment = [s]{/*}{*/}
+}
+
+\endinput
