@@ -4,7 +4,7 @@
 %
 
 % WKUCSManuscript document class and AMMALanguages styles
-\documentclass[letterpaper,12pt]{./Support/WKUCSManuscript}
+\documentclass[letterpaper,12pt]{./Support/Classes/WKUCSManuscript}
 \usepackage{./Support/Styles/AMMALanguages}
 
 % Packages used within LaTeX solution.
@@ -45,7 +45,6 @@
 \newcommand{\ThesisCommitteeMemberOne}{Prof. Leah Moss}
 \newcommand{\ThesisCommitteeMemberTwo}{Prof. Mark Simpson}
 \newcommand{\ThesisCommitteeMemberThree}{Dr. Rong Yang}
-\newcommand{\ThesisCommitteeMemberFour}{Dr. Gregory Arbuckle}
 
 \newcommand{\PageCount}{X}
 \newcommand{\AcademicInstitution}{Western Kentucky University}
@@ -61,29 +60,29 @@
 		\input{./Sections/Signatures.tex}
 	\end{signatures}
 
-	% \begin{dedication}
-	% 	\input{./Sections/Dedication.tex}
-	% \end{dedication}
+	\begin{dedication}
+		\input{./Sections/Dedication.tex}
+	\end{dedication}
 
-	% \begin{acknowledgments}
-	% 	\input{./Sections/Acknowledgments.tex}
-	% \end{acknowledgments}
+	\begin{acknowledgments}
+		\input{./Sections/Acknowledgments.tex}
+	\end{acknowledgments}
 
     \begin{toc}
 	    \tableofcontents
 	\end{toc}
 
-    % \begin{tables}
-    %     \listoftables
-    % \end{tables}
+    \begin{tables}
+        \listoftables
+    \end{tables}
 
 	\begin{figures}
 	    \listoffigures
     \end{figures}
 
-% 	\begin{symbols}
-% 	  \listofsymbols
-% 	\end{symbols}
+	\begin{symbols}
+	  \listofsymbols
+	\end{symbols}
 
 	% Begin the actual Thesis
 	\begin{abstract}
@@ -93,18 +92,18 @@
 	\begin{body}
 		\input{./Sections/Chapter1.tex}
 		\input{./Sections/Chapter2.tex}
-%		\input{./Sections/Chapter3.tex}
-%       \input{./Sections/Chapter4.tex}
-% 		\input{./Sections/Chapter5.tex}
-% 		\input{./Sections/Chapter6.tex}
+		\input{./Sections/Chapter3.tex}
+      	\input{./Sections/Chapter4.tex}
+		\input{./Sections/Chapter5.tex}
+		\input{./Sections/Chapter6.tex}
 	\end{body}
 
 	\begin{references}
         \input{./Sections/References.tex}
     \end{references}
 
-% 	\begin{appendices}
-% 		\input{./Sections/Appendices.tex}
-% 	\end{appendices}
+	\begin{appendices}
+		\input{./Sections/Appendices.tex}
+	\end{appendices}
 
 \end{document}
