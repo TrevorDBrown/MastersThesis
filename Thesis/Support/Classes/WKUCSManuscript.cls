@@ -69,7 +69,7 @@
     % letterpaper, % letterpaper no longer needed... maybe...
     onecolumn,
     oneside
-]{report} 
+]{report}
 
 %-- Packages
 \usepackage{algorithm}
@@ -128,7 +128,7 @@
 %--
 
 %---- geometry
-% \geometry{letterpaper}        % letterpaper no longer needed... maybe...								
+% \geometry{letterpaper}        % letterpaper no longer needed... maybe...
 % \geometry{textwidth=6.5in}    % Dimension no longer needed... maybe...
 % \geometry{textheight=9in}     % Dimension no longer needed... maybe...
 \geometry{top=1in,left=1.5in,right=1in,bottom=1in}			% 1.0? top, bottom, and right, and 1.5? left;%
@@ -183,10 +183,10 @@
 \author{\ThesisAuthor}
 
 %-- Preliminary pages
-   
+
 %--
 
-%---- Blank page left intentionally 
+%---- Blank page left intentionally
 
 %---- Blank page
 % First Fly Sheet, not considered in numbering.
@@ -208,7 +208,7 @@
    \date{\ThesisDate}
 
    \newsavebox{\mylistingbox}
-   \patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{} 
+   \patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
 
    \cleardoublepage
    \thispagestyle{empty}
@@ -253,7 +253,7 @@
 
    \begin{center}
       By \\
-      \ETD@author \\ 			%remove "MakeUppercase" to have case sensitive names 
+      \ETD@author \\ 			%remove "MakeUppercase" to have case sensitive names
       \doublespacing
       \ETD@date
    \end{center}
@@ -289,29 +289,29 @@
         \MakeUppercase{\ETD@title}
     \end{center}
     %\addcontentsline{toc}{section}{\normalsize\textnormal{ABSTRACT}}		%commented to remove from table of content
-   
+
     \doublespacing
-    
+
     \begin{center}
-        %Month Year 
+        %Month Year
         \ETD@date
     \end{center}
-    
+
     \vspace{-3em}													% changed to -3 to be in the same line as author
-    
+
     {\raggedright \ETD@author}
-    
+
     \vspace{-2em}
-    
+
     {\raggedleft \hfill \PageCount\ Pages}  % Replace XX with the number of pages.		% replace with newer page
-    
+
     {\raggedright Directed by: \ThesisCommitteeChairOne,\ \ThesisCommitteeMemberOne,\ \ThesisCommitteeMemberTwo,\ and\ \ThesisCommitteeMemberThree }
-    
+
     {\raggedright \AcademicDepartment}
-    
+
     {\vspace{-2em}}
-    {\raggedleft \hfill \AcademicInstitution} \\ 
-    
+    {\raggedleft \hfill \AcademicInstitution} \\
+
     {\vspace{-1em}}
     {\par}
 }{
@@ -419,7 +419,7 @@
       \penalty\@highpenalty
     \endgroup
   \fi}
-  
+
 \renewcommand*\l@figure[2]{
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
@@ -437,7 +437,7 @@
 }
 \def\ps@toccont{
    \setlength{\topmargin}{-0.5in}
-   
+
 }
 
 %---- List of Tables
@@ -496,8 +496,8 @@
                    {\protect\numberline{\thechapter}#1}%
     \else
       \addcontentsline{toc}{chapter}{#1}%
-    \fi 
-    
+    \fi
+
     \chaptermark{#1}%
     \if@twocolumn
       \@topnewpage[\@makechapterhead{#2}]%
@@ -505,7 +505,7 @@
       \@makechapterhead{#2}%
       \@afterheading
     \fi
-    
+
 }
 
 \renewcommand\appendix{\par
@@ -583,7 +583,7 @@
 %       \advance\leftmargin\bibindent
 %       \itemindent -\bibindent
 %       \listparindent \itemindent
-%       \parsep \z@ 
+%       \parsep \z@
 %       \usecounter{enumi}
 %   }
 %   \def\newblock{}
