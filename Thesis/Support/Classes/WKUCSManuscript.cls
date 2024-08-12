@@ -131,7 +131,14 @@
 % \geometry{letterpaper}        % letterpaper no longer needed... maybe...
 % \geometry{textwidth=6.5in}    % Dimension no longer needed... maybe...
 % \geometry{textheight=9in}     % Dimension no longer needed... maybe...
-\geometry{top=1in,left=1.5in,right=1in,bottom=1in}			% 1.0? top, bottom, and right, and 1.5? left;%
+\geometry{
+   letterpaper,
+   top=1in,
+   left=1in,
+   right=1in,
+   bottom=1in
+}
+% Note: may need to include "bindingoffset=0.5in", when submitting for bindery service. TODO: Verify first.
 
 %---- fancyhdr
 \fancyhf{}

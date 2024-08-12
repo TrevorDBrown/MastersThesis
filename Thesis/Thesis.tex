@@ -4,12 +4,14 @@
 %
 
 % WKUCSManuscript document class and AMMALanguages styles
-\documentclass[letterpaper,12pt]{./Support/Classes/WKUCSManuscript}
+\documentclass[letterpaper,12pt,english]{./Support/Classes/WKUCSManuscript}
 \usepackage{./Support/Styles/AMMALanguages}
 
 % Packages used within LaTeX solution.
 \usepackage[english]{babel}
 \usepackage[final]{microtype}
+\usepackage{ragged2e}
+\usepackage{layouts}
 \usepackage{csquotes}
 \usepackage{textcomp}
 \usepackage{upquote}
@@ -24,7 +26,6 @@
 \usepackage{xcolor}
 \usepackage{longtable}
 \usepackage{chngcntr}
-\counterwithout{footnote}{chapter}
 \usepackage{epigraph}
 \usepackage{hyperref}
 \usepackage{cleveref}
@@ -35,7 +36,12 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{etoolbox}
 \usepackage{biblatex}
-\addbibresource{./Support/References.bib}
+
+% References file
+\addbibresource{./Support/Bibliography/References.bib}
+
+% Additional Settings
+\counterwithout{footnote}{chapter}
 
 % Thesis Properties - text, representations, etc. that are meta to the document.
 \newcommand{\ThesisTitle}{Working Title To Be Finalized Later}
@@ -52,58 +58,62 @@
 \newcommand{\AcademicProgram}{Computer Science}
 
 \begin{document}
+	\begin{FlushLeft}
 
-	\IntentionallyBlankPage
-	\maketitle
+		\listdiagram
 
-	\begin{signatures}
-		\input{./Sections/Signatures.tex}
-	\end{signatures}
+		\IntentionallyBlankPage
+		\maketitle
 
-	\begin{dedication}
-		\input{./Sections/Dedication.tex}
-	\end{dedication}
+		\begin{signatures}
+			\input{./Sections/Signatures.tex}
+		\end{signatures}
 
-	\begin{acknowledgments}
-		\input{./Sections/Acknowledgments.tex}
-	\end{acknowledgments}
+		\begin{dedication}
+			\input{./Sections/Dedication.tex}
+		\end{dedication}
 
-    \begin{toc}
-	    \tableofcontents
-	\end{toc}
+		\begin{acknowledgments}
+			\input{./Sections/Acknowledgments.tex}
+		\end{acknowledgments}
 
-    \begin{tables}
-        \listoftables
-    \end{tables}
+		\begin{toc}
+			\tableofcontents
+		\end{toc}
 
-	\begin{figures}
-	    \listoffigures
-    \end{figures}
+		\begin{tables}
+			\listoftables
+		\end{tables}
 
-	\begin{symbols}
-	  \listofsymbols
-	\end{symbols}
+		\begin{figures}
+			\listoffigures
+		\end{figures}
 
-	% Begin the actual Thesis
-	\begin{abstract}
-		\input{./Sections/Abstract.tex}
-	\end{abstract}
+		\begin{symbols}
+		\listofsymbols
+		\end{symbols}
 
-	\begin{body}
-		\input{./Sections/Chapter1.tex}
-		\input{./Sections/Chapter2.tex}
-		\input{./Sections/Chapter3.tex}
-      	\input{./Sections/Chapter4.tex}
-		\input{./Sections/Chapter5.tex}
-		\input{./Sections/Chapter6.tex}
-	\end{body}
+		% Begin the actual Thesis
+		\begin{abstract}
+			\input{./Sections/Abstract.tex}
+		\end{abstract}
 
-	\begin{references}
-        \input{./Sections/References.tex}
-    \end{references}
+		\begin{body}
+			\input{./Sections/Chapter1.tex}
+			\input{./Sections/Chapter2.tex}
+			\input{./Sections/Chapter3.tex}
+			\input{./Sections/Chapter4.tex}
+			\input{./Sections/Chapter5.tex}
+			\input{./Sections/Chapter6.tex}
+		\end{body}
 
-	\begin{appendices}
-		\input{./Sections/Appendices.tex}
-	\end{appendices}
+		\begin{references}
+			\input{./Sections/References.tex}
+		\end{references}
 
+		\begin{appendices}
+			\input{./Sections/Appendices.tex}
+		\end{appendices}
+
+	\end{FlushLeft}
 \end{document}
