@@ -3,8 +3,14 @@ function Build-Thesis {
     # Note: on first run, PDF has broken references. Re-run to fix.
     # TODO: figure out why this happens...
     cd ./Thesis/
-    biber "./../MetaTeX/Thesis.bcf"
-    pdflatex -output-directory="./../MetaTeX/" Thesis.tex
+
+    # Bibliography processing.
+    echo "Processing Bibliography..."
+    biber -quiet "./../MetaTeX/Thesis.bcf"
+
+    # PDF processing.
+    echo "Producing PDF..."
+    pdflatex -quiet -output-directory="./../MetaTeX/" Thesis.tex
 }
 
 function Execute-Main {

@@ -14,8 +14,8 @@
 %
 % Nicholas A. Kraft <nkraft@cs.ua.edu>
 
-\def\filedate{2021/09/16}
-\def\fileversion{v1.0}
+\def\filedate{2024/08/12}
+\def\fileversion{v1.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{./Support/WKUCSManuscript}[%
@@ -39,6 +39,10 @@
 
 \newcommand{\SignatureLine}{
    \makebox[2.75in]{\hrulefill} \\
+}
+
+\newcommand{\LongSignatureLine}{
+   \makebox[4in]{\hrulefill} \\
 }
 
 \newcommand{\DateLine}{
@@ -172,7 +176,6 @@
 %---- ulem
 \normalem
 
-
 %-- Document properties
 %--
 
@@ -201,11 +204,15 @@
    \newpage
    \thispagestyle{empty}
    \phantom{}
+
+   \addtocounter{page}{-1}    % Decrement the page counter.
 }
 
 
 %---- Title page and copyright page
 \renewcommand{\maketitle}[1]{%
+   \newpage
+   \thispagestyle{empty}
    \setlength\epigraphwidth{\textwidth}
    \setlength\epigraphrule{0pt}
    \BeforeBeginEnvironment{lstlisting}{\begin{singlespace}}
@@ -218,44 +225,39 @@
    \patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
 
    \cleardoublepage
-   \thispagestyle{empty}
    \phantomsection
-   \vspace*{.625in}
-
-   \vspace*{.625in}
+   \vspace{2in}
 
    \begin{center}
       \MakeUppercase{\ETD@title} \\
    \end{center}
+
    % Leave a blank line below, to start another paragraph.
 
    % The vertical measurement below may need to be adjusted to get the next bit of text 4 in. from the top of the page.
-   \vspace{1.25in}
+   \vspace{2in}
    % Leave a blank line below, to start another paragraph.
 
    \begin{center}
-      A Thesis \\
-      Submitted to the Faculty of the \\
+      A Thesis submitted in partial fulfillment \\
+      of the requirements for the degree \\
+      Master of Science
+   \end{center}
+   % Leave a blank line below, to start another paragraph.
+
+   % The vertical measurement below may need to be adjusted to get the next bit of text 7 in. from the top of the page.
+   \vspace{2in}
+   % Leave a blank line below, to start another paragraph.
+
+   \begin{center}
       School of Engineering and Applied Sciences (SEAS) \\
-      Computer Science Program \\
       Western Kentucky University \\
       Bowling Green, Kentucky
    \end{center}
    % Leave a blank line below, to start another paragraph.
 
-   % The vertical measurement below may need to be adjusted to get the next bit of text 7 in. from the top of the page.
-   \vspace{1.5in}
-   % Leave a blank line below, to start another paragraph.
-
-   \begin{center}
-      In Partial Fulfillment \\
-      of the Requirements for the Degree of \\
-      Master of Science
-   \end{center}
-   % Leave a blank line below, to start another paragraph.
-
    % The vertical measurement below may need to be adjusted to get the next bit of text 9 in. from the top of the page.
-   \vspace{1.05in}
+   \vspace{2in}
    % Leave a blank line below, to start another paragraph.
 
    \begin{center}
@@ -268,59 +270,53 @@
 }
 
 %-------- Signatures page
-\newenvironment{signature}{%
-   \phantomsection
- %  \addcontentsline{toc}{}{}									%commented to remove from table of content
-   %\changepage{-1in}{0in}{0in}{0in}{0in}{1in}{0in}{0in}{0in}
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
-   \begin{center}
-      signature
-   \end{center}
-   \vspace{-\baselineskip}
-   \begin{spacing}{2.0}
-}{%
-   \end{spacing}
-   \cleardoublepage
-   %\changepage{1in}{0in}{0in}{0in}{0in}{-1in}{0in}{0in}{0in}
-}
+\newenvironment{signatures}{
+   \newpage
+   \thispagestyle{empty}
+}{}
 
-\newenvironment{signatures}{}{}
-
-\newenvironment{references}{}{}
-
+%-------- References pages
+\newenvironment{references}{
+   \newpage
+}{}
 
   %---- Abstract
 \renewenvironment{abstract}{%
-    \begin{center}
+
+   \setlength{\parskip}{\baselineskip}
+   \setlength{\parindent}{20pt}
+
+   \begin{center}
+      ABSTRACT
+   \end{center}
+
+   \begin{center}
         \MakeUppercase{\ETD@title}
     \end{center}
-    %\addcontentsline{toc}{section}{\normalsize\textnormal{ABSTRACT}}		%commented to remove from table of content
 
-    \doublespacing
+   %  \doublespacing
 
-    \begin{center}
-        %Month Year
-        \ETD@date
-    \end{center}
+   %  \begin{center}
+   %      %Month Year
+   %      \ETD@date
+   %  \end{center}
 
-    \vspace{-3em}													% changed to -3 to be in the same line as author
+   %  \vspace{-3em}													% changed to -3 to be in the same line as author
 
-    {\raggedright \ETD@author}
+   %  {\raggedright \ETD@author}
 
-    \vspace{-2em}
+   %  \vspace{-2em}
 
-    {\raggedleft \hfill \PageCount\ Pages}  % Replace XX with the number of pages.		% replace with newer page
+   %  {\raggedleft \hfill \PageCount\ Pages}  % Replace XX with the number of pages.		% replace with newer page
 
-    {\raggedright Directed by: \ThesisCommitteeChairOne,\ \ThesisCommitteeMemberOne,\ \ThesisCommitteeMemberTwo,\ and\ \ThesisCommitteeMemberThree }
+   %  {\raggedright Directed by: \ThesisCommitteeChairOne,\ \ThesisCommitteeMemberOne,\ \ThesisCommitteeMemberTwo,\ and\ \ThesisCommitteeMemberThree }
 
-    {\raggedright \AcademicDepartment}
+   %  {\raggedright \AcademicDepartment}
 
-    {\vspace{-2em}}
-    {\raggedleft \hfill \AcademicInstitution} \\
+   %  {\vspace{-2em}}
+   %  {\raggedleft \hfill \AcademicInstitution} \\
 
-    {\vspace{-1em}}
-    {\par}
+   %  {\par}
 }{
     \clearpage
 }
@@ -342,8 +338,6 @@
 %---- Dedication
 \newenvironment{dedication}{%
    \phantomsection
-   %\addcontentsline{toc}{chapter}{DEDICATION}						%commented to remove from table of content
-   %\changepage{-1in}{0in}{0in}{0in}{0in}{1in}{0in}{0in}{0in}
    \vspace*{0.5in}
    \vspace*{\baselineskip}
    \begin{center}
@@ -359,13 +353,15 @@
 %---- Acknowledgments
 \newenvironment{acknowledgments}{%
    \phantomsection
-   %\addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}				%commented to remove from table of content
+   % \addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}				%commented to remove from table of content
    %\changepage{-1in}{0in}{0in}{0in}{0in}{1in}{0in}{0in}{0in}
    \vspace*{0.5in}
    \vspace*{\baselineskip}
    \begin{center}
       ACKNOWLEDGMENTS
    \end{center}
+   \setlength{\parskip}{\baselineskip}
+   \setlength{\parindent}{20pt}
    \vspace{-\baselineskip}
    \begin{spacing}{2.0}
 }{%
@@ -382,7 +378,7 @@
    \vspace*{0.5in}
    \vspace*{\baselineskip}
    \begin{center}
-      CONTENTS
+      TABLE OF CONTENTS
    \end{center}
    \vspace{-\baselineskip}
    \begin{spacing}{1.0}
@@ -450,7 +446,7 @@
 %---- List of Tables
 \renewcommand{\listoftables}{%
    \phantomsection
-   %\addcontentsline{toc}{chapter}{LIST OF TABLES}				%commented to remove from table of content
+   \addcontentsline{toc}{chapter}{List of Tables}
    \vspace*{0.5in}
    \vspace*{\baselineskip}
    \begin{center}
@@ -466,7 +462,7 @@
 %---- List of Figures
 \renewcommand{\listoffigures}{%
    \phantomsection
-   %\addcontentsline{toc}{chapter}{LIST OF FIGURES}				%commented to remove from table of content
+   \addcontentsline{toc}{chapter}{List of Figures}
    \vspace*{0.5in}
    \vspace*{\baselineskip}
    \begin{center}
@@ -482,7 +478,7 @@
 %---- List of Symbols/Abbreviations
 \newcommand{\listofsymbols}{%
    \phantomsection
-   %\addcontentsline{toc}{chapter}{LIST OF ABBREVIATIONS}				%commented to remove from table of content
+   \addcontentsline{toc}{chapter}{List of Abbreviations}
    \vspace*{0.5in}
    \vspace*{\baselineskip}
    \begin{center}
@@ -493,6 +489,23 @@
       \input{./Sections/Abbreviations.tex}
    \end{spacing}
    \cleardoublepage
+}
+
+  %---- List of Algorithms
+
+  \renewcommand{\listofalgorithms}{%
+  \phantomsection
+%\addcontentsline{toc}{chapter}{LIST OF ALGORITHMS}				%commented to remove from table of content
+  \vspace*{0.5in}
+  \vspace*{\baselineskip}
+  \begin{center}
+     LIST OF ALGORITHMS
+  \end{center}
+  \vspace{-\baselineskip}
+  \begin{spacing}{1.0}
+     \@starttoc{tocloft}
+  \end{spacing}
+  \cleardoublepage
 }
 
 \def\@chapter[#1]#2{
@@ -528,29 +541,16 @@
   \newpage
   }
 
-  %---- List of Algorithms
-
-\renewcommand{\listofalgorithms}{%
-   \phantomsection
-%\addcontentsline{toc}{chapter}{LIST OF ALGORITHMS}				%commented to remove from table of content
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
-   \begin{center}
-      LIST OF ALGORITHMS
-   \end{center}
-   \vspace{-\baselineskip}
-   \begin{spacing}{1.0}
-      \@starttoc{tocloft}
-   \end{spacing}
-   \cleardoublepage
-}
-
 %-- Body
 %--
 
 \newenvironment{body}{%
    \setcounter{page}{1}
    \pagenumbering{arabic}
+
+   \setlength{\parskip}{\baselineskip}
+   \setlength{\parindent}{20pt}
+
    \begin{spacing}{2.0}
       \ifthenelse{\equal{\ETD@draft}{true}}{%
          \begin{linenumbers}

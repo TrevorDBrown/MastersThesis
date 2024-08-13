@@ -3,9 +3,8 @@
 %	(c)2024 Trevor D. Brown. All rights reserved.
 %
 
-% WKUCSManuscript document class and AMMALanguages styles
+% WKUCSManuscript document class
 \documentclass[letterpaper,12pt,english]{./Support/Classes/WKUCSManuscript}
-\usepackage{./Support/Styles/AMMALanguages}
 
 % Packages used within LaTeX solution.
 \usepackage[english]{babel}
@@ -44,9 +43,9 @@
 \counterwithout{footnote}{chapter}
 
 % Thesis Properties - text, representations, etc. that are meta to the document.
-\newcommand{\ThesisTitle}{Working Title To Be Finalized Later}
+\newcommand{\ThesisTitle}{DashAR: An Implementation of Augmented Reality Technology for Automotive Applications}
 \newcommand{\ThesisAuthor}{Trevor Dylan Brown}
-\newcommand{\ThesisDate}{May 2025}
+\newcommand{\ThesisDate}{May, 2025}
 \newcommand{\ThesisCommitteeChairOne}{Dr. Michael Galloway}
 \newcommand{\ThesisCommitteeMemberOne}{Prof. Leah Moss}
 \newcommand{\ThesisCommitteeMemberTwo}{Prof. Mark Simpson}
@@ -58,16 +57,19 @@
 \newcommand{\AcademicProgram}{Computer Science}
 
 \begin{document}
+
+	\IntentionallyBlankPage
+
 	\begin{FlushLeft}
-
-		\listdiagram
-
-		\IntentionallyBlankPage
 		\maketitle
 
 		\begin{signatures}
 			\input{./Sections/Signatures.tex}
 		\end{signatures}
+
+		\begin{abstract}
+			\input{./Sections/Abstract.tex}
+		\end{abstract}
 
 		\begin{dedication}
 			\input{./Sections/Dedication.tex}
@@ -90,14 +92,10 @@
 		\end{figures}
 
 		\begin{symbols}
-		\listofsymbols
+			\listofsymbols
 		\end{symbols}
 
 		% Begin the actual Thesis
-		\begin{abstract}
-			\input{./Sections/Abstract.tex}
-		\end{abstract}
-
 		\begin{body}
 			\input{./Sections/Chapter1.tex}
 			\input{./Sections/Chapter2.tex}
