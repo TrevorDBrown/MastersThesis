@@ -1,6 +1,6 @@
-# Thesis Title To Be Determined Later
+# DashAR: An Implementation of Augmented Reality Technology for Automotive Applications
 
-My thesis is... to be added later.
+My thesis explores a proof of concept system, which utilizes modern Augmented Reality technology to visualize automobile data, in virtually real time, via a heads up display, while in operation.
 
 ## Thesis Structure
 
@@ -20,8 +20,6 @@ I dedicate my thesis, research, and efforts to my Lord and Savior, Jesus Christ.
 ## Acknowledgements
 
 The formal acknowledgements section of the thesis was very limiting. To honor those in my life that have made an impact, I include an extended version of those acknowledgements here:
-
-For those who know me, they know I can be long winded. So, I find it difficult to summarize my acknowledgements and thanks in regard to the support and encouragement I received during the writing of this thesis, let alone my entire academic career.
 
 First and foremost, to my Lord and Savior Jesus Christ, thank You for Your guidance and protection over my life. I would not be where I am today without Your hand and blessings in my life and in the lives of those around me.
 
