@@ -1,8 +1,6 @@
 function Build-Thesis {
     # Build the Thesis PDF.
-    # Note: on first run, PDF has broken references. Re-run to fix.
-    # TODO: figure out why this happens...
-    cd ./Thesis/
+    cd $TEX_PATH
 
     # Bibliography processing.
     echo "Processing Bibliography..."
@@ -11,6 +9,8 @@ function Build-Thesis {
     # PDF processing.
     echo "Producing PDF..."
     pdflatex -quiet -output-directory="./../MetaTeX/" Thesis.tex
+
+    cd $THESIS_ROOT
 }
 
 function Execute-Main {
@@ -19,6 +19,7 @@ function Execute-Main {
     $THESIS_ROOT=$PWD
     $OUTPUT_PATH="$THESIS_ROOT\Output"
     $META_PATH="$THESIS_ROOT\MetaTeX"
+    $TEX_PATH="$THESIS_ROOT\Thesis"
 
     Write-Host "Output path is: $OUTPUT_PATH"
     Write-Host "Meta path is: $META_PATH"
@@ -40,19 +41,26 @@ function Execute-Main {
 
         # Build the Thesis PDF (will generate, but references are broken.)
         Build-Thesis
-
-        # Go back to the root directory.
-        cd $THESIS_ROOT
     }
 
-    # Build the Thesis PDF
+    # Build the Thesis PDF (1st pass)
     Build-Thesis
+
+    # Make the Glossaries
+    cd $META_PATH
+    echo "Making Glossaries..."
+    makeglossaries -q Thesis
 
     # Go back to the root directory.
     cd $THESIS_ROOT
 
+    # Build the Thesis PDF (2nd pass)
+    Build-Thesis
+
     # Rename the output to the submission filename.
+    echo "Moving PDF to Output directory..."
     Copy-Item "$META_PATH\Thesis.pdf" "$OUTPUT_PATH\Brown.800793873.seas.thesis.pdf"
 }
 
 Execute-Main
+echo "Done!"
