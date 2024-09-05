@@ -35,12 +35,18 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{etoolbox}
 \usepackage{biblatex}
+\usepackage{zref-totpages}
+\usepackage[acronym,nopostdot,nogroupskip,style=super,nonumberlist,toc]{glossaries}
+\usepackage{glossaries-extra}
+\setabbreviationstyle[acronym]{long-short}
 
 % References file
 \addbibresource{./Support/Bibliography/References.bib}
 
 % Additional Settings
 \counterwithout{footnote}{chapter}
+\renewcommand*{\glsclearpage}{}		% Prevents Abbreviations from showing up on new page.
+\makeglossaries
 
 % Thesis Properties - text, representations, etc. that are meta to the document.
 \newcommand{\ThesisTitle}{DashAR: An Implementation of Augmented Reality Technology for Automotive Applications}
@@ -51,7 +57,7 @@
 \newcommand{\ThesisCommitteeMemberTwo}{Prof. Mark Simpson}
 \newcommand{\ThesisCommitteeMemberThree}{Dr. Rong Yang}
 
-\newcommand{\PageCount}{X}
+\newcommand{\PageCount}{\ztotpages}
 \newcommand{\AcademicInstitution}{Western Kentucky University}
 \newcommand{\AcademicDepartment}{School of Engineering and Applied Sciences}
 \newcommand{\AcademicProgram}{Computer Science}

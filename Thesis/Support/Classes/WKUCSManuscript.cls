@@ -477,14 +477,14 @@
 
 %---- List of Symbols/Abbreviations
 \newcommand{\listofsymbols}{%
-   \phantomsection
-   \addcontentsline{toc}{chapter}{List of Abbreviations}
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
-   \begin{center}
-      LIST OF ABBREVIATIONS
-   \end{center}
-   \vspace{-\baselineskip}
+   % \phantomsection
+   % \addcontentsline{toc}{chapter}{List of Abbreviations}
+   % \vspace*{0.5in}
+   % \vspace*{\baselineskip}
+   % \begin{center}
+   %    LIST OF ABBREVIATIONS
+   % \end{center}
+   % \vspace{-\baselineskip}
    \begin{spacing}{1.0}
       \input{./Sections/Abbreviations.tex}
    \end{spacing}
