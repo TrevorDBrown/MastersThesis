@@ -7,9 +7,19 @@ function Build-Thesis {
     biber -quiet "./../MetaTeX/Thesis.bcf"
 
     # PDF processing.
-    echo "Producing PDF..."
+    echo "Building PDF..."
     pdflatex -quiet -output-directory="./../MetaTeX/" Thesis.tex
 
+    cd $THESIS_ROOT
+}
+
+function Make-Glossaries {
+    # Make the Glossaries
+    cd $META_PATH
+    echo "Making Glossaries..."
+    makeglossaries -q Thesis
+
+    # Go back to the root directory.
     cd $THESIS_ROOT
 }
 
@@ -38,21 +48,13 @@ function Execute-Main {
     } else {
         mkdir "MetaTeX"
         echo "MetaTeX directory created."
-
-        # Build the Thesis PDF (will generate, but references are broken.)
-        Build-Thesis
     }
 
     # Build the Thesis PDF (1st pass)
     Build-Thesis
 
     # Make the Glossaries
-    cd $META_PATH
-    echo "Making Glossaries..."
-    makeglossaries -q Thesis
-
-    # Go back to the root directory.
-    cd $THESIS_ROOT
+    Make-Glossaries
 
     # Build the Thesis PDF (2nd pass)
     Build-Thesis
