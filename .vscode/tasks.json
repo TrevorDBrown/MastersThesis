@@ -4,9 +4,15 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "BuildThesis",
+            "label": "BuildThesis-Windows",
             "type": "shell",
             "command": "./BuildThesis.ps1",
+            "problemMatcher": []
+        },
+        {
+            "label": "BuildThesis-macOS",
+            "type": "shell",
+            "command": "./BuildThesis.sh",
             "problemMatcher": []
         }
     ]
