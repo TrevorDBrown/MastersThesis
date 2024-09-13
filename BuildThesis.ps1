@@ -3,11 +3,11 @@ function Build-Thesis {
     cd $TEX_PATH
 
     # Bibliography processing.
-    echo "Processing Bibliography..."
+    Write-Host "Processing Bibliography..."
     biber -quiet "./../MetaTeX/Thesis.bcf"
 
     # PDF processing.
-    echo "Building PDF..."
+    Write-Host "Building PDF..."
     pdflatex -quiet -output-directory="./../MetaTeX/" Thesis.tex
 
     cd $THESIS_ROOT
@@ -16,7 +16,7 @@ function Build-Thesis {
 function Make-Glossaries {
     # Make the Glossaries
     cd $META_PATH
-    echo "Making Glossaries..."
+    Write-Host "Making Glossaries..."
     makeglossaries -q Thesis
 
     # Go back to the root directory.
@@ -39,30 +39,32 @@ function Execute-Main {
         echo "Output directory exists."
     } else {
         mkdir "Output"
-        echo "Output directory created."
+        Write-Host "Output directory created."
     }
 
     # Check if MetaTeX and Output directories exist.
     if (Test-Path -Path $META_PATH) {
-        echo "MetaTeX directory exists."
+        Write-Host "MetaTeX directory exists."
     } else {
         mkdir "MetaTeX"
-        echo "MetaTeX directory created."
+        Write-Host "MetaTeX directory created."
     }
 
     # Build the Thesis PDF (1st pass)
+    Write-Host "First Pass:"
     Build-Thesis
 
     # Make the Glossaries
     Make-Glossaries
 
     # Build the Thesis PDF (2nd pass)
+    Write-Host "Second Pass:"
     Build-Thesis
 
     # Rename the output to the submission filename.
-    echo "Moving PDF to Output directory..."
+    Write-Host "Moving PDF to Output directory..."
     Copy-Item "$META_PATH\Thesis.pdf" "$OUTPUT_PATH\Brown.800793873.seas.thesis.pdf"
 }
 
 Execute-Main
-echo "Done!"
+Write-Host "Done!"
