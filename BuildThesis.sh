@@ -48,12 +48,14 @@ else
 fi
 
 # Build the Thesis PDF (1st pass)
+echo "First Pass:"
 Build-Thesis
 
 # Make the Glossaries
 Make-Glossaries
 
 # Build the Thesis PDF (2nd pass)
+echo "Second Pass:"
 Build-Thesis
 
 # Rename the output to the submission filename.
