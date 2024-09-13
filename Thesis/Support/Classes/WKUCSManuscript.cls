@@ -108,7 +108,7 @@
 % \RequirePackage[square,longnamesfirst,sort&compress]{natbib}
 \RequirePackage[
     backend=biber,
-    style=numeric,
+    style=apa,
     sorting=none,
     natbib=true
 ]{biblatex}
