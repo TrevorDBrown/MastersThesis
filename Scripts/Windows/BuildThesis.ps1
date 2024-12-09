@@ -13,12 +13,14 @@ function Build-Thesis {
     cd $TEX_PATH
 
     # Bibliography processing.
-    Write-Host "Processing Bibliography..."
-    biber -quiet "$META_PATH/Thesis.bcf"
+    #Write-Host "Processing Bibliography..."
+    biber "$($META_PATH)\\Thesis.bcf"
+    #biber -quiet "$META_PATH\Thesis.bcf"
 
     # PDF processing.
     Write-Host "Building PDF..."
-    pdflatex -quiet -output-directory=$META_PATH Thesis.tex
+    #pdflatex -quiet -output-directory=$META_PATH Thesis.tex
+    pdflatex -output-directory="$($META_PATH)" Thesis.tex
 
     cd $THESIS_ROOT
 }
@@ -45,7 +47,7 @@ function Execute-Main {
     if (Test-Path -Path $OUTPUT_PATH) {
         echo "Output directory exists."
     } else {
-        mkdir "Output"
+        mkdir $OUTPUT_PATH
         Write-Host "Output directory created."
     }
 
@@ -53,7 +55,7 @@ function Execute-Main {
     if (Test-Path -Path $META_PATH) {
         Write-Host "MetaTeX directory exists."
     } else {
-        mkdir "MetaTeX"
+        mkdir $META_PATH
         Write-Host "MetaTeX directory created."
     }
 
@@ -70,7 +72,7 @@ function Execute-Main {
 
     # Rename the output to the submission filename.
     Write-Host "Moving PDF to Output directory..."
-    Copy-Item "$META_PATH\Thesis.pdf" "$OUTPUT_PATH\Brown.800793873.seas.thesis.pdf"
+    Copy-Item "$($META_PATH)\Thesis.pdf" "$($OUTPUT_PATH)\Brown.800793873.seas.thesis.pdf"
 }
 
 Execute-Main
