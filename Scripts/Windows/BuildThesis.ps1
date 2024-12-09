@@ -1,14 +1,24 @@
+#
+#   BuildThesis.ps1
+#   (c)2024 Trevor D. Brown. All rights reserved.
+#   Distributed under the MIT license.
+#
+#   Purpose: to generate a PDF copy of the Master's Thesis.
+#
+#   Note: This script is designed to be called from VSCode, as a task.
+#
+
 function Build-Thesis {
     # Build the Thesis PDF.
     cd $TEX_PATH
 
     # Bibliography processing.
     Write-Host "Processing Bibliography..."
-    biber -quiet "./../MetaTeX/Thesis.bcf"
+    biber -quiet "$META_PATH/Thesis.bcf"
 
     # PDF processing.
     Write-Host "Building PDF..."
-    pdflatex -quiet -output-directory="./../MetaTeX/" Thesis.tex
+    pdflatex -quiet -output-directory=$META_PATH Thesis.tex
 
     cd $THESIS_ROOT
 }
@@ -28,11 +38,8 @@ function Execute-Main {
     # Set the root directory of the script.
     $THESIS_ROOT=$PWD
     $OUTPUT_PATH="$THESIS_ROOT\Output"
-    $META_PATH="$THESIS_ROOT\MetaTeX"
+    $META_PATH="$OUTPUT_PATH\MetaTeX"
     $TEX_PATH="$THESIS_ROOT\Thesis"
-
-    Write-Host "Output path is: $OUTPUT_PATH"
-    Write-Host "Meta path is: $META_PATH"
 
     # Check if Output directory exists.
     if (Test-Path -Path $OUTPUT_PATH) {

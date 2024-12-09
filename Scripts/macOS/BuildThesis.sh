@@ -1,9 +1,19 @@
 #!/bin/zsh
 
+#
+#   BuildThesis.sh
+#   (c)2024 Trevor D. Brown. All rights reserved.
+#   Distributed under the MIT license.
+#
+#   Purpose: to generate a PDF copy of the Master's Thesis.
+#
+#   Note: This script is designed to be called from VSCode, as a task.
+#
+
 # Set the root directory of the script, and other associated paths.
 PROJECT_ROOT=$PWD
 OUTPUT_PATH=$PROJECT_ROOT/Output
-META_PATH=$PROJECT_ROOT/MetaTeX
+META_PATH=$OUTPUT_PATH/MetaTeX
 THESIS_PATH=$PROJECT_ROOT/Thesis
 
 Build-Thesis() {
@@ -11,11 +21,11 @@ Build-Thesis() {
 
     # Bibliography Processing
     echo "Processing Bibliography..."
-    biber "./../MetaTeX/Thesis.bcf"
+    biber "$META_PATH/Thesis.bcf"
 
     # PDF Processing
     echo "Building PDF..."
-    pdflatex -quiet -output-directory="./../MetaTeX/" Thesis.tex
+    pdflatex -quiet -output-directory=$META_PATH Thesis.tex
 
     # Go back to the root directory.
     cd $PROJECT_ROOT
