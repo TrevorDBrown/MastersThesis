@@ -6,13 +6,13 @@
         {
             "label": "BuildThesis-Windows",
             "type": "shell",
-            "command": "./BuildThesis.ps1",
+            "command": "./Scripts/Windows/BuildThesis.ps1",
             "problemMatcher": []
         },
         {
             "label": "BuildThesis-macOS",
             "type": "shell",
-            "command": "./BuildThesis.sh",
+            "command": "./Scripts/macOS/BuildThesis.sh",
             "problemMatcher": []
         }
     ]
