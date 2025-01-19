@@ -1,8 +1,19 @@
-\chapter{Implementing DashAR}
+\chapter{Implementation}
 
 \begin{center}
     ``A scientist builds in order to learn; an engineer learns in order to build.'' \\
     - Fred Brooks \cite{Brooks1996}
 \end{center}
 
-\par Chapter 4 here...
+\section{Development Methodology}
+    \par The design and implementation of the DashAR system was handled through iterative development practices via Agile. Each iteration of the project consisted of two week sprints, in which work was identified, evaluated, performed, completed, and/or deferred. The development process formally began on Sunday, August 18th, 2024, and ended on Saturday, March 29th, 2025. There were brief interruptions in development for
+
+    \par Sprints were tracked using the Obsidian personal knowledge base software. A community module exists for managing Agile sprint boards. Each sprint consisted of a sprint board, with six swimlanes - To Do, In Progress, On Hold, Testing, Completed, and Rollover. Work items, or ``cards'', were initially added to the ``To Do'' swimlane, and progressed into the others.
+
+    \par ``To Do'' was designated for cards that were waiting to be addressed. ``In Progress'' contained those cards actively being developed. ``On Hold'' contained cards that were unable to continue further into development, for any number of reasons (e.g. a roadblock prevent further work, waiting on a dependency to be worked on first, etc.) ``Testing'' was for cards that had been fully implemented, but needed verification of their functionality against the rest of the system. ``Completed'' contained the cards that were fully implemented and incorporated into the system. Finally, ``Rollover'' contained the cards that were to move into the next sprint.
+
+    \par On Saturdays, cards not in the ``Completed'' swimlane were reviewed to verify their readiness. If a card was completed by the end of the day, it was moved into ``Completed''. If a card was not fully completed by the end of the day, it would be moved into ``Rollover'', to be worked on next sprint. If for any reason a card was no longer needed (e.g. a planned feature ultimately not included in the system, erroneous cards like duplications, etc.), it would be moved to ``Completed'', and the text ``(CANCELLED)'' would be appended to the title of the card.
+
+    \par Each card had a corresponding Markdown file, which contained more details regarding the work. The sections of the Markdown file were: Tasks and Updates. ``Tasks'' were the step-by-step items needed to complete the overarching work item. ``Updates'' were anecdotal notes, grouped by date, with information assisting with development. An entry was added to Updates for each new cards, signifying the date in which the card was introduced. This helped with tracking the amount of time a card took to get from ``To Do'' to ``Completed''.
+
+    \par Some cards merited implementation that could not be achieved during the development of the system. The title of those cards were prepended with ``(FUTURE WORK)'', to signify their usefulness to the system. An example early on in development of this was the ``Determine uninterrupted power supply issue solution.'' This work item was designed to address a problem faced with the \gls{das} device immediately losing power as soon as the car was turned off. Since the \gls{das} device was a Raspberry Pi, some solutions existed involving batteries (i.e. \gls{ups}) that would help solve the problem. However, it was still not clear of the efficacy of those solutions, as they were bulky, and the batteries were exposed. After some time, a workaround was advised, suggesting that before the car is turned off, the power button on the \gls{das} device should be pressed. This would safely power down the device, stopping running services, such as the \gls{das} API.
