@@ -12,13 +12,19 @@
     \par The first question that may come to someone's mind when thinking about this is: ``Why can't I just look down at the instrument cluster in my car?''. For some information, that is the most practical solution. After all, it is available, and it is there to help the driver. However, the biggest issue with the instrument cluster is the information presented is fixed. The instrument cluster can't easily be adjusted to meet the needs of every individual that operates a specific automobile. The information presented within an instrument cluster is also at the mercy of the manufacturer. With the DashAR System, the user has control over the information presented to them as they drive.
 
 \section{System Design}
-    \par During the development of IBM's Watson platform in the late 2000s, Dr. Bijan Davari, IBM Fellow and Vice President of Next Generation Computing Systems and Technology, stated in regards to Watson's development that ``[Watson] is the king. Start with that, what are the key requirements for that, and how do they need to be satisfied. You bring the elements that are required to take care of that application need.'' \cite{IBM2012} In other words, design the software first, then proceed to bring in the necessary resources as they are needed. That is the approach taken with this project.
-
-    \par The first consideration made for this project was the method in which the \gls{hud} would be displayed. The most obvious solution was an \gls{ar}-enabled device. At the time the project started, Meta's Quest 3 \gls{ar} headset was the most commonplace product that fit the application's need. However, due to the bulkiness of the headset, and the legal concerns regarding \gls{vr} utilization while operating an automobile, this product selection was quickly abandoned.
-
-    \par Then, a relatively unknown product came to the forefront of this author's attention, which, on paper, seemed like an ideal solution to these concerns - the Air 2 line of \gls{ar} glasses by XREAL.
-
-    \par (TODO: continue writing about the system design.)
+    \par During the development of IBM's Watson platform - a massively parallel computation project in the early 2010s - Dr. Bijan Davari, \gls{ibm} Fellow and Vice President of Next Generation Computing Systems and Technology, stated, regarding application development at the scale of Watson that ``That application is the king. Start with that, what are the key requirements for that, and how do they need to be satisfied. You bring the elements that are required to take care of that application need.'' \cite{IBM2012} In other words, design the software first, then proceed to bring in the necessary resources as they are needed. That is the approach taken with this project.
 
     \subsection{System Components}
     \par The DashAR System is comprised of three major components: the automobile, the \gls{das}, and the \gls{ar} subsystem. The automobile is any automobile manufactured after 1996, with an \gls{obdii} port available. The \gls{das} device is a computer that interfaces directly with the automobile via an \gls{obdii}-to-serial connection (e.g. \gls{usb}, Bluetooth). The \gls{ar} subsystem is a combination of a compute device and \gls{ar} glasses - a small form factor \gls{ar} solution that are approximately the size of a pair of large sunglasses.
+
+    \subsection{AR Subsystem}
+        \par The first consideration made for the project was the method in which the \gls{hud} would be displayed. The most obvious solution was an \gls{ar}-enabled device. At the time the project started, Meta's Quest 3 \gls{ar} headset was the most commonplace product that fit the application's need. However, due to the bulkiness of the headset, and the legal concerns regarding \gls{vr} utilization while operating an automobile, this product selection was quickly abandoned.
+
+        \par Then, a relatively unknown product came to the forefront of this author's attention, which, on paper, seemed like an ideal solution to these concerns - the Air 2 line of \gls{ar} glasses by XREAL. Since their founding in 2017, XREAL has released multiple models of their \gls{ar} glasses, as well as companion devices - the XREAL Beam and XREAL Beam Pro \cite{XREAL2025}.
+
+        \par At the start of development, the XREAL Air 2 Pro glasses were considered the mid-tier offering, as they lacked certain functionality found in the higher end model (e.g. two front facing cameras, \gls{mr} experiences, etc.)
+
+    \subsection{Intermediate Computing Subsystem}
+        \par The next consideration made for thr project was the method in which the \gls{ar} subsystem would communicate with the automobile. A computer was needed that could
+
+    \par (TODO: continue writing about the system design.)
