@@ -7,14 +7,36 @@
 
 \par Before one can begin to explore a problem, one must understand some of the history and background related to the problem. Additionally, it is beneficial to have this understanding when exploring aspects of new solutions as well. In this chapter, a history of multiple parts of this project - the application (\gls{hud}, \gls{hdd}, Automobiles), as well as the underlying technical aspects (\gls{cg}, \gls{xr}, \gls{hci}, Software Engineering) of the tools used to achieve a solution - are explored.
 
-\section{HUDs, HDDs, and Automotive Instrumentation}
-    \par The \gls{hud} can be traced back to the beginning of the 20th century. In 1900, an Irish Optical Engineer - Howard Grubb - devised a new kind of gun sight which used a mirror to superimpose a reticle into a visible field \cite{Grubb1902}. The gun operator would use this sight - known as a reflector sight - to aim at a target, and shoot it. As time progressed, the reflector sight was enlarged, and began to be utilized in During \gls{wwii}, the \gls{raf} of the United Kingdom utilizes reflector sights during combat, to target enemies more accurately.
+\section{Automotive Instrumentation and Heads Down Displays}
+    \par Automotive Instrumentation is the representation of critical operation data easily and quickly consumable by the operator of the automobile. Generally, when one talks about instrumentation in an automobile, they are referring to the instrument cluster, which sits directly in front of driver. It is generally embedded within the dashboard. The earliest implementation of instrumentation
 
-    \par (TODO: continue writing about HUD, HDD, and Automotive Instrumentation History)
+\section{Heads Up Displays}
+    \par The concept of \gls{hud}s can be traced back to the beginning of the 20th century. In 1900, an Irish Optical Engineer - Howard Grubb - devised a new kind of gun sight which used a mirror to superimpose a reticle into a visible field \cite{Grubb1902}. The gun operator would use this sight - known as a reflector (or reflex) sight - to aim at a target, and shoot it. As time progressed, the reflector sight was enlarged, and became more integral in military applications. During \gls{wwii}, the Allied Ground Combat and Naval forces utilizes reflector sights, to target enemies more accurately \cite{Suits1948}.
 
-    \par \gls{obdii} was introduced in 1996, to satisfy a state government regulation in California, \glsxtrshort{usa} \cite{CEPA2019}.
+    \par Over the remainder of the 20th century, many other advancements and innovations in science and engineering behind \gls{hud} technology were made. \cite{Nobles1958} introduced a method for projecting information onto the windshield of an aircraft, namely radar information within their macular and near peripheral vision. This would allow pilots to have both their target in view, as well as more detailed information about the relative position of that targeted aircraft.
 
-\section{XR, CG, and HCI}
+    \par In the early 1970s, developments by a team of engineers at General Electric led to the creation of a \gls{hud} that was rendered from a \gls{crt} display onto a piece of glass affixed to the aircraft windshield. This arrangement allowed for highly dynamic content to be display, such as instrumentation of the aircraft, without blocking the pilot's field of view \cite{Antonson1973}.
+
+    \par \cite{Withrington1976}, with the Hughes Aircraft Company, introduced an approach that involved the use of holographic lenses to achieve a similar effect. However, instead of projection onto the windshield of the aircraft, the projection would be made within the pilot's helmet. While independent of the developments in \gls{ar}, this can be seen as a precursor to the technology.
+
+    \par By the 1980s, \gls{hud}s were in use in commercial aviation. By 1988, the first \gls{hud} for automobiles was introduced, specifically the 1988 Oldsmobile Cutlass Supreme. This achievement in implementing a smaller \gls{hud} system was done through research efforts by collaboration between the General Motors Corporation, Hughes Aircraft Company's Automotive Systems division, and Delco Electronics. It utilizes a \gls{vfd}, which reflected into the automobile's windshield \cite{Weihrauch1989,Jurgen1998}.
+
+    \begin{figure}[h]
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[scale=0.5]{./Support/Images/DADHUD.png}
+        \caption{Testbed Configuration (left) and Dynamic Active Display (right) \cite{Doshi2009}.}
+        \label{figure-sketchpaddemo}
+    \end{figure}
+
+    \par Since the commercialization of \gls{hud}s for automotive use, research and development has continued at great lengths. \cite{Doshi2009} explored a \gls{hud} option that displays alerts to the driver through a ``Dynamic Active Display''. Specifically, the \gls{hud} alerted drivers if their vehicle exceeded the speed limit, either numerically, symbolically, or through graphical charts. Something of note from this research, and how it is applied to the automotive \gls{hud} solution described later is its incorporation of a standard \gls{pc}, a 1000 W power inverter, and interfaces into the \glsxtrshort{can} Bus.
+
+\section{OBDII}
+    \par The \gls{obdii} protocol was introduced in 1996, to satisfy \glsxtrshort{usa} federal government regulations \cite{EPA1996}, as well as regulations at the state level, specifically the State of California \cite{CEPA2019}.
+
+    \par The research by \cite{Godavarty2000} demonstrates an approach for interfacing a \gls{pc} into an automobile via \gls{obdii}.
+
+\section{Extended Reality, Computer Graphics, and Human-Computer Interaction}
     \par Ivan Sutherland, an early pioneer in the fields of \gls{cg} and \gls{vr}, once said, ``The screen is a window through which one sees a virtual world. The challenge is to make that world look real, act real, sound real, feel real.'' \cite{Garassini1994} In this context, the ``screen'' Sutherland is referring to is the literal screen of a computer - the display. In Sutherland's early days (1960s), a computer display would have been a \gls{crt}. When paired with a keyboard, it would become an interface into a remote time-shared computer.
 
     \par Before Sutherland's landmark doctoral dissertation - ``Sketchpad, A Man-Machine Graphical Communication System'' \cite{Sutherland1963}, the field of computer graphics was considered still in its infancy. In his thesis, Sutherland introduced new, interesting concepts related to the way people interacted with machines. The graphics used in Sketchpad were very primitive - basic, un-shaded 2D polygons. The interface for the Sketchpad system was also revolutionary, yet very primitive by today's standards. A light pen - a device that uses sensors to detect light on a screen, along with a series of manually controlled limit switches, and a monitor, were used to create, display, and manipulate Sketchpad's graphics. Yet, even with all of the primitive aspects of the system, many of today's commonplace software development techniques and attributes were introduced, either explicitly or implicitly - interactive computer graphics, object-oriented programming, and non-procedural programming languages \cite{Kay2017}. Even through all of the progress that was made, it would be some time before \gls{cg} would become anything that would be considered close to realism.
@@ -23,13 +45,17 @@
         \vspace{0.5cm}
         \centering
         \includegraphics[scale=0.75]{./Support/Images/SketchpadDissertation.png}
-        \caption{Demonstration of Sketchpad (1963). \cite{Sutherland1963}}
+        \caption{Demonstration of Sketchpad \cite{Sutherland1963}.}
         \label{figure-sketchpaddemo}
     \end{figure}
 
     \par A little over a decade after Sketchpad, a Ph.D candidate at the University of Utah explored new and efficient means of producing curved surfaces. The student, Edwin Catmull, advised by Sutherland himself, produced what is considered another landmark piece - A Subdivision Algorithm for Computer Display of Curved Surfaces \cite{Catmull1974}. He, along with other University of Utah students, later co-founded an animation company known as Pixar Animation Studios, known for their award-winning animated films and advancements in computer animation technology (e.g. RenderMan \cite{Raghavachary2006}). Many now standard computer graphics technologies and techniques either came from or were enhanced by Pixar - ray tracing (the projection of light in virtual environments) \cite{Cook1984}, model texturing enhancements \cite{Peachey1990}, and others.
 
-    \par Other efforts, while not \gls{cg}-centric, utilized \gls{cg} in innovative and expressive ways. In the early 1970s, Terry Winograd - Computer Science Professor Emeritus at Stanford University and renowned expert in \gls{hci} - developed a \gls{cg}-based \gls{ai} program called SHRDLU \cite{Winograd1971}. While innovative, SHRDLU was limited to a micro-world containing basic elements - blocks, pyramids, and a box. Each element was given a color. These colors could be used as an identifier of a group of elements (e.g. all red objects), or in conjunction with a specific element (e.g. the red pyramid). The earliest implementation lacked any shading of the graphics, which made it difficult to track elements. However, later efforts by students at the University of Utah introduced color rendering of the micro-world's graphics, thus improving the comprehension of the environment \cite{Winograd1971}. In retrospect, this micro-world could be considered a primitive representation of the physical world around us; rather, a form of world simulation.
+    \par Other efforts, while not \gls{cg}-centric, utilized \gls{cg} in innovative and expressive ways. In the early 1970s, Terry Winograd - Computer Science Professor Emeritus at Stanford University and renowned expert in \gls{hci} - developed a \gls{cg}-based \gls{ai} program called SHRDLU \cite{Winograd1971} - a \gls{nlp} system. While innovative, SHRDLU was limited to a micro-world containing basic elements - blocks, pyramids, and a box. Each element was given a color. These colors could be used as an identifier of a group of elements (e.g. all red objects), or in conjunction with a specific element (e.g. the red pyramid). The earliest implementation lacked any shading of the graphics, which made it difficult to track elements. However, later efforts by students at the University of Utah introduced color rendering of the micro-world's graphics, thus improving the comprehension of the environment \cite{Winograd1971}. In retrospect, this micro-world could be considered a primitive representation of the physical world around us; rather, a form of world simulation.
+
+    \par From there, \gls{cg} continued to evolve by leaps and bounds. \gls{vr} technology was impacted by these advancements as well, as the rendered graphics within the \gls{vr} environments became more defined and clearer. The 1990s saw the introduction of consumer-grade \gls{vr} headsets, such as the Sony Glasstron \cite{Rekimoto1998}. Even with these advancements, these types of \gls{vr} headsets were still prohibitively expensive for the general public.
+
+    \par Then, in 2011, an 18 year old technology enthusiast named Palmer Luckey developed a \gls{vr} prototype of what would become the Oculus Rift \cite{Mortensen2015}. The revolutionary change that the Oculus Rift \gls{vr} headset brought the world was akin to that of Henry Ford's introduction of the assembly line for automobile manufacturing. \gls{vr} became widely available to the general populace. Since then, \gls{xr} technology in general has seen significant investments in research and development.
 
     \par In all of these efforts which shaped the fields of \gls{xr}, \gls{cg}, \gls{hci}, and implicitly, the field of computing in general, one must recognize the organized, collaborative efforts of the software engineers and artists behind the screen. Without software engineering, these feats would not have been possible.
 
