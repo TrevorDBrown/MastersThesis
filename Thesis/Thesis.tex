@@ -4,22 +4,22 @@
 %
 
 % WKUCSManuscript document class
-\documentclass[letterpaper,12pt,english]{./Support/Classes/WKUCSManuscript}
+\documentclass[letterpaper,12pt,english]{./Support/Classes/WKUGSManuscript}
 
 % Packages used within LaTeX solution.
 \usepackage[english]{babel}
 \usepackage[final]{microtype}
+\usepackage[utf8]{inputenc}
 \usepackage{ragged2e}
 \usepackage{layouts}
 \usepackage{csquotes}
 \usepackage{textcomp}
 \usepackage{upquote}
-\usepackage{listings}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage[page,title,toc]{appendix}
+\usepackage[title,titletoc]{appendix}
 \usepackage{framed}
 \usepackage{subfig}
 \usepackage{textcase}
@@ -36,12 +36,36 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{etoolbox}
 \usepackage{zref-totpages}
+
+% bibliography configuration
+\addbibresource{./Support/Bibliography/References.bib}
+
+% titlesec configuration
+\usepackage{titlesec}
+\titleformat{\chapter}{}{}{0em}{\bf\centering}
+\titleformat{\section}{\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\bfseries}{\thesubsection}{1em}{}
+
+% glossaries configuration
 \usepackage[acronym,nopostdot,nogroupskip,style=super,nonumberlist,toc]{glossaries}
 \usepackage{glossaries-extra}
 \setabbreviationstyle[acronym]{long-short}
 
-% References file
-\addbibresource{./Support/Bibliography/References.bib}
+% listings configuration
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\selectfont\ttfamily,
+	numbers=left,
+	numberstyle=\tiny,
+	stepnumber=1,
+	tabsize=2,
+	showstringspaces=false,
+	breaklines=true,
+	breakatwhitespace=true,
+	captionpos=t,
+	extendedchars=true,
+	inputencoding=utf8
+}
 
 % Additional Settings
 \counterwithout{footnote}{chapter}
@@ -116,8 +140,10 @@
 		\end{references}
 
 		\begin{appendices}
-			\input{./Sections/Appendices.tex}
+			\input{./Sections/Appendices/AppendixA.tex}
+			\input{./Sections/Appendices/AppendixB.tex}
 		\end{appendices}
 
 	\end{FlushLeft}
+
 \end{document}
