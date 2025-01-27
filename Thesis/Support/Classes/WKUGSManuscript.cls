@@ -1,26 +1,27 @@
-% $Id: WKUCSManuscript.cls $
+% $Id: WKUGSManuscript.cls $
 %
-% Manuscript Class for a Thesis written in TeX for WKU CS Graduate Students
-% School of Engineering and Applied Sciences (SEAS), Computer Science Program
+% Manuscript Class for a Thesis written in LaTeX for WKU Graduate Students
 % Western Kentucky University
 %
 % Trevor D. Brown <trevor.brown593@topper.wku.edu>
 %
-% Adapted from: AlabamaManuscript.cls 17328 2011-07-07 01:11:59Z nkraft $
+% Adapted from:
+% AlabamaManuscript.cls 17328 2011-07-07 01:11:59Z nkraft $
 %
 % Manuscript Class for an ETD
 % Department of Computer Science
 % The University of Alabama
 %
 % Nicholas A. Kraft <nkraft@cs.ua.edu>
+%
 
 \def\filedate{2024/08/12}
-\def\fileversion{v1.1}
+\def\fileversion{v1.2}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{./Support/WKUCSManuscript}[%
    \filedate \space \fileversion
-   Manuscript Class for a WKU CS Thesis
+   Manuscript Class for a WKU Graduate School Thesis.
    ]
 
 %-- Variable declaration/initialization
@@ -132,9 +133,6 @@
 %--
 
 %---- geometry
-% \geometry{letterpaper}        % letterpaper no longer needed... maybe...
-% \geometry{textwidth=6.5in}    % Dimension no longer needed... maybe...
-% \geometry{textheight=9in}     % Dimension no longer needed... maybe...
 \geometry{
    letterpaper,
    top=1in,
@@ -293,30 +291,6 @@
    \begin{center}
         \MakeUppercase{\ETD@title}
     \end{center}
-
-   %  \doublespacing
-
-   %  \begin{center}
-   %      %Month Year
-   %      \ETD@date
-   %  \end{center}
-
-   %  \vspace{-3em}													% changed to -3 to be in the same line as author
-
-   %  {\raggedright \ETD@author}
-
-   %  \vspace{-2em}
-
-   %  {\raggedleft \hfill \PageCount\ Pages}  % Replace XX with the number of pages.		% replace with newer page
-
-   %  {\raggedright Directed by: \ThesisCommitteeChairOne,\ \ThesisCommitteeMemberOne,\ \ThesisCommitteeMemberTwo,\ and\ \ThesisCommitteeMemberThree }
-
-   %  {\raggedright \AcademicDepartment}
-
-   %  {\vspace{-2em}}
-   %  {\raggedleft \hfill \AcademicInstitution} \\
-
-   %  {\par}
 }{
     \clearpage
 }
@@ -350,6 +324,7 @@
    \cleardoublepage
    %\changepage{1in}{0in}{0in}{0in}{0in}{-1in}{0in}{0in}{0in}
 }
+
 %---- Acknowledgments
 \newenvironment{acknowledgments}{%
    \phantomsection
@@ -396,7 +371,7 @@
     \setlength\@tempdima{1.5em}%
     \begingroup
       \leavevmode
-      \@dottedtocline{1}{0em}{1.4em}{\MakeUppercase{#1}}{#2}
+      \@dottedtocline{1}{0em}{1.4em}{#1}{#2}
       \penalty\@highpenalty
     \endgroup
   \fi}
@@ -534,8 +509,8 @@
   \setcounter{section}{0}%
   \setcounter{table}{0}
   \gdef\@chapapp{\appendixname}%
-  \gdef\thechapter{\@Alph\c@chapter}
-  \renewcommand{\thetable}{A.\arabic{table}}
+  \gdef\chapter{\@Alph\c@chapter}
+%   \renewcommand{\thetable}{.\arabic{table}}
   \renewcommand{\appendixtocname}{Appendix}
   \addappheadtotoc
   \newpage
@@ -603,4 +578,3 @@
 
 \renewcommand{\cite}[1]{\citep{#1}}
 \newcommand{\shortcite}[1]{\citeyearpar{#1}}
-
