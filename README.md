@@ -17,9 +17,9 @@ This thesis is structured into chapters:
 
 I dedicate my thesis, research, and efforts to my Lord and Savior, Jesus Christ. I also dedicate this work to my wife, Jillian, my family, friends, church family, and the educators in my life (from Preschool to Senior Year of High School, into Undergrad and Graduate School).
 
-## Acknowledgements
+## Acknowledgments
 
-The formal acknowledgements section of the thesis was very limiting. To honor those in my life that have made an impact, I include an extended version of those acknowledgements here:
+The formal acknowledgments section of the thesis was very limiting. To honor those in my life that have made an impact, I include an extended version of those acknowledgments here:
 
 First and foremost, to my Lord and Savior Jesus Christ, thank You for Your guidance and protection over my life. I would not be where I am today without Your hand and blessings in my life and in the lives of those around me.
 
