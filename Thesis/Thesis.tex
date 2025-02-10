@@ -40,6 +40,7 @@
 
 % bibliography configuration
 \addbibresource{./Support/Bibliography/References.bib}
+\setlength\bibitemsep{1.5\itemsep}
 
 % titlesec configuration
 \usepackage{titlesec}
@@ -134,16 +135,18 @@
 			\input{./Sections/Chapter4.tex}
 			\input{./Sections/Chapter5.tex}
 			\input{./Sections/Chapter6.tex}
+		% \end{body}
+
+			\begin{references}
+				\input{./Sections/References.tex}
+			\end{references}
+
+			\begin{appendices}
+				\input{./Sections/Appendices/AppendixA.tex}
+				\input{./Sections/Appendices/AppendixB.tex}
+			\end{appendices}
+
 		\end{body}
-
-		\begin{references}
-			\input{./Sections/References.tex}
-		\end{references}
-
-		\begin{appendices}
-			\input{./Sections/Appendices/AppendixA.tex}
-			\input{./Sections/Appendices/AppendixB.tex}
-		\end{appendices}
 
 	\end{FlushLeft}
 
