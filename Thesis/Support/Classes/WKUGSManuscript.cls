@@ -578,3 +578,5 @@
 
 \renewcommand{\cite}[1]{\citep{#1}}
 \newcommand{\shortcite}[1]{\citeyearpar{#1}}
+
+\newenvironment{singlespacecode}{\singlespacing}{\par}
