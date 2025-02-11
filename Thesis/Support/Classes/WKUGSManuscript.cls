@@ -580,3 +580,11 @@
 \newcommand{\shortcite}[1]{\citeyearpar{#1}}
 
 \newenvironment{singlespacecode}{\singlespacing}{\par}
+
+\newcommand{\appendixtitleformat}{%
+   \titleformat{\chapter} % Modify chapter format
+     {\centering\bfseries} % Styling: centered, bold, and huge font
+     {APPENDIX \thechapter} % Label format: "APPENDIX X"
+     {1em} % Extra space before the title
+     {\vspace{1em}} % Space between the label and the title
+}
