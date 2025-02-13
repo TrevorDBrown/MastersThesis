@@ -20,8 +20,43 @@
         .2 Source/.
         .3 DAS/.
         .4 das\_service.py.
-        .4 config.json.
+        .4 das\_core/.
+        .5 configuration.py.
+        .5 das\_extensions.py.
+        .5 data\_connector.py.
+        .5 helper.py.
+        .5 obdii\_interpreter.py.
+        .4 data/.
+        .5 config.json.
+        .5 hud/.
+        .6 base.json.
+        .6 default.json.
+        .4 private/.
+        .5 dashar-data.sqlite3.
+        .5 hud/.
+        .6 example.json.
         .3 HUD/.
+        .4 Assets/.
+        .5 DashAR/.
+        .6 Origin.cs.
+        .6 Objects/.
+        .7 DashARConfiguration.cs.
+        .7 DashARDataAggregatorServer.cs.
+        .7 DashARDevice.cs.
+        .7 DashARHUD.cs.
+        .7 DashARHUDBaseWidget.cs.
+        .7 DashARHUDTray.cs.
+        .7 DashARHUDTrayAnchor.cs.
+        .7 DashARHUDWidget.cs.
+        .7 DashARStateMachine.cs.
+        .7 HTTPResponse/.
+        .8 DashARDataAggregatorServerHUDConfigurationResponse.cs.
+        .8 DashARDataAggregatorServerOBDIIResponse.cs.
+        .5 NRSDK/.
+        .5 Scenes/.
+        .6 DashAR HUD - Base Scene.unity.
+        .6 DashAR HUD - First Design.unity.
+        .6 DashAR HUD - Second Design.unity.
         .3 Configurator/.
         .3 Miscellaneous/.
         .2 Testing/.
@@ -30,12 +65,7 @@
     }
 
     \section{DAS API}
-        \par The following source code and configuration files comprise the \gls{das} \gls{api} of the DashAR system. These are the components that run on the \gls{ics}.
-
-        \begin{itemize}
-            \item das\_service.py
-            \item config.json
-        \end{itemize}
+        \par The following source code and configuration files are some of the primary files that comprise the \gls{das} \gls{api} of the DashAR system. These are the components that run on the \gls{ics}.
 
         \newpage
 
@@ -44,9 +74,53 @@
             \lstinputlisting[language=Python,label=scl:dasservicepy]{./../../DashAR/Source/DAS/das_service.py}
         \end{singlespacecode}
 
+        \newpage
+
+        \subsection{DashAR/Source/DAS/das\_core/helper.py}
+        \begin{singlespacecode}
+            \lstinputlisting[language=Python,label=scl:dascorehelperpy]{./../../DashAR/Source/DAS/das_core/helper.py}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/DAS/das\_core/obdii\_interpreter.py}
+        \begin{singlespacecode}
+            \lstinputlisting[language=Python,label=scl:dascoreobdiipy]{./../../DashAR/Source/DAS/das_core/obdii_interpreter.py}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/DAS/das\_core/data\_connector.py}
+        \begin{singlespacecode}
+            \lstinputlisting[language=Python,label=scl:dascoredataconnectorpy]{./../../DashAR/Source/DAS/das_core/data_connector.py}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/DAS/das\_core/configuration.py}
+        \begin{singlespacecode}
+            \lstinputlisting[language=Python,label=scl:dascoreconfigpy]{./../../DashAR/Source/DAS/das_core/configuration.py}
+        \end{singlespacecode}
+
+        \newpage
+
         \subsection{DashAR/Source/DAS/data/config.json}
         \begin{singlespacecode}
             \lstinputlisting[label=scl:configjson]{./../../DashAR/Source/DAS/data/config.json}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/DAS/data/hud/base.json}
+        \begin{singlespacecode}
+            \lstinputlisting[label=scl:hudbasejson]{./../../DashAR/Source/DAS/data/hud/base.json}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/DAS/data/hud/default.json}
+        \begin{singlespacecode}
+            \lstinputlisting[label=scl:huddefaultjson]{./../../DashAR/Source/DAS/data/hud/default.json}
         \end{singlespacecode}
 
         \newpage
@@ -57,5 +131,82 @@
 
         \subsection{DashAR/Source/HUD/Assets/DashAR/Origin.cs}
         \begin{singlespacecode}
-            \lstinputlisting[language={[Sharp]C},label=scl:hudcs]{./../../DashAR/Source/HUD/Assets/DashAR/Origin.cs}
+            \lstinputlisting[language={[Sharp]C},label=scl:origincs]{./../../DashAR/Source/HUD/Assets/DashAR/Origin.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/Assets/DashAR/Objects/DashARStateMachine.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dasharstatemachinecs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/DashARStateMachine.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/Assets/DashAR/Objects/DashARConfiguration.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dasharconfigurationcs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/DashARConfiguration.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/.../Objects/DashARDataAggregatorServer.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dashardascs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/DashARDataAggregatorServer.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/Assets/DashAR/Objects/DashARDevice.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dashardevicecs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/DashARDevice.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUD.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dasharhud.cs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUD.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUDBaseWidget.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dasharhudbasewidgetcs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUDBaseWidget.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUDTray.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dasharhudtraycs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUDTray.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUDTrayAnchor.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dasharhudtrayanchorcs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUDTrayAnchor.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUDWidget.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dasharhudwidgetcs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/DashARHUDWidget.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/.../DashARDataAggregatorServerHUDConfigurationResponse.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl:dasharhttpresponsedashudconfigcs]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/HTTPResponse/DashARDataAggregatorServerHUDConfigurationResponse.cs}
+        \end{singlespacecode}
+
+        \newpage
+
+        \subsection{DashAR/Source/HUD/.../DashARDataAggregatorServerOBDIIResponse.cs}
+        \begin{singlespacecode}
+            \lstinputlisting[language={[Sharp]C},label=scl: dasharhttpresponsedasobdiics]{./../../DashAR/Source/HUD/Assets/DashAR/Objects/HTTPResponse/DashARDataAggregatorServerOBDIIResponse.cs}
         \end{singlespacecode}
