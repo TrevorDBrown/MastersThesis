@@ -31,33 +31,36 @@
         \label{fig:dashartechstack}
     \end{figure}
 
-    \subsection{Hardware Components}
+    \subsection{System Components}
         \subsubsection{Automobile}
-            \par The automobile, being the core component of DashAR, is any gasoline powered automobile manufactured after 1996, or any diesel powered automobile after 1997. This is because they are required to have \gls{obdii} \cite{CEPA2019}. Considering that the mean age of an automobile is 12 years in the \glsxtrshort{usa} \cite{BTS2024} and 18 years in Western Europe \cite{Held2021}, it is safe to assume a wide array of people will be able to use DashAR as designed, with little to no modification. Unfortunately, even with the rapid growth in market share around \gls{ev} in society today, these automobiles are not guaranteed to have \gls{obdii} available, thus breaking functionality with the DashAR system.
+            \par The automobile, being the core component of DashAR, is any gasoline powered automobile manufactured after 1996, or any diesel powered automobile after 1997. This is because they are required to have \gls{obdii} \cite{CEPA2019}. Considering that the mean age of an automobile is 12 years in the \glsxtrshort{usa} \cite{BTS2024} and 18 years in Western Europe \cite{Held2021}, it is safe to assume a wide array of people will be able to use DashAR as designed, with little to no modification. Unfortunately, even with the rapid growth in market share around \gls{ev} in society today, these automobiles are not guaranteed to have \gls{obdii} available, thus breaking functionality with the DashAR system. Since \gls{obdii} interfaces directly with the \gls{ecu} of the automobile, \gls{can} communications are internally well-established, provide real-time data. The primary consideration when dealing with this data is finding an effective way to extract it.
 
         \subsubsection{Intermediate Computing Subsystem}
-            \par The next major consideration made for the project's hardware needs was the method in which the \gls{ar} subsystem would communicate with the automobile. Based on the research of \cite{Doshi2009}, it was determined a computer would be needed that met the following criteria:
+            \par The \gls{ics} is the data aggregation and brokering platform of the DashAR system. The \gls{ics} is what allows the \gls{ar} subsystem to communicate with the automobile, as well as other data sources. Based on the research of \cite{Doshi2009}, it was determined a \gls{pc} would be needed that met the following criteria:
 
             \begin{itemize}
-                \item Portable - the computer should be able to fit int he automobile easily. The smaller the computer, the better.
-                \item Energy Consumption - the computer should be able to be powered by the automobile while driving.
+                \item Physically Portable - the computer should be able to fit into the automobile easily.
+                \item Energy Consumption - the computer should be able to be powered by the automobile while driving, or by an external power source such as a \gls{ups} or battery bank.
                 \item Computing Power - the computer should be able to process data from the automobile and other inputs in near real-time (i.e. within, at most, 500 ms/s).
-                \item Headless Operation - the computer should be able to run without direct interaction from the user.
-                \item Connectivity - the computer should be able to interface with \gls{usb} devices, Bluetooth devices, and WiFi networks.
+                \item Headless Operation - the computer should be able to run without direct interaction from the user, with the exception of the system shutdown process.
+                \item Connectivity - the computer should be able to interface with \gls{usb} devices, Bluetooth devices, and Wi-Fi networks.
+                \item Easily Programmable - the computer should be able to run both system software and bespoke application software.
             \end{itemize}
 
-            \cite{RPL2025} produces the \gls{rpi} 5 - a \gls{sbc} released in 2023 - which meets all of the criteria prescribed. The \gls{rpi} 5 uses an industry standard, ARM-based processor, operating at 2.4 GHz, with \gls{ram} options between 2 GB to 16 GB. This is comparable to a early- to mid-2010s desktop \glsxtrshort{pc}. It is very compact physically, measuring in at 56mm by 85mm. It contains the necessary connectivity options that make it a feasible option for the \gls{ics}, as it can interface with the automobile via a serial-to-\gls{obdii} adapter, either wired (i.e. \gls{usb}) or wireless (i.e. Bluetooth). Regarding energy consumption, the \gls{rpi} 5 consumes around 12 watts of power over a \gls{usb}-C cable, requiring 5V/5A \gls{dc}.
+            \par Fortunately, there exists a form factor of \gls{pc}, which is readily available on the market, that meet the criteria specified - the \gls{sbc}. \gls{sbc}s are \gls{pc}s that are approximately the size of a credit card. They are generally powered by \glsxtrashort{arm}-based chips, having a wide range of performance capabilities.
+
+            \par Once a computing platform was determined, the methodology in which the data from the automobile could be extracted had to be determined as well. There exists a standard interface between \gls{obdii} and serial, called ELM327. The ELM327 can signal the \gls{ecu} to provide specific details regarding the automobile's operational state. In turn, the ELM327 can package the responses from the \gls{ecu} into a format usable by an \gls{obdii} scanning tool or \gls{pc} running \gls{obdii} interpreter software.
+
+            \par ELM327-based adapters exist several serial interface formats, from wired (e.g. \gls{obdii}-to-\gls{usb} and \gls{obdii}-to-RS232 (Standard Serial)) to wireless (e.g. \gls{obdii}-to-Bluetooth and \gls{obdii}-to-Wi-Fi). For the purposes of this project, the DashAR system was designed with a wired connection in mind, due to its consistent reliability. Considering the ubiquitous nature of \gls{usb}, it was the logical choice in wired options.
+
+            \par With connectivity established between the automobile and the \gls{ics}, the final component is ready to be integrated.
 
         \subsubsection{AR Subsystem}
-            \par Finally, the last major consideration made regarding hardware for the project was the method in which the \gls{hud} would be displayed. At the time the project started, Meta's Quest 3 \gls{ar} headset was the most commonplace \gls{ar} product that fit the application needs. However, due to the bulkiness of the headset, and the legal concerns regarding \gls{vr} utilization while operating an automobile, this product selection was quickly abandoned.
+            \par The \gls{ar} Subsystem is the platform in which the \gls{hud} is displayed. When the project began, Meta's Quest 3 \gls{ar} headset was the most commonplace \gls{ar} product that fit the application needs. However, due to the bulkiness of the headset, and the legal concerns regarding \gls{vr} utilization while operating an automobile, this product selection was quickly abandoned.
 
             \par While searching for alternative options, a relatively unknown product came to the forefront, which, on paper, seemed like an ideal solution to these concerns - XREAL's Air 2 line of \gls{ar} glasses. The Air 2 Pro \gls{ar} glasses is a small form factor \gls{ar} solution that is approximately the size of a pair of large sunglasses. Since their founding in 2017, XREAL has released multiple models of their \gls{ar} glasses, as well as companion devices - the XREAL Beam and XREAL Beam Pro \cite{XREAL2025}.
 
             \par At the start of development, the Air 2 Pro \gls{ar} glasses were considered to be XREAL's mid-tier offering, as they either lacked certain functionality found in the higher end model or were limited in their function (e.g. front facing cameras, 6-\gls{dof} as opposed to the Air 2 Pro's 3-\gls{dof}, etc.)
-
-    \subsection{Software Components}
-        \subsubsection{HUD}
-            \par The first major consideration when designing the DashAR system was how the \gls{hud} would be rendered. An \gls{ar}-based interface made the most sense, as it would allow the \gls{hud} to be superimposed in the user's line of sight while they operate the automobile. Regarding the development tools available around \gls{ar} development, the Unity Engine was the ideal choice \cite{UnityTechnologies2025}. At the time of design, Unity Engine 2022.3 was the available \gls{lts} version available. Since then, a newer LTS version was released - Unity 6 (or 6000, to keep compatibility with the previously used versioning scheme.) Additionally, XREAL provides an easy-to-use \gls{sdk} - NRSDK - which allows 3D scenes within Unity to be compiled for XREAL \gls{ar} glasses \cite{XREAL2024}.
 
 \section{Why DashAR?}
     \par Considering the design of the DashAR system, a question that may come to someone's mind when thinking about this approach: ``Why can't I just look down at the instrument cluster while I drive?''. Admittedly, for many people, that is the most practical solution. After all, it is readily available, and it is there to help the driver.
