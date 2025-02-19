@@ -523,7 +523,7 @@
    \setcounter{page}{1}
    \pagenumbering{arabic}
 
-   \setlength{\parskip}{\baselineskip}
+   % \setlength{\parskip}{\baselineskip}
    \setlength{\parindent}{20pt}
 
    \begin{spacing}{2.0}
@@ -582,9 +582,11 @@
 \newenvironment{singlespacecode}{\singlespacing}{\par}
 
 \newcommand{\appendixtitleformat}{%
-   \titleformat{\chapter} % Modify chapter format
-     {\centering\bfseries} % Styling: centered, bold, and huge font
-     {APPENDIX \thechapter} % Label format: "APPENDIX X"
-     {1em} % Extra space before the title
-     {\vspace{1em}} % Space between the label and the title
+   \titleformat
+      {\chapter} % Modify chapter format
+      [display]
+      {\centering\bfseries} % Styling: centered and bold.
+      {APPENDIX \thechapter} % Label format: "APPENDIX X"
+      {0pt} % Extra space before the title
+      {} % Space between the label and the title
 }
