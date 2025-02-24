@@ -8,10 +8,18 @@
 \section{Summary}
     \par DashAR (pronounced either as it looks: a portmanteau of ``Dashboard'' and ``\gls{ar}'', or like Dasher the Reindeer) is a dynamic \gls{hud} solution for drivers of automobiles. It provides drivers near real-time information, such as automobile's speed in space, the engine's rotational speed internally, the amount of fuel remaining in the fuel tank, and so on. These are pieces of information generally found on the instrument cluster of most automobiles.
 
-\section{System Design}
+\section{Requirements}
     \par During the development of IBM's Watson platform - a massively parallel computation project in the early 2010s - Dr. Bijan Davari, \gls{ibm} Fellow and Vice President of Next Generation Computing Systems and Technology, stated, regarding application development at the scale of Watson that ``[The] application is the king. Start with that, what are the key requirements for that, and how do they need to be satisfied. You bring the elements that are required [together] to take care of that application need.'' \cite{IBM2012} In other words, design the software first, then proceed to bring in the necessary resources as they are needed. That is the approach taken with this project.
 
-    \par When starting out, a basic framework was designed that would handle the following basic functions:
+    \subsection{Functional Requirements}
+
+    \subsection{Non-functional Requirements}
+
+    \subsection{Inverse Requirements}
+
+
+\section{DashAR's Design}
+    \par After determining the requirements of the system, a basic framework was designed that would handle the following basic functions:
 
     \begin{itemize}
         \item An \gls{ar} component, for rendering an automotive \gls{hud}.
@@ -66,9 +74,22 @@
         \subsubsection{AR Subsystem}
             \par The \gls{ar} Subsystem is the platform in which the \gls{hud} is displayed. When the project began, Meta's Quest 3 \gls{ar} headset was the most commonplace \gls{ar} product that fit the application needs. However, due to the bulkiness of the headset, and the legal concerns regarding \gls{vr} utilization while operating an automobile, this product selection was quickly abandoned.
 
-            \par While searching for alternative options, a relatively unknown product came to the forefront, which, on paper, seemed like an ideal solution to these concerns - XREAL's Air 2 line of \gls{ar} glasses. The Air 2 Pro \gls{ar} glasses is a small form factor \gls{ar} solution that is approximately the size of a pair of large sunglasses. Since their founding in 2017, XREAL has released multiple models of their \gls{ar} glasses, as well as companion devices - the XREAL Beam and XREAL Beam Pro \cite{XREAL2025}.
+            \par While searching for alternative options, a relatively unknown product came to the forefront, which, on paper, seemed like an ideal solution to these concerns - \gls{ar} glasses, namely the Air 2 line from XREAL (formerly NREAL). The Air 2 Pro \gls{ar} glasses is a small form factor \gls{ar} solution that is approximately the size of a pair of large sunglasses. Since their founding in 2017, XREAL has released multiple models of their \gls{ar} glasses, as well as companion devices - the XREAL Beam and XREAL Beam Pro \cite{XREAL2025}.
 
             \par At the start of development, the Air 2 Pro \gls{ar} glasses were considered to be XREAL's mid-tier offering, as they either lacked certain functionality found in the higher end model or were limited in their function (e.g. front facing cameras, 6-\gls{dof} as opposed to the Air 2 Pro's 3-\gls{dof}, etc.)
+
+    \subsection{Software Components}
+            \subsubsection{DAS API}
+                \par The modern automobile captures many data points, events, and system states via the \gls{ecu} several times a second. This data is accessible over the \gls{obdii} interface, generally for the purposes of diagnostics. However, there is a potential for this data to be captured in real time, while the automobile is in operation.
+
+                \par The \gls{das} is the software subsystem responsible for the collection, aggregation, and distribution of data, from varying sources within the automobile to the visualization of the data via the \gls{hud}. The \gls{das} is hosted on the \gls{ics}. The \gls{ecu} is one of many potential data sources while operating the automobile. Data can also be collected from additional devices and sensors on board, such as those found in mobile phones, computers, and other electronics. With a cellular modem, even the internet is accessible as a data source, expanding the potential for services that the DashAR System can provide.
+
+                \par Given this wide array of data sources, it's important to have a software subsystem capable of managing these resources effectively, efficiently, and dynamically. To satisfy these conditions, the \gls{das} was designed to function as a client-server, \gls{tcpip}-oriented \gls{api}. Exposed endpoints allow for data to be retrieved from the various sources via GET requests from an \gls{http} client.
+
+            \subsubsection{HUD}
+                \par To satisfy the setup of the \gls{das} \gls{api}, the \gls{hud} software is designed with a basic \gls{http} client acting as the central context for the \gls{ar} subsystem's interaction with the \gls{ics}. When data is needed, the \gls{hud} would send requests to the appropriate endpoints of the \gls{api}. In turn, the \gls{api} would provide a response, formatted in a standard data serialization format acceptable by the \gls{hud}. The responses would be tailored to the requested endpoint (i.e. the /data/obdii endpoint would result in \gls{obdii} data, the /data/map would results in map data, etc.)
+
+                \par Based on the user's needs, the \gls{hud} interface layout would be customizable. Widgets would be assigned a data source, down to the data point level. From there, as data is retrieved from the \gls{das} \gls{api},
 
 \section{Why DashAR?}
     \par Considering the design of the DashAR system, a question that may come to someone's mind when thinking about this approach: ``Why can't I just look down at the instrument cluster while I drive?''. Admittedly, for many people, that is the most practical solution. After all, it is readily available, and it is there to help the driver.
