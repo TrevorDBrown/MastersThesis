@@ -5,54 +5,55 @@
     - Ed Catmull \cite{Catmull2014}
 \end{center}
 
-\par The Information Age has, arguably, been one of the most challenging and revealing, yet fruitful times in history. Before the mid-twentieth century, a computer was defined as a person who calculates. Then, with the developments of computing machines during \gls{wwii}, by both allied and axis powers, a computer became defined as a machine that calculates \cite{Palfreman1992}. These early computers took up vast amounts of physical space - rooms full of cabinets, containing various blinking lights, buttons, and vacuum tubes, arranged in patterns that made logic, arithmetic, and memory capabilities possible. These machines were seen as a wonder by many, used in various capacities.
+\par The Information Age has, arguably, been one of the most challenging and revealing, yet fruitful times in history. Before the mid-twentieth century, a computer was defined as a person who calculates. Then, with the developments of computing machines during \gls{wwii}, by both allied and axis powers, a computer became defined as a machine that calculates \cite{Palfreman1992}. These early computers took up vast amounts of physical space: rooms full of cabinets, containing various blinking lights, buttons, and vacuum tubes, arranged in patterns that made logic, arithmetic, and memory capabilities possible. These machines were seen as a wonder by many, used in various capacities.
 
-\par By the end the twentieth century, the computer became known as a small device that could sit on someone's desk, in someone's lap, or within a cabinet in a data center. Within the first two decades of the 21st century, though, the computer became much more than that. We now see them in our hands, on our heads, on our wrists, and beyond. Interestingly, over this nearly one hundred year period of expansion in the digital frontier, the basic principles of the computer - namely, those defined in the von Neumann Architecture, the design pattern in which most computers follow - have remained fundamentally unchanged. The primary difference between then and now is computers are magnitudes more performant and compact.
+\par By the end the twentieth century, the computer became known as a small device that could sit on someone's desk, in someone's lap, or within a cabinet in a data center. Within the first two decades of the 21st century, though, the computer became much more than that. We now see them in our hands, on our heads, on our wrists, and beyond. Interestingly, over this nearly one hundred year period of expansion in the digital frontier, the basic principles of the computer, namely those defined in the von Neumann Architecture, the design pattern in which most computers follow, have remained fundamentally unchanged. The primary difference between then and now is computers are magnitudes more performant and compact.
 
-\par With changes in the size and scale of the computer comes changes in the means in which people interface with the computer. \gls{hci} - a field dedicated to the research, development, and innovation of how people use computing devices - has had great influence in how the form factor and presentation of the computer have changed over time \cite{Hartson1989}. Early \gls{hci} implementations include computer wiring patterns (e.g. \glsxtrshort{eniac}), punched cards (e.g. \glsxtrshort{univac} \cite{Eckert1951}, \glsxtrshort{ibm} 1401 \cite{Garner2010}), and bit manipulation by means of physical switches (e.g. Altair 8800, \glsxtrshort{imsai} 8080). Eventually, the keyboard was introduced, mimicking the familiar typewriters and tabulators of the day.
+\par With changes in the size and scale of the computer comes changes in the means in which people interface with the computer. \gls{hci}, a field dedicated to the research, development, and innovation of how people use computing devices, has had great influence in how the form factor and presentation of the computer have changed over time \cite{Hartson1989}. Early \gls{hci} implementations include computer wiring patterns (e.g. \glsxtrshort{eniac}), punched cards (e.g. \glsxtrshort{univac} \cite{Eckert1951}, \glsxtrshort{ibm} 1401 \cite{Garner2010}), and bit manipulation by means of physical switches (e.g. Altair 8800, \glsxtrshort{imsai} 8080). Eventually, the keyboard was introduced, mimicking the familiar typewriters and tabulators of the day.
 
-\par In the late 1960s, a core component of modern computer interfaces would be recognized for the first time - the mouse. Douglas Engelbart introduced radically new technology that floored the computer science community in what writer Steven Levy called ``The Mother of All Demos'' \cite{Levy1994}. Unfortunately, it would not be until years later when the keyboard and mouse would finally become the standard in interface for the computer.
+\par In the late 1960s, a core component of modern computer interfaces would be recognized for the first time: the mouse. Douglas Engelbart introduced radically new technology that floored the computer science community in what writer Steven Levy called ``The Mother of All Demos'' \cite{Levy1994}. Unfortunately, it would not be until years later when the keyboard and mouse would finally become the standard in interface for the computer.
 
-\par Given these advancements with \gls{hci} over time, society began seeing more interesting, and somewhat experimental means of computer interface. \gls{xr} technology - a blend of prominent new methodologies for interacting with a virtual or enhanced world - is one such means. Within \gls{xr} exists \gls{vr}, \gls{ar}, and \gls{mr}. \gls{vr} offers the ability to create amazing, and sometimes even surreal or outright physically impossible, experiences contained within the bounds of hardware and software. \gls{ar} provides a context where virtual elements are imposed into the physical world. Virtual elements (seen either by means of \gls{vr} or \gls{ar}), blending seamlessly into physical space provides us with \gls{mr} \cite{Vasarainen2021}.
+\par Given these advancements with \gls{hci} over time, society began seeing more interesting, and somewhat experimental means of computer interface. \gls{xr} technology, a blend of prominent new methodologies for interacting with a virtual or enhanced world, is one such means. Within \gls{xr} exists \gls{vr}, \gls{ar}, and \gls{mr}. \gls{vr} offers the ability to create amazing, and sometimes even surreal or outright physically impossible, experiences contained within the bounds of hardware and software. \gls{ar} provides a context where virtual elements are imposed into the physical world. Virtual elements (seen either by means of \gls{vr} or \gls{ar}), blending seamlessly into physical space provides us with \gls{mr} \cite{Vasarainen2021}.
 
 \section{Problem Statement}
     \par While \gls{xr} is seen by the general public as a means of providing entertainment value (i.e. social applications, games, film, artistic experiences, etc.), it can also be used as a means of enhancing and expanding our understanding of the world around us. Some other examples of \gls{xr} in the world are the presentation of news and weather (e.g. title cards for news stories next to a news anchor, projections of weather conditions symbols onto maps) and online shopping experiences (e.g. websites where you can test fit eyeglasses \cite{Zhang2017}, clothing, etc.). One potential application of \gls{xr}, that would expand our understanding, that seems to elude society, is \gls{hud}s, specifically for automobiles. \gls{hud} technology has existed since the mid 20th century, but has been limited in application, primarily focused on aircraft for military use.
 
-    \par \gls{hud} solutions exist for automobiles today, which are either embedded in the dashboard of an automobile by the manufacturer (either directly in front of or to the side of the driver), or are added by the driver through a third-party device which sits atop the dashboard of the automobile. Each of these solutions share the same problem - limited information, dynamically updated, in a static format. Why must this be so? Must \gls{hud}s be restricted in presentation and configuration?
+    \par \gls{hud} solutions exist for automobiles today, which are either embedded in the dashboard of an automobile by the manufacturer (either directly in front of or to the side of the driver), or are added by the driver through a third-party device which sits atop the dashboard of the automobile. Each of these solutions share the same problem: limited information, dynamically updated, in a static format. Why must this be so? Must \gls{hud}s be restricted in presentation and configuration?
 
     \par With the emergence of recent \gls{ar} technology, a solution can be explored to provide a wearable, more dynamic, and more fluid \gls{hud} experience to automobile operators. This is the problem this paper intends to explore.
 
 \section{Parameters}
-    \par Before proceeding with this thesis, a set of functional and inverse parameters must be established. These parameters provide a facility to ensure good faith effort was made in the development of the solution, and to prevent potential scope creep.
+    \par Before proceeding with this thesis, parameters must be established. These parameters provide a facility to ensure good faith effort was made in the development of the solution, and to prevent potential scope creep.
 
-    \subsection{Functional Parameters}
-        \par The following functional parameters are defined, as to what is being explored in this thesis:
+    \subsection{Target Parameters}
+        \par The following target parameters are defined, as to what is being explored in this thesis:
 
         \begin{itemize}
-            \item The project defined in this paper will implement an \gls{ar}-based \gls{hud} and software system, spanning multiple physical devices.
-            \item The project defined in this paper will utilize lightweight, wearable electronic eyeglasses to satisfy the \gls{ar} needs.
-            \item The project defined in this paper will utilize integrations between the various hardware subsystems (e.g. Automobile to Intermediate Compute, to Edge Compute, to Display.)
-            \item The project defined in this paper will implement a \gls{hud} that provides information dynamically, in form and in update, defined by the user of the system via a web-based configuration application.
-            \item The project defined in this paper will implement near real-time display of information within the \gls{hud}.
+            \item The project defined in this paper shall implement an \gls{ar}-based \gls{hud} and software system, spanning multiple physical devices.
+            \item The project defined in this paper shall utilize lightweight, wearable electronic eyeglasses to satisfy the \gls{ar} needs.
+            \item The project defined in this paper shall utilize integrations between the various hardware subsystems (e.g. Automobile to Intermediate Compute, to Edge Compute, to Display.)
+            \item The project defined in this paper shall implement a \gls{hud} that provides information dynamically, in form and in update, defined by the user of the system via a web-based configuration application.
+            \item The project defined in this paper shall implement near real-time display of information within the \gls{hud}.
         \end{itemize}
 
-    \subsection{Inverse Parameters}
-        \par The following inverse parameters are defined. These ``anti-requirements'' define a boundary of work for the research and development of this system, where there will be no focus or energy expelled:
+    \subsection{Boundary Parameters}
+        \par The following boundary parameters are defined. These parameters define a boundary of work for the research and development of this system, where there will be no focus or energy expelled:
 
         \begin{itemize}
-            \item The project defined in this paper will not implement functionality to block other applications from running in the system (e.g. potential vectors of distraction, \gls{os} functions handled by components of the system, etc.).
-            \item The project defined in this paper will not implement \gls{ml} and \gls{ai} functionality.
-            \item The project defined in this paper will not implement \gls{cv} for object recognition, even if facilities were provided for that functionality (e.g. camera and sensor arrays, \gls{ml} models, etc.).
+            \item The project defined in this paper shall not implement functionality to block other applications from running in the system (e.g. potential vectors of distraction, \gls{os} functions handled by components of the system, etc.).
+            \item The project defined in this paper shall not implement \gls{ml} and \gls{ai} functionality.
+            \item The project defined in this paper shall not implement \gls{cv} for object recognition, even if facilities were provided for that functionality (e.g. camera and sensor arrays, \gls{ml} models, etc.).
         \end{itemize}
 
 \section{Thesis Structure}
     This thesis is structured as follows:
 
     \begin{itemize}
-        \item Chapter 2 - a background on \gls{xr}, \gls{hud}s, Automotive Instrumentation, and other relevant concepts.
-        \item Chapter 3 - an introduction to the Automotive \gls{hud} solution and its design.
-        \item Chapter 4 - the implementation of the solution.
-        \item Chapter 5 - the solution results.
-        \item Chapter 6 - potential future works for this research and development and conclusions.
-        \item Appendices - source code listings, build instructions, etc.
+        \item Chapter 1: this chapter, an introduction.
+        \item Chapter 2: a background on \gls{xr}, \gls{hud}s, Automotive Instrumentation, and other relevant concepts.
+        \item Chapter 3: the design of the Automotive \gls{hud} solution.
+        \item Chapter 4: the implementation of the Automotive \gls{hud} solution.
+        \item Chapter 5: the Automotive \gls{hud} solution results.
+        \item Chapter 6: potential future works for this research, and general conclusions.
+        \item Appendices: project source code listings, build instructions, extended acknowledgements, etc.
     \end{itemize}

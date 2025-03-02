@@ -5,10 +5,18 @@
     - Fred Brooks \cite{Brooks1996}
 \end{center}
 
-\section{Development Methodology}
-    \par The design and implementation of the DashAR system was handled through iterative development practices via Agile. Each iteration of the project consisted of two week sprints, in which work was identified, evaluated, performed, completed, and/or deferred. The development process formally began on Sunday, August 18th, 2024, and ended on Saturday, March 29th, 2025. There were brief interruptions in development for
+\section{Methodology}
+    \par The design and implementation of the DashAR system was handled through iterative development practices via Agile. Each iteration of the project consisted of two week sprints, in which work was identified, evaluated, performed, completed, and/or deferred. The development process formally began on Sunday, August 18th, 2024 with sprint 1, and ended on Saturday, March 29th, 2025 with sprint 16. There were brief interruptions in development for various purposes, from writing this thesis (which was tracked in sprint) to impediments that prevented progress (untracked).
 
-    \par Sprints were tracked using the Obsidian \gls{pkb} software. A community module exists for managing Agile sprint boards. Each sprint consisted of a sprint board, with six swimlanes - To Do, In Progress, On Hold, Testing, Completed, and Rollover. Cards were initially added to the ``To Do'' swimlane, and progressed into the others.
+    \begin{figure}[h!]
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[scale=0.25]{./Support/Images/DashAR-SprintBoard.png}
+        \caption{Sprint 14 Sprint Board in Obsidian MD}
+        \label{fig:dasharsprintboard}
+    \end{figure}
+
+    \par Sprints were tracked using the Obsidian \gls{pkb} software \cite{Obsidian2025}. An example of this tracking can be seen in figure \ref{fig:dasharsprintboard}. A community module exists for managing Agile sprint boards. Each sprint consisted of a sprint board, with six swimlanes: To Do, In Progress, On Hold, Testing, Completed, and Rollover. Cards were initially added to the ``To Do'' swimlane, and progressed into the others.
 
     \par ``To Do'' was designated for cards that were waiting to be addressed. ``In Progress'' contained those cards actively being developed. ``On Hold'' contained cards that were unable to continue further into development, for any number of reasons (e.g. a roadblock prevent further work, waiting on a dependency to be worked on first, etc.) ``Testing'' was for cards that had been fully implemented, but needed verification of their functionality against the rest of the system. ``Completed'' contained the cards that were fully implemented and incorporated into the system. Finally, ``Rollover'' contained the cards that were to move into the next sprint.
 
@@ -18,16 +26,27 @@
 
     \par Some cards merited implementation that could not be achieved during the development of the system. The title of those cards were prepended with ``(FUTURE WORK)'', to signify their usefulness to the system. An example early on in development of this was the ``Determine uninterrupted power supply issue solution.'' This work item was designed to address a problem faced with the \gls{das} device immediately losing power as soon as the car was turned off. Since the \gls{das} device was a Raspberry Pi, some solutions existed involving batteries (i.e. \gls{ups}) that would help solve the problem. However, it was still not clear of the efficacy of those solutions, as they were bulky, and the batteries were exposed. After some time, a workaround was advised, suggesting that before the car is turned off, the power button on the \gls{das} device should be pressed. This would safely power down the device, stopping running services, such as the \gls{das} \gls{api}.
 
+\section{The Implementation}
+    \par The implementation of the DashAR System, following the Agile methodology prescribed, resulted in a usable, \gls{ar}-based software system.
+
 \section{ICS and the DAS API}
-    % TODO: this was transplanted from chapter 3. Rewrite to fix flow.
-    \cite{RPL2025} produces the \gls{rpi} 5 - a \gls{sbc} released in 2023 - which meets all of the criteria prescribed. The \gls{rpi} 5 uses an industry standard, ARM-based processor, operating at 2.4 GHz, with \gls{ram} options between 2 GB to 16 GB. This is comparable to a early- to mid-2010s desktop \glsxtrshort{pc}. It is very compact physically, measuring in at 56mm by 85mm. It contains the necessary connectivity options that make it a feasible option for the \gls{ics}, as it can interface with the automobile via a serial-to-\gls{obdii} adapter, either wired (i.e. \gls{usb}) or wireless (i.e. Bluetooth). Regarding energy consumption, the \gls{rpi} 5 consumes around 12 watts of power over a \gls{usb}-C cable, requiring 5V/5A \gls{dc}.
+
+    \begin{figure}[h!]
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[scale=0.25]{./Support/Images/RPi5.png}
+        \caption{Raspberry Pi 5, an example of a SBC \cite{SparkFunElectronics2023}}
+        \label{fig:rpi5}
+    \end{figure}
+
+    Following the design specified in chapter 3, the computing platform selected for the \gls{ics} was the \gls{rpi}. \cite{RPL2025} produces the \gls{rpi} 5: a \gls{sbc}, released in 2023, which meets all of the criteria prescribed. The \gls{rpi} 5 uses an industry standard, ARM-based processor, operating at 2.4 GHz, with \gls{ram} options between 2 GB to 16 GB. This is comparable to a early- to mid-2010s desktop \glsxtrshort{pc}. It is very compact physically, measuring in at 56mm by 85mm. It contains the necessary connectivity options that make it a feasible option for the \gls{ics}, as it can interface with the automobile via a serial-to-\gls{obdii} adapter, either wired (i.e. \gls{usb}) or wireless (i.e. Bluetooth). Regarding energy consumption, the \gls{rpi} 5 consumes around 12 watts of power over a \gls{usb}-C cable, requiring 5V/5A \gls{dc}.
 
     \par Following the methodology prescribed above, the \gls{ics} was the first focus. A \gls{rpi} 5, specifically with 8 GB of \gls{ram} and 256 GB of storage via a micro \glsxtrshort{sd} card, was selected as the target platform. The Ubuntu Server 24.04 \gls{os} was installed on the device. From there, additional packages were installed in order to prepare the device to run the \gls{das} \gls{api} service. Specific details regarding the configuration of the intermediate compute device can be found in Appendix XX.
 
     \par Once the device was ready, the \gls{api} was implemented in the Python programming language, specifically version 3.12 \cite{PSF2025}. Python was selected over many other available programming languages due to its platform independence, its ease of use when implementing functionality, and its ability to be performant enough to execute the tasks it needed. Given the integrations with \gls{obdii}, it would have been optimal, from a performance perspective, to select a traditional systems language, like C, C++, or Rust. However, the learning curve for those languages is much higher, and many functions readily available in Python would have to be manually implemented in those languages.
 
-    \par Regarding modules used in the Python environment, the two most important pieces that made this project possible are the Tornado web server module and the python-obd module. The Tornado web server is an asynchronous web framework, developed initially by FriendFeed - a social media feed aggregation company, which was acquired by Meta (formerly Facebook) in 2009 \cite{TornadoAuthors2025}.
+    \par Regarding modules used in the Python environment, the two most important pieces that made this project possible are the Tornado web server module and the python-obd module. The Tornado web server is an asynchronous web framework, developed initially by FriendFeed: a social media feed aggregation company, which was acquired by Meta (formerly Facebook) in 2009 \cite{TornadoAuthors2025}.
 
 \section{HUD}
     % TODO: this was transplanted from chapter 3. Rewrite to fix flow.
-    \par The next consideration when designing the DashAR system was how the \gls{hud} would be rendered. An \gls{ar}-based interface made the most sense, as it would allow the \gls{hud} to be superimposed in the user's line of sight while they operate the automobile. Regarding the development tools available around \gls{ar} development, the Unity Engine was the ideal choice \cite{UnityTechnologies2025}. At the time of design, Unity Engine 2022.3 was the available \gls{lts} version available. Since then, a newer LTS version was released - Unity 6 (or 6000, to keep compatibility with the previously used versioning scheme.) Additionally, XREAL provides an easy-to-use \gls{sdk} - NRSDK - which allows 3D scenes within Unity to be compiled for XREAL \gls{ar} glasses \cite{XREAL2024}.
+    \par The next consideration when designing the DashAR system was how the \gls{hud} would be rendered. An \gls{ar}-based interface made the most sense, as it would allow the \gls{hud} to be superimposed in the user's line of sight while they operate the automobile. Regarding the development tools available around \gls{ar} development, the Unity Engine was the ideal choice \cite{UnityTechnologies2025}. At the time of design, Unity Engine 2022.3 was the available \gls{lts} version available. Since then, a newer LTS version was released: Unity 6 (or 6000, to keep compatibility with the previously used versioning scheme.) Additionally, XREAL provides an easy-to-use \gls{sdk}: NRSDK, which allows 3D scenes within Unity to be compiled for XREAL \gls{ar} glasses \cite{XREAL2024}.

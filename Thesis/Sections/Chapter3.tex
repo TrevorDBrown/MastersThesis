@@ -9,7 +9,7 @@
     \par DashAR (pronounced either as it looks: a portmanteau of ``Dashboard'' and ``\gls{ar}'', or like Dasher the Reindeer) is a dynamic \gls{hud} solution for drivers of automobiles. It provides drivers near real-time information, such as automobile's speed in space, the engine's rotational speed internally, the amount of fuel remaining in the fuel tank, and so on. These are pieces of information generally found on the instrument cluster of most automobiles.
 
 \section{Requirements}
-    \par During the development of IBM's Watson platform - a massively parallel computation project in the early 2010s - Dr. Bijan Davari, \gls{ibm} Fellow and Vice President of Next Generation Computing Systems and Technology, stated, regarding application development at the scale of Watson that ``[The] application is the king. Start with that, what are the key requirements for that, and how do they need to be satisfied. You bring the elements that are required [together] to take care of that application need.'' \cite{IBM2012} In other words, design the software first, then proceed to bring in the necessary resources as they are needed. That is the approach taken with this project.
+    \par During the development of IBM's Watson platform, a massively parallel computation project in the early 2010s, Dr. Bijan Davari, \gls{ibm} Fellow and Vice President of Next Generation Computing Systems and Technology, stated, regarding application development at the scale of Watson that ``[The] application is the king. Start with that, what are the key requirements for that, and how do they need to be satisfied. You bring the elements that are required [together] to take care of that application need.'' \cite{IBM2012} In other words, design the software first, then proceed to bring in the necessary resources as they are needed. That is the approach taken with this project.
 
     \subsection{Functional Requirements}
         \par In order to determine what kind of system needs to be designed, a set of functional requirements must be defined to establish base expectations. These requirements drive the research and development of the system, as they describe what the system will do. For the DashAR System, the following functional requirements are defined:
@@ -65,7 +65,7 @@
         \item Interchangeable, system-agnostic components.
     \end{itemize}
 
-    \par This framework led to the realization of the system components which comprise DashAR - the automobile, the \gls{ics}, and the \gls{ar} subsystem. This framework is visualized in Figure \ref{fig:dashartechstack}.
+    \par This framework led to the realization of the components which comprise the DashAR System: the automobile, the \gls{ics}, and the \gls{ar} subsystem. This framework is visualized in Figure \ref{fig:dashartechstack}.
 
     \begin{figure}[h]
         \vspace{0.5cm}
@@ -83,34 +83,26 @@
             \par The \gls{ics} is the data aggregation and brokering platform of the DashAR system. The \gls{ics} is what allows the \gls{ar} subsystem to communicate with the automobile, as well as other data sources. Based on the research of \cite{Doshi2009}, it was determined a \gls{pc} would be needed that met the following criteria:
 
             \begin{itemize}
-                \item Physically Portable - the computer should be able to fit into the automobile easily.
-                \item Energy Consumption - the computer should be able to be powered by the automobile while driving, or by an external power source such as a \gls{ups} or battery bank.
-                \item Computing Power - the computer should be able to process data from the automobile and other inputs in near real-time (i.e. within, at most, 500 ms/s).
-                \item Unattended Operation - the computer should be able to run without direct interaction from the user, with the exception of the system shutdown process.
-                \item Connectivity - the computer should be able to interface with \gls{usb} devices, Bluetooth devices, and Wi-Fi networks.
-                \item Easily Programmable - the computer should be able to run both system software and bespoke application software.
+                \item Physically Portable: the computer should be able to fit into the automobile easily.
+                \item Energy Consumption: the computer should be able to be powered by the automobile while driving, or by an external power source such as a \gls{ups} or battery bank.
+                \item Computing Power: the computer should be able to process data from the automobile and other inputs in near real-time (i.e. within, at most, 500 ms/s).
+                \item Unattended Operation: the computer should be able to run without direct interaction from the user, with the exception of the system shutdown process.
+                \item Connectivity: the computer should be able to interface with \gls{usb} devices, Bluetooth devices, and Wi-Fi networks.
+                \item Easily Programmable: the computer should be able to run both system software and bespoke application software.
             \end{itemize}
 
-            \par Fortunately, there exists a form factor of \gls{pc}, which is readily available on the market, that meet the criteria specified - the \gls{sbc}. \gls{sbc}s are \gls{pc}s that are approximately the size of a credit card. They are generally powered by \glsxtrshort{arm}-based chips, having a wide range of performance capabilities.
+            \par Fortunately, there exists a form factor of \gls{pc}, which is readily available on the market, that meet the criteria specified: the \gls{sbc}. \gls{sbc}s are \gls{pc}s that are approximately the size of a credit card. They are generally powered by \glsxtrshort{arm}-based chips, having a wide range of performance capabilities. An example of one can be found in Figure \ref{fig:rpi5}.
 
-            \par Once a computing platform was determined, the methodology in which the data from the automobile could be extracted had to be determined as well. There exists a standard interface between \gls{obdii} and serial, called ELM327. The ELM327 can signal the \gls{ecu} to provide specific details regarding the automobile's operational state. In turn, the ELM327 can package the responses from the \gls{ecu} into a format usable by an \gls{obdii} scanning tool or \gls{pc} running \gls{obdii} interpreter software.
+            \par Once an ideal computing platform was determined, the methodology in which the data from the automobile could be extracted had to be determined as well. There exists a standard interface between \gls{obdii} and serial, called ELM327. The ELM327 can signal the \gls{ecu} to provide specific details regarding the automobile's operational state. In turn, the ELM327 can package the responses from the \gls{ecu} into a format usable by an \gls{obdii} scanning tool or \gls{pc} running \gls{obdii} interpreter software.
 
             \par ELM327-based adapters exist several serial interface formats, from wired (e.g. \gls{obdii}-to-\gls{usb} and \gls{obdii}-to-RS232 (Standard Serial)) to wireless (e.g. \gls{obdii}-to-Bluetooth and \gls{obdii}-to-Wi-Fi). For the purposes of this project, the DashAR system was designed with a wired connection in mind, due to its consistent reliability. Considering the ubiquitous nature of \gls{usb}, it was the logical choice in wired options.
 
             \par With connectivity established between the automobile and the \gls{ics}, the final component is ready to be integrated.
 
-            % \begin{figure}[h!]
-            %     \vspace{0.5cm}
-            %     \centering
-            %     \includegraphics[scale=0.25]{./Support/Images/RPi5.png}
-            %     \caption{Raspberry Pi 5, an example of a SBC \cite{SparkFunElectronics2023}}
-            %     \label{fig:rpi5}
-            % \end{figure}
-
         \subsubsection{AR Subsystem}
             \par The \gls{ar} Subsystem is the platform in which the \gls{hud} is displayed. When the project began, Meta's Quest 3 \gls{ar} headset was the most commonplace \gls{ar} product that fit the application needs. However, due to the bulkiness of the headset, and the legal concerns regarding \gls{vr} utilization while operating an automobile, this product selection was quickly abandoned.
 
-            \par While searching for alternative options, a relatively unknown product came to the forefront, which, on paper, seemed like an ideal solution to these concerns - \gls{ar} glasses, namely the Air 2 line from XREAL (formerly NREAL). The Air 2 Pro \gls{ar} glasses is a small form factor \gls{ar} solution that is approximately the size of a pair of large sunglasses. Since their founding in 2017, XREAL has released multiple models of their \gls{ar} glasses, as well as companion devices - the XREAL Beam and XREAL Beam Pro \cite{XREAL2025}.
+            \par While searching for alternative options, a relatively unknown product came to the forefront, which, on paper, seemed like an ideal resolution for these concerns: \gls{ar} glasses, namely the Air 2 line from XREAL (formerly NREAL). The Air 2 Pro \gls{ar} glasses is a small form factor \gls{ar} solution that is approximately the size of a pair of large sunglasses. Since their founding in 2017, XREAL has released multiple models of their \gls{ar} glasses, as well as companion devices: the XREAL Beam and XREAL Beam Pro \cite{XREAL2025}.
 
             \par At the start of development, the Air 2 Pro \gls{ar} glasses were considered to be XREAL's mid-tier offering, as they either lacked certain functionality found in the higher end model or were limited in their function (e.g. front facing cameras, 6-\gls{dof} as opposed to the Air 2 Pro's 3-\gls{dof}, etc.)
 
@@ -128,6 +120,8 @@
                 \par Based on the user's needs, the \gls{hud} interface layout would be customizable. Widgets would be assigned a data source, down to the data point level. From there, as data is retrieved from the \gls{das} \gls{api},
 
 \section{Why DashAR?}
-    \par Considering the design of the DashAR system, a question that may come to someone's mind when thinking about this approach: ``Why can't I just look down at the instrument cluster while I drive?''. Admittedly, for many people, that is the most practical solution. After all, it is readily available, and it is there to help the driver.
+    \par Considering the design of the DashAR system, a question that may come to someone's mind when thinking about this approach: ``Why bother with a solution like DashAR, and just look down at the instrument cluster while I drive?''. Admittedly, for many people, that is the most practical solution. After all, the instrument cluster is readily available, generally easy to follow, and is there to help the driver.
 
-    \par However, the biggest problem today with the instrument cluster in most automobiles is that the information presented is fixed. The instrument cluster can't easily be adjusted to meet the needs of every individual that operates a specific automobile. The information presented within an instrument cluster is also at the mercy of the manufacturer. With the DashAR System, the user has control over the information presented to them as they drive.
+    \par However, the biggest problem with the instrument cluster today is that, in most automobiles, the information presented is fixed. The instrument cluster cannot easily be adjusted to meet the needs of every individual that operates a specific automobile. The information presented within an instrument cluster is also at the mercy of the manufacturer. With the DashAR System, the user has control over the information presented to them as they drive.
+
+\par
