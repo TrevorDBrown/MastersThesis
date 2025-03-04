@@ -1,4 +1,5 @@
 \chapter{The DashAR System and Its Design}
+\label{chap:design}
 
 \begin{center}
     ``I just wondered how things were put together.'' \\
@@ -117,11 +118,35 @@
             \subsubsection{HUD}
                 \par To satisfy the setup of the \gls{das} \gls{api}, the \gls{hud} software is designed with a basic \gls{http} client acting as the central context for the \gls{ar} subsystem's interaction with the \gls{ics}. When data is needed, the \gls{hud} would send requests to the appropriate endpoints of the \gls{api}. In turn, the \gls{api} would provide a response, formatted in a standard data serialization format acceptable by the \gls{hud}. The responses would be tailored to the requested endpoint (i.e. the /data/obdii endpoint would result in \gls{obdii} data, the /data/map would results in map data, etc.)
 
-                \par Based on the user's needs, the \gls{hud} interface layout would be customizable. Widgets would be assigned a data source, down to the data point level. From there, as data is retrieved from the \gls{das} \gls{api},
+                \par Based on the user's needs, the \gls{hud} interface layout would be customizable, but with a couple of caveats. The first caveat: a limited palette of \gls{ui} components. These components are:
+
+                \begin{itemize}
+                    \item Widgets: also known as a gauge, these are the basic components that allow data from the automobile and other data sources to be displayed.
+                    \item Trays: the base \gls{ui} element in which widgets are affixed. By default, two trays are used: top tray and bottom tray.
+                    \item Tray Anchors: the specific, equidistant points on a given tray in which a widget can affixed. By default, only 10 tray anchors are used, 5 per tray.
+                \end{itemize}
+
+                \par Widgets are assigned a data source, down to a specific data point (e.g. speedometer -> speed data, tachometer -> RPM data, etc.) From there, as data is retrieved from the \gls{das} \gls{api}, the widgets are automatically updated with the provided data.
+
+\section{An Ideal Scenario}
+    \par When thinking through the design of the DashAR System, an ideal scenario is utilized to set a baseline for what the user's experience should be. Ideally, the following experience would occur for the user of the system:
+
+    \begin{enumerate}
+        \item The user configures the \gls{ics} device before entering the automobile. This would be achieved by the user powering on their \gls{ics} device via a standard power outlet, based on their country's electrical standards. Then, the user would connect to the device directly via Wi-Fi or ethernet. Finally, the user would load a configuration app hosted on the device. Once the desired configuration is achieved, the user powers down the \gls{ics} device, either by pressing a power button, or in software.
+        \item The user connects the ELM327 adapter into the \gls{obdii} port on their automobile. The user connects the other end of the adapter into a USB port on their \gls{ics} device.
+        \item The user powers on their \gls{ics} device, using either an automobile-integrated or external power inverter.
+        \item After 30 seconds, the user connects their \gls{ar} subsystem compute device to the Wi-Fi emitted by the \gls{ics} device.
+        \item Once connectivity is established between the \gls{ics} device and the \gls{ar} subsystem compute device, the user connects their \gls{ar} glasses to the associated compute device, and opens the \gls{hud} application.
+        \item Once opened, the \gls{hud} application will initialize, by sending a request to the \gls{ics} device for the \gls{hud}'s base configuration and the custom interface configuration. The configuration is interpreted and rendered by the \gls{hud} application.
+        \item Once the \gls{hud} is rendered, the \gls{hud} application will poll the \gls{ics} device for data on a set frequency. As responses are received, the \gls{hud}'s widgets automatically update with near real-time data.
+        \item The user drives the automobile.
+        \item Once the drive has concluded, the user will close the \gls{hud} application. The user will also power down the \gls{ics} device, by pressing the power button. All remaining activity on the \gls{ics} device will cease, and result in a safe shutdown.
+        \item If desired, the user can retrieve the data collected during the automobile's operation from the \gls{ics} device at a later time.
+    \end{enumerate}
+
+    \par Obviously, this scenario does not take into account error conditions (e.g. disconnects between subsystems, \gls{hud} application failure, etc.) or delays (e.g. responses greater than one second from the \gls{ics} when making a request, \gls{hud} application slowdown resulting in data being rendered late, etc.) However, it does provide a primary path of success for the system, in which errors can be addressed throughout via branching logic and system/data validations.
 
 \section{Why DashAR?}
     \par Considering the design of the DashAR system, a question that may come to someone's mind when thinking about this approach: ``Why bother with a solution like DashAR, and just look down at the instrument cluster while I drive?''. Admittedly, for many people, that is the most practical solution. After all, the instrument cluster is readily available, generally easy to follow, and is there to help the driver.
 
     \par However, the biggest problem with the instrument cluster today is that, in most automobiles, the information presented is fixed. The instrument cluster cannot easily be adjusted to meet the needs of every individual that operates a specific automobile. The information presented within an instrument cluster is also at the mercy of the manufacturer. With the DashAR System, the user has control over the information presented to them as they drive.
-
-\par
