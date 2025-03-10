@@ -123,7 +123,7 @@
                 \begin{itemize}
                     \item Widgets: also known as a gauge, these are the basic components that allow data from the automobile and other data sources to be displayed.
                     \item Trays: the base \gls{ui} element in which widgets are affixed. By default, two trays are used: top tray and bottom tray.
-                    \item Tray Anchors: the specific, equidistant points on a given tray in which a widget can affixed. By default, only 10 tray anchors are used, 5 per tray.
+                    \item Tray Anchors: the specific, equidistant points on a given tray in which a widget can affixed. By default, only 10 tray anchors are used, 5 per tray, addressible by specifying a tray prefix and relative position, such as T1-T5 or B1-B5.
                 \end{itemize}
 
                 \par Widgets are assigned a data source, down to a specific data point (e.g. speedometer -> speed data, tachometer -> RPM data, etc.) From there, as data is retrieved from the \gls{das} \gls{api}, the widgets are automatically updated with the provided data.
