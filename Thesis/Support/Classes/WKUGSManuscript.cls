@@ -71,9 +71,10 @@
 
 \LoadClass[
     12pt,
-    % letterpaper, % letterpaper no longer needed... maybe...
+    letterpaper,
     onecolumn,
-    oneside
+    oneside,
+    english
 ]{report}
 
 %-- Packages
@@ -291,6 +292,8 @@
    \begin{center}
         \MakeUppercase{\ETD@title}
     \end{center}
+
+    \doublespacing
 }{
     \clearpage
 }
@@ -303,7 +306,7 @@
     \newpage
 }
 
-\newenvironment{symbols}{
+\newenvironment{abbreviations}{
     \newpage
 }
 
@@ -450,8 +453,8 @@
    \cleardoublepage
 }
 
-%---- List of Symbols/Abbreviations
-\newcommand{\listofsymbols}{%
+%---- List of Abbreviations
+\newcommand{\listofabbreviations}{%
    % \phantomsection
    % \addcontentsline{toc}{chapter}{List of Abbreviations}
    % \vspace*{0.5in}
@@ -461,7 +464,8 @@
    % \end{center}
    % \vspace{-\baselineskip}
    \begin{spacing}{1.0}
-      \input{./Sections/Abbreviations.tex}
+        % Print the defined Abbreviations.
+			\printglossary[title=List of Abbreviations, type=\acronymtype]
    \end{spacing}
    \cleardoublepage
 }

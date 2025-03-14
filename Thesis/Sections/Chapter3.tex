@@ -27,7 +27,7 @@
 
         \begin{itemize}
             \item The DashAR System shall provide extensibility via an Extensions framework, utilizing configuration files and custom scripts to extend system functionality.
-            \item The DashAR System shall provide support for third-party \gls{api}s via the Extensions framework, providing data and insights to enhance the driver's experience while operating the automobile.
+            \item The DashAR System shall provide support for third-party \glspl{api} via the Extensions framework, providing data and insights to enhance the driver's experience while operating the automobile.
             \item The DashAR System shall provide facilities for end users to easily customize \gls{hud} layouts, such as a web-based configuration application.
             \item The DashAR System shall provide additional operational information via Extensions, including \gls{ecu} error code information, turn signal indication, and blind spot detection.
         \end{itemize}
@@ -78,7 +78,7 @@
 
     \subsection{System Components}
         \subsubsection{Automobile}
-            \par The automobile, being the core component of DashAR, is any gasoline powered automobile manufactured after 1996, or any diesel powered automobile after 1997. This is because the automobile manufacturers are required to have \gls{obdii} \cite{CEPA2019}. Considering that the mean age of an automobile is 12 years in the \glsxtrshort{usa} \cite{BTS2024} and 18 years in Western Europe \cite{Held2021}, it is safe to assume a wide array of people will be able to use DashAR as designed, with little to no modification. Unfortunately, even with the rapid growth in market share around \gls{ev} in society today, these automobiles are not guaranteed to have \gls{obdii} available, thus breaking functionality with the DashAR system. Since \gls{obdii} interfaces directly with the \gls{ecu} of the automobile, \gls{can} communications are internally well-established, provide real-time data. The primary consideration when dealing with this data is finding an effective way to extract it.
+            \par The automobile, being the core component of DashAR, is any gasoline powered automobile manufactured after 1996, or any diesel powered automobile after 1997. This is because the automobile manufacturers are required to have \gls{obdii} \cite{CEPA2019}. Considering that the mean age of an automobile is 12 years in the \glsxtrshort{usa} \cite{BTS2024} and 18 years in Western Europe \cite{Held2021}, it is safe to assume a wide array of people will be able to use DashAR as designed, with little to no modification. Unfortunately, even with the rapid growth in market share around \glspl{ev} in society today, these automobiles are not guaranteed to have \gls{obdii} available, thus breaking functionality with the DashAR system. Since \gls{obdii} interfaces directly with the \gls{ecu} of the automobile, \gls{can} communications are internally well-established, provide real-time data. The primary consideration when dealing with this data is finding an effective way to extract it.
 
         \subsubsection{Intermediate Computing Subsystem}
             \par The \gls{ics} is the data aggregation and brokering platform of the DashAR system. The \gls{ics} is what allows the \gls{ar} subsystem to communicate with the automobile, as well as other data sources. Based on the research of \cite{Doshi2009}, it was determined a \gls{pc} would be needed that met the following criteria:
@@ -92,7 +92,7 @@
                 \item Easily Programmable: the computer should be able to run both system software and bespoke application software.
             \end{itemize}
 
-            \par Fortunately, there exists a form factor of \gls{pc}, which is readily available on the market, that meet the criteria specified: the \gls{sbc}. \gls{sbc}s are \gls{pc}s that are approximately the size of a credit card. They are generally powered by \glsxtrshort{arm}-based chips, having a wide range of performance capabilities. An example of one can be found in Figure \ref{fig:rpi5}.
+            \par Fortunately, there exists a form factor of \gls{pc}, which is readily available on the market, that meet the criteria specified: the \gls{sbc}. \Glspl{sbc} are \glspl{pc} that are approximately the size of a credit card. They are generally powered by \glsxtrshort{arm}-based chips, having a wide range of performance capabilities. An example of one can be found in Figure \ref{fig:rpi5}.
 
             \par Once an ideal computing platform was determined, the methodology in which the data from the automobile could be extracted had to be determined as well. There exists a standard interface between \gls{obdii} and serial, called ELM327. The ELM327 can signal the \gls{ecu} to provide specific details regarding the automobile's operational state. In turn, the ELM327 can package the responses from the \gls{ecu} into a format usable by an \gls{obdii} scanning tool or \gls{pc} running \gls{obdii} interpreter software.
 
