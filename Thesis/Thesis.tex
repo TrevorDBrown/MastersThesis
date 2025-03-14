@@ -4,7 +4,8 @@
 %
 
 % WKUCSManuscript document class
-\documentclass[letterpaper,12pt,english]{./Support/Classes/WKUGSManuscript}
+% Essentially, a report, letterpaper, 12pt font, single column format.
+\documentclass{./Support/Classes/WKUGSManuscript}
 
 % Packages used within LaTeX solution.
 \usepackage[english]{babel}
@@ -73,6 +74,8 @@
 \counterwithout{footnote}{chapter}
 \renewcommand*{\glsclearpage}{}		% Prevents Abbreviations from showing up on new page.
 \makeglossaries
+\loadglsentries{./Sections/Abbreviations.tex}
+
 
 % Thesis Properties - text, representations, etc. that are meta to the document.
 \newcommand{\ThesisTitle}{DashAR: An Implementation of Augmented Reality Technology for Automotive Applications}
@@ -123,9 +126,10 @@
 			\listoffigures
 		\end{figures}
 
-		\begin{symbols}
-			\listofsymbols
-		\end{symbols}
+		\begin{abbreviations}
+			% This prints the acronyms/abbreviations
+			\listofabbreviations
+		\end{abbreviations}
 
 		% Begin the actual Thesis
 		\begin{body}
