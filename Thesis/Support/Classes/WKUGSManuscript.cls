@@ -166,7 +166,7 @@
    {\itshape\normalsize}{\thesubsubsection}{1em}{}
 \titleformat{\paragraph}[runin]
    {\itshape\normalsize}{\theparagraph}{1em}{}
-\titlespacing{\chapter}{0pt}{.5in}{*0}
+\titlespacing{\chapter}{0pt}{*0}{*0}
 \titlespacing{\section}{0pt}{*0}{*0}
 \titlespacing{\subsection}{0pt}{*0}{*0}
 \titlespacing{\subsubsection}{0pt}{*0}{*0}
@@ -281,6 +281,7 @@
 
   %---- Abstract
 \renewenvironment{abstract}{%
+   \phantomsection
 
    \setlength{\parskip}{\baselineskip}
    \setlength{\parindent}{20pt}
@@ -333,8 +334,8 @@
    \phantomsection
    % \addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}				%commented to remove from table of content
    %\changepage{-1in}{0in}{0in}{0in}{0in}{1in}{0in}{0in}{0in}
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
+   % \vspace*{0.5in}
+   % \vspace*{\baselineskip}
    \begin{center}
       ACKNOWLEDGMENTS
    \end{center}
@@ -353,8 +354,8 @@
    %\pagestyle{toccont}
    %\thispagestyle{tocstart}
    \phantomsection
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
+   % \vspace*{0.5in}
+   % \vspace*{\baselineskip}
    \begin{center}
       TABLE OF CONTENTS
    \end{center}
@@ -425,8 +426,8 @@
 \renewcommand{\listoftables}{%
    \phantomsection
    \addcontentsline{toc}{chapter}{List of Tables}
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
+   % \vspace*{0.5in}
+   % \vspace*{\baselineskip}
    \begin{center}
       LIST OF TABLES
    \end{center}
@@ -441,8 +442,8 @@
 \renewcommand{\listoffigures}{%
    \phantomsection
    \addcontentsline{toc}{chapter}{List of Figures}
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
+   % \vspace*{0.5in}
+   % \vspace*{\baselineskip}
    \begin{center}
       LIST OF FIGURES
    \end{center}
@@ -460,12 +461,14 @@
    % \vspace*{0.5in}
    % \vspace*{\baselineskip}
    % \begin{center}
-   %    LIST OF ABBREVIATIONS
+      % LIST OF ABBREVIATIONS
    % \end{center}
    % \vspace{-\baselineskip}
    \begin{spacing}{1.0}
         % Print the defined Abbreviations.
-			\printglossary[title=List of Abbreviations, type=\acronymtype]
+			% \printglossary[title={List of Abbreviations}, type=\acronymtype, posttitle=\vspace{\baselineskip}]
+         \phantomsection
+         \printglossary[title={List of Abbreviations}, type=\acronymtype]
    \end{spacing}
    \cleardoublepage
 }
@@ -527,7 +530,6 @@
    \setcounter{page}{1}
    \pagenumbering{arabic}
 
-   % \setlength{\parskip}{\baselineskip}
    \setlength{\parindent}{20pt}
 
    \begin{spacing}{2.0}
