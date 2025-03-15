@@ -38,16 +38,11 @@
 \usepackage{etoolbox}
 \usepackage{zref-totpages}
 \usepackage{dirtree}
+\usepackage{errata}
 
 % bibliography configuration
 \addbibresource{./Support/Bibliography/References.bib}
 \setlength\bibitemsep{1.5\itemsep}
-
-% titlesec configuration
-\usepackage{titlesec}
-\titleformat{\chapter}{}{}{0em}{\bf\centering}
-\titleformat{\section}{\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}{\bfseries}{\thesubsection}{1em}{}
 
 % glossaries configuration
 \usepackage[acronym,nopostdot,nogroupskip,style=super,nonumberlist,toc]{glossaries}
@@ -76,6 +71,12 @@
 \makeglossaries
 \loadglsentries{./Sections/Abbreviations.tex}
 
+% Watermark (for draft copies only)
+% \usepackage{draftwatermark}
+% \SetWatermarkText{DRAFT}
+% \SetWatermarkScale{1.5}
+% \SetWatermarkColor[gray]{0.8}
+
 
 % Thesis Properties - text, representations, etc. that are meta to the document.
 \newcommand{\ThesisTitle}{DashAR: An Implementation of Augmented Reality Technology for Automotive Applications}
@@ -93,15 +94,18 @@
 
 \begin{document}
 
+	% Create the Fly Sheet
 	\IntentionallyBlankPage
 
+	% Create the Title Page
+	\maketitle
+
+	% Create the Signature Page
+	\begin{signatures}
+		\input{./Sections/Signatures.tex}
+	\end{signatures}
+
 	\begin{FlushLeft}
-		\maketitle
-
-		\begin{signatures}
-			\input{./Sections/Signatures.tex}
-		\end{signatures}
-
 		\begin{abstract}
 			\input{./Sections/Abstract.tex}
 		\end{abstract}
