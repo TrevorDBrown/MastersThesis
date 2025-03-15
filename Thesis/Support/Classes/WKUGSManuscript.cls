@@ -140,6 +140,7 @@
    left=1in,
    right=1in,
    bottom=1in
+   % bindingoffset=0.5in
 }
 % Note: may need to include "bindingoffset=0.5in", when submitting for bindery service. TODO: Verify first.
 
@@ -155,18 +156,18 @@
 
 %---- titlesec
 \titleformat{\chapter}[display]
-   {\centering\normalsize\bfseries}{\vspace*{0.5\baselineskip}\@chapapp\space\Numberstring{chapter}}{0pt}{\MakeUppercase}
+   {\centering\normalsize}{}{0pt}{}
 \titleformat{name=\chapter,numberless}[display]
-   {\centering\normalsize}{\vspace*{\baselineskip}}{0pt}{\MakeUppercase}
+   {\centering\normalsize}{\vspace*{\baselineskip}}{0pt}{}
 \titleformat{\section}[hang]
-   {\centering\normalsize\bfseries}{\thesection}{1em}{}
+   {\centering\normalsize}{}{1em}{}
 \titleformat{\subsection}[hang]
-   {\normalsize}{\thesubsection}{1em}{}
+   {\centering\normalsize}{}{1em}{}
 \titleformat{\subsubsection}[hang]
-   {\itshape\normalsize}{\thesubsubsection}{1em}{}
+   {\centering\normalsize}{}{1em}{}
 \titleformat{\paragraph}[runin]
-   {\itshape\normalsize}{\theparagraph}{1em}{}
-\titlespacing{\chapter}{0pt}{.5in}{*0}
+   {\normalsize}{}{1em}{}
+\titlespacing{\chapter}{0pt}{*0}{*0}
 \titlespacing{\section}{0pt}{*0}{*0}
 \titlespacing{\subsection}{0pt}{*0}{*0}
 \titlespacing{\subsubsection}{0pt}{*0}{*0}
@@ -214,8 +215,6 @@
    \thispagestyle{empty}
    \setlength\epigraphwidth{\textwidth}
    \setlength\epigraphrule{0pt}
-   \BeforeBeginEnvironment{lstlisting}{\begin{singlespace}}
-   \AfterEndEnvironment{lstlisting}{\end{singlespace}\noindent\ignorespaces}
 
    \title{\ThesisTitle}
    \date{\ThesisDate}
@@ -225,7 +224,8 @@
 
    \cleardoublepage
    \phantomsection
-   \vspace{2in}
+
+   \vspace*{1.5in}
 
    \begin{center}
       \MakeUppercase{\ETD@title} \\
@@ -234,7 +234,7 @@
    % Leave a blank line below, to start another paragraph.
 
    % The vertical measurement below may need to be adjusted to get the next bit of text 4 in. from the top of the page.
-   \vspace{2in}
+   \vspace*{1.25in}
    % Leave a blank line below, to start another paragraph.
 
    \begin{center}
@@ -245,7 +245,7 @@
    % Leave a blank line below, to start another paragraph.
 
    % The vertical measurement below may need to be adjusted to get the next bit of text 7 in. from the top of the page.
-   \vspace{2in}
+   \vspace{1.2in}
    % Leave a blank line below, to start another paragraph.
 
    \begin{center}
@@ -256,7 +256,7 @@
    % Leave a blank line below, to start another paragraph.
 
    % The vertical measurement below may need to be adjusted to get the next bit of text 9 in. from the top of the page.
-   \vspace{2in}
+   \vspace{1.2in}
    % Leave a blank line below, to start another paragraph.
 
    \begin{center}
@@ -281,6 +281,7 @@
 
   %---- Abstract
 \renewenvironment{abstract}{%
+   \phantomsection
 
    \setlength{\parskip}{\baselineskip}
    \setlength{\parindent}{20pt}
@@ -315,8 +316,7 @@
 %---- Dedication
 \newenvironment{dedication}{%
    \phantomsection
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
+   \vspace*{1.5in}
    \begin{center}
       DEDICATION
    \end{center}
@@ -333,8 +333,8 @@
    \phantomsection
    % \addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}				%commented to remove from table of content
    %\changepage{-1in}{0in}{0in}{0in}{0in}{1in}{0in}{0in}{0in}
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
+   % \vspace*{0.5in}
+   % \vspace*{\baselineskip}
    \begin{center}
       ACKNOWLEDGMENTS
    \end{center}
@@ -353,8 +353,8 @@
    %\pagestyle{toccont}
    %\thispagestyle{tocstart}
    \phantomsection
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
+   % \vspace*{0.5in}
+   % \vspace*{\baselineskip}
    \begin{center}
       TABLE OF CONTENTS
    \end{center}
@@ -425,8 +425,8 @@
 \renewcommand{\listoftables}{%
    \phantomsection
    \addcontentsline{toc}{chapter}{List of Tables}
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
+   % \vspace*{0.5in}
+   % \vspace*{\baselineskip}
    \begin{center}
       LIST OF TABLES
    \end{center}
@@ -441,8 +441,8 @@
 \renewcommand{\listoffigures}{%
    \phantomsection
    \addcontentsline{toc}{chapter}{List of Figures}
-   \vspace*{0.5in}
-   \vspace*{\baselineskip}
+   % \vspace*{0.5in}
+   % \vspace*{\baselineskip}
    \begin{center}
       LIST OF FIGURES
    \end{center}
@@ -455,17 +455,19 @@
 
 %---- List of Abbreviations
 \newcommand{\listofabbreviations}{%
+   \newpage
    % \phantomsection
    % \addcontentsline{toc}{chapter}{List of Abbreviations}
    % \vspace*{0.5in}
    % \vspace*{\baselineskip}
    % \begin{center}
-   %    LIST OF ABBREVIATIONS
+      % LIST OF ABBREVIATIONS
    % \end{center}
    % \vspace{-\baselineskip}
-   \begin{spacing}{1.0}
+   \begin{spacing}{2.0}
+      % TODO: Figure out how to fix the formatting of this...(i.e. move the title up!!)
         % Print the defined Abbreviations.
-			\printglossary[title=List of Abbreviations, type=\acronymtype]
+         \printglossary[title={LIST OF ABBREVIATIONS}, toctitle={List of Abbreviations}, type=\acronymtype]
    \end{spacing}
    \cleardoublepage
 }
@@ -474,7 +476,6 @@
 
   \renewcommand{\listofalgorithms}{%
   \phantomsection
-%\addcontentsline{toc}{chapter}{LIST OF ALGORITHMS}				%commented to remove from table of content
   \vspace*{0.5in}
   \vspace*{\baselineskip}
   \begin{center}
@@ -514,7 +515,6 @@
   \setcounter{table}{0}
   \gdef\@chapapp{\appendixname}%
   \gdef\chapter{\@Alph\c@chapter}
-%   \renewcommand{\thetable}{.\arabic{table}}
   \renewcommand{\appendixtocname}{Appendix}
   \addappheadtotoc
   \newpage
@@ -527,7 +527,6 @@
    \setcounter{page}{1}
    \pagenumbering{arabic}
 
-   % \setlength{\parskip}{\baselineskip}
    \setlength{\parindent}{20pt}
 
    \begin{spacing}{2.0}
@@ -546,40 +545,6 @@
    \addtocontents{toc}{\protect\newpage\protect\vspace*{-2\baselineskip}}
 }
 
-%---- References
-% \renewenvironment{thebibliography}[1]{%
-% 	\phantomsection
-% 	\addcontentsline{toc}{chapter}{REFERENCES}
-% 	\cleardoublepage
-%   %\changepage{-1in}{0in}{0in}{0in}{0in}{1in}{0in}{0in}{0in}
-%   \vspace*{0.5in}
-%   \vspace*{\baselineskip}
-%   \begin{center}
-%       REFERENCES
-%   \end{center}
-%   %\vspace{-.75\baselineskip}
-%   \vspace{-.5\baselineskip}
-%   \list{%
-%       [\arabic{enumi}]
-%   }{%
-%       \settowidth\labelwidth{[#1]}
-%       \itemsep\baselineskip
-%       \leftmargin\labelwidth
-%       \advance\leftmargin\labelsep
-%       \advance\leftmargin\bibindent
-%       \itemindent -\bibindent
-%       \listparindent \itemindent
-%       \parsep \z@
-%       \usecounter{enumi}
-%   }
-%   \def\newblock{}
-%   \sloppy
-%   \sfcode`\.=1000\relax
-% }{%
-% 	\cleardoublepage
-%   %\changepage{1in}{0in}{0in}{0in}{0in}{-1in}{0in}{0in}{0in}
-% }
-
 \renewcommand{\cite}[1]{\citep{#1}}
 \newcommand{\shortcite}[1]{\citeyearpar{#1}}
 
@@ -589,7 +554,7 @@
    \titleformat
       {\chapter} % Modify chapter format
       [display]
-      {\centering\bfseries} % Styling: centered and bold.
+      {\centering} % Styling: centered.
       {APPENDIX \thechapter} % Label format: "APPENDIX X"
       {0pt} % Extra space before the title
       {} % Space between the label and the title
