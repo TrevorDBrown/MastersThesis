@@ -13,7 +13,7 @@
         \vspace{0.5cm}
         \centering
         \includegraphics[scale=0.25]{./Support/Images/DashAR-SprintBoard.png}
-        \caption{Sprint 14 Sprint Board in Obsidian MD}
+        \caption{Sprint 14 Sprint Board in Obsidian}
         \label{fig:dasharsprintboard}
     \end{figure}
 
@@ -102,7 +102,7 @@
                 \label{fig:dasharhudmockup}
             \end{figure}
 
-            \par With the \gls{ui} mockup on hand, the \gls{hud} could be implemented. Out of all of the existing development tools available around \gls{ar} development, the Unity Engine was the ideal choice \cite{UnityTechnologies2025}. At the time of development, Unity Engine 2022.3 was the most recent \gls{lts} version available. Since then, a newer LTS version was released: Unity 6 (or 6000, to keep with the previously used version scheme.) Additionally, XREAL provides an easy-to-use \gls{sdk}: NRSDK, which allows Unity projects to be compiled for the XREAL \gls{ar} glasses \cite{XREAL2024}.
+            \par With the \gls{ui} mockup on hand, the \gls{hud} could be implemented. Out of all of the existing development tools available around \gls{ar} development, the Unity Engine was the ideal choice \cite{UnityTechnologies2025}. At the time of development, Unity Engine 2022.3 was the most recent \gls{lts} version available. Since then, a newer LTS version was released: Unity 6 (or 6000, to keep with the previously used version scheme.) Additionally, XREAL provides an easy-to-use \gls{sdk}: \gls{nrsdk}, which allows Unity projects to be compiled for the XREAL \gls{ar} glasses \cite{XREAL2024}.
 
             \par Programming in Unity is made possible with the C\# programming language. C\# scripts are attached to objects in a ``scene'', which is the primary metaphor used to express a 3D environment. Scripts attached to objects inherit MonoBehavior, which is a base class for Unity which offers various methods for managing execution of code and other functions. Two of the main methods utilized in this application inherited from MonoBehavior are Start and Update. The Start method is invoked when a script initializes at runtime. The engine will execute any code provided within the method before the first frame is rendered. After initialization, the Update method is automatically invoked once per frame, relative to the performance of the engine (e.g. if the application is running at 30 \gls{fps}, the Update method is invoked 30 times per second).
 
