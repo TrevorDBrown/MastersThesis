@@ -27,8 +27,10 @@
 
     \par Some cards merited implementation that could not be achieved during the development of the system. The title of those cards were prepended with ``(FUTURE WORK)'', to signify their usefulness to the system. An example early on in development of this was the ``Determine uninterrupted power supply issue solution.'' This work item was designed to address a problem faced with the \gls{das} device immediately losing power as soon as the car was turned off. Since the \gls{das} device was a Raspberry Pi, some solutions existed involving batteries (i.e. \gls{ups}) that would help solve the problem. However, it was still not clear of the efficacy of those solutions, as they were bulky, and the batteries were exposed. After some time, a workaround was advised, suggesting that before the car is turned off, the power button on the \gls{das} device should be pressed. This would safely power down the device, stopping running services, such as the \gls{das} \gls{api}.
 
+    \par With an Agile methology defined, development of the DashAR System is now achievable in a structured, iterative way.
+
 \section{The Implementation}
-    \par The implementation of the DashAR System, following the Agile methodology prescribed, resulted in a usable software system, which met the defined functional requirements. The following subsections detail the development process for each subsystem. Associated source code can be found in Appendix \ref{appendix:project}.
+    \par The implementation of the DashAR System, following the Agile methodology prescribed, resulted in a usable \gls{ar}-based software system, which met the defined functional requirements. The following subsections detail the development process for each subsystem. Associated source code can be found in Appendix \ref{appendix:project}.
 
     \subsection{ICS and the DAS API}
 
@@ -104,7 +106,7 @@
 
             \par With the \gls{ui} mockup on hand, the \gls{hud} could be implemented. Out of all of the existing development tools available around \gls{ar} development, the Unity Engine was the ideal choice \cite{UnityTechnologies2025}. At the time of development, Unity Engine 2022.3 was the most recent \gls{lts} version available. Since then, a newer LTS version was released: Unity 6 (or 6000, to keep with the previously used version scheme.) Additionally, XREAL provides an easy-to-use \gls{sdk}: \gls{nrsdk}, which allows Unity projects to be compiled for the XREAL \gls{ar} glasses \cite{XREAL2024}.
 
-            \par Programming in Unity is made possible with the C\# programming language. C\# scripts are attached to objects in a ``scene'', which is the primary metaphor used to express a 3D environment. Scripts attached to objects inherit MonoBehavior, which is a base class for Unity which offers various methods for managing execution of code and other functions. Two of the main methods utilized in this application inherited from MonoBehavior are Start and Update. The Start method is invoked when a script initializes at runtime. The engine will execute any code provided within the method before the first frame is rendered. After initialization, the Update method is automatically invoked once per frame, relative to the performance of the engine (e.g. if the application is running at 30 \gls{fps}, the Update method is invoked 30 times per second).
+            \par Programming in Unity is made possible with the C\# programming language. C\# scripts are attached to objects in a ``scene'', which is the primary metaphor used to express a 3D environment. Scripts attached to objects inheriting MonoBehavior, named ``GameObjects'', which is a base class for Unity which offers various methods for managing execution of code and other functions. Two of the main methods utilized in this application inherited from MonoBehavior are Start and Update. The Start method is invoked when a script initializes at runtime. The engine will execute any code provided within the method before the first frame is rendered. After initialization, the Update method is automatically invoked once per frame, relative to the performance of the engine (e.g. if the application is running at 30 \gls{fps}, the Update method is invoked 30 times per second).
 
             \par Using this understanding of the MonoBehavior class, the \gls{hud} application performs its operations centered around a state machine. The state machine, defined in Appendix \ref{scl:dasharstatemachinecs}, holds an instance of the \gls{hud} class (Appendix \ref{scl:dasharhudcs}), device contexts, such as the \gls{das} device (Appendix \ref{scl:dashardascs}) and the \gls{ar} subsystem device (Appendix \ref{scl:dashardevicecs}), as well as configuration data. There are also special classes for handling \gls{http} responses, which are demarshalled \gls{json}, defined at the request level.
 
@@ -116,3 +118,46 @@
             \par base.json, as shown in Appendix \ref{appendix:hudbaseconfigjson}, defines the general positions of the trays and tray anchors. Additionally, a palette of base widgets are defined. These base widgets, Circles (Small and Large) and Rectangles (Large), provide a means of display critical and non-critical information while operating the automobile. The actual widget definitions refer to these base widgets in order to know how they need to be formatted.
 
             \par default.json, as shown in Appendix \ref{appendix:huddefaultconfigjson}, define the widgets to be used, their target tray anchor, and their data source. For example, a Speedometer widget would have a defined data point (i.e. speed), a data source (i.e. \gls{obdii}), and a tray anchor (i.e. B3). Given the constraints set in the design specification, only 10 active entries can exist in the configuration.
+
+            \par While not implemented during this research due to time constraints, the customizations made to the \gls{hud} interface would be reflected in JSON files that look very similar to default.json. However, the main difference is the new file would be referenced in the base.json file, instead of default.json. A web-based application, ideally, would exist, hosted by the \gls{ics}, to allow for direct customization of the \gls{hud}.
+
+        \subsubsection{User Interface}
+            \par The development of the DashAR System resulted in two major versions of the \gls{hud}, alongside the customization framework version. The first interface, as seen in Figure \ref{fig:dasharhuduiversion1}, features angled trays and widgets, with all circular widgets being the same size. It should be noted that Figure \ref{fig:dasharhuduiversion1} is an edited version of the \gls{hud}, for a video presentation. There is no viable option to record the \gls{xr} glasses displays directly. Therefore, this representation of the \gls{hud} must be generated manually. An unaltered version of the first iteration of the \gls{hud} can be seen in Figure \ref{fig:dasharhuduiversion1unity}.
+
+            \begin{figure}[h!]
+                \vspace{0.5cm}
+                \centering
+                \includegraphics[scale=0.3]{./Support/Images/DashAR-UIVersion1.png}
+                \caption{DashAR HUD UI (First Iteration) in Use}
+                \label{fig:dasharhuduiversion1}
+            \end{figure}
+
+            \begin{figure}[h!]
+                \vspace{0.5cm}
+                \centering
+                \includegraphics[scale=0.5]{./Support/Images/DashAR-UIVersion1-Unity.png}
+                \caption{DashAR HUD UI (First Iteration) in Unity}
+                \label{fig:dasharhuduiversion1unity}
+            \end{figure}
+
+            \par The second iteration of the \gls{hud}, featured in Figure \ref{fig:dasharhuduiversion2unity}, features trays and widgets that are perpendicular to the user's viewpoint. Also, all widgets have been scaled down in size. Additionally, the differing sizes of circle widgets was implemented during this iteration.
+
+            \begin{figure}[h!]
+                \vspace{0.5cm}
+                \centering
+                \includegraphics[scale=0.5]{./Support/Images/DashAR-UIVersion2-Unity.png}
+                \caption{DashAR HUD UI (Second Iteration) in Unity}
+                \label{fig:dasharhuduiversion2unity}
+            \end{figure}
+
+            \par Eventually, the second iteration was re-created using the dynamic methodology described previously. This method is visualized in Figure \ref{fig:dasharhuduiversion2dynamicunity}. There are a few notable differences between the second iteration developed in Unity and the dynamically generated version. First, the lighting of the environment causes the dynamically generated version to appear brighter. In turn, it is more difficult to discern the boundaries of the trays and widgets' edges. Second, the position of some of the widgets are off, namely with the Clock widget. In the second iteration, it is shifted left into the tray. In the dynamically generated version, it is more to the right. This is because of the widget's tray anchor position. Due to time constraints, an offset to be applied to widgets was not implemented. Providing some kind of offset value would allow widgets to be placed within a range of points, versus the current method of aligning the midpoint of the widget with the tray anchor's midpoint. Finally, the widget's text formatting has changed. With the second iteration, accessible control is provided for text objects formatting in the environment via the Properties panel for the given object. With the dynamically generated version, Unity's Scripting \gls{api} is utilized. While this method allows for precise control of formatting parameters, it must be done programmatically. Furthermore, due to the use of nested GameObjects, formatting of parent objects influences child objects. This makes it difficult to maintain consistency with the text objects.
+
+            \begin{figure}[h!]
+                \vspace{0.5cm}
+                \centering
+                \includegraphics[scale=0.5]{./Support/Images/DashAR-UIVersion2-Dynamic-Unity.png}
+                \caption{DashAR HUD UI (Dynamic Generation) in Unity}
+                \label{fig:dasharhuduiversion2dynamicunity}
+            \end{figure}
+
+\par With the design and development aspects of the DashAR System explained, the resulting product can be explored, and tested.
