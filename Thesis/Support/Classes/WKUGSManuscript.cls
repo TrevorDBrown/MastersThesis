@@ -283,7 +283,7 @@
 \renewenvironment{abstract}{%
    \phantomsection
 
-   \setlength{\parskip}{\baselineskip}
+   % \setlength{\parskip}{\baselineskip}
    \setlength{\parindent}{20pt}
 
    \begin{center}
@@ -455,25 +455,24 @@
 
 %---- List of Abbreviations
 \newcommand{\listofabbreviations}{%
-   \newpage
-   % \phantomsection
-   % \addcontentsline{toc}{chapter}{List of Abbreviations}
-   % \vspace*{0.5in}
-   % \vspace*{\baselineskip}
-   % \begin{center}
-      % LIST OF ABBREVIATIONS
-   % \end{center}
-   % \vspace{-\baselineskip}
-   \begin{spacing}{2.0}
-      % TODO: Figure out how to fix the formatting of this...(i.e. move the title up!!)
-        % Print the defined Abbreviations.
-         \printglossary[title={LIST OF ABBREVIATIONS}, toctitle={List of Abbreviations}, type=\acronymtype]
-   \end{spacing}
+   \phantomsection
+   \addcontentsline{toc}{chapter}{List of Abbreviations}
+   \begin{center}
+      LIST OF ABBREVIATIONS
+   \end{center}
+   \begingroup
+      \let\clearpage\relax
+      \renewcommand{\glossarypreamble}{\vspace{-3.5\baselineskip}} % Reduces space before glossary list
+      % \setlength{\glslistdottedwidth}{0pt} % Ensures no extra spacing due to dotted lines
+      \begin{spacing}{1.5}
+         % Print the defined Abbreviations.
+            \printglossary[title={},toctitle={},type=\acronymtype] % toctitle={List of Abbreviations},
+      \end{spacing}
+   \endgroup
    \cleardoublepage
 }
 
   %---- List of Algorithms
-
   \renewcommand{\listofalgorithms}{%
   \phantomsection
   \vspace*{0.5in}
