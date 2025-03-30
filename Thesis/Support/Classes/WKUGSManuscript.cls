@@ -487,6 +487,18 @@
   \cleardoublepage
 }
 
+% References
+\newcommand{\listofreferences}{%
+   % \renewcommand{\bibname}{REFERNECES}
+   \renewcommand{\refname}{REFERENCES}
+
+   \phantomsection
+   \addcontentsline{toc}{chapter}{References}
+   \renewcommand{\bibname}{\vspace{-3.5\baselineskip} REFERENCES} % Reduces space before References list
+   \printbibliography
+   \cleardoublepage
+}
+
 \def\@chapter[#1]#2{
     \ifnum \c@secnumdepth >\m@ne
          \refstepcounter{chapter}%
