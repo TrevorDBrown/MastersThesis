@@ -1,66 +1,76 @@
 \chapter{Project Contents}
 \label{appendix:project}
 
-    \par The entire repository of source code, supporting scripts, and documentation for the DashAR system can be located at \url{https://github.com/TrevorDBrown/DashAR}. The following listings are the source code files, as they were at the submission of this thesis.
+    \par The DashAR Project is comprised of three repositories. Please note: the list below includes the commit hashes of the repositories at the state they were when the thesis was submitted.
 
-    \section{Project Structure}
+    \begin{itemize}
+        \item Source Code: \url{https://github.com/TrevorDBrown/DashAR} (TODO: hash here)
+        \item System Documentation: \url{https://github.com/TrevorDBrown/DashAR-Docs} (TODO: hash here)
+        \item Master's Thesis (i.e. this document): \url{https://github.com/TrevorDBrown/MastersThesis} (TODO: hash here)
+    \end{itemize}
 
-    \dirtree{%
-        .1 DashAR/.
-        .2 Documentation/.
-        .3 Templates/.
-        .4 DAS/.
-        .5 data/.
-        .6 dashar-data.sqlite3.
-        .6 Data.md.
-        .5 config.json/.
-        .6 config.json.
-        .6 config.schema.json.
-        .4 Python.md.
-        .2 Source/.
-        .3 DAS/.
-        .4 das\_service.py.
-        .4 das\_core/.
-        .5 configuration.py.
-        .5 das\_extensions.py.
-        .5 data\_connector.py.
-        .5 helper.py.
-        .5 obdii\_interpreter.py.
-        .4 data/.
-        .5 config.json.
-        .5 hud/.
-        .6 base.json.
-        .6 default.json.
-        .4 private/.
-        .5 dashar-data.sqlite3.
-        .5 hud/.
-        .6 example.json.
-        .3 HUD/.
-        .4 Assets/.
-        .5 DashAR/.
-        .6 Origin.cs.
-        .6 Objects/.
-        .7 DashARConfiguration.cs.
-        .7 DashARDataAggregatorServer.cs.
-        .7 DashARDevice.cs.
-        .7 DashARHUD.cs.
-        .7 DashARHUDBaseWidget.cs.
-        .7 DashARHUDTray.cs.
-        .7 DashARHUDTrayAnchor.cs.
-        .7 DashARHUDWidget.cs.
-        .7 DashARStateMachine.cs.
-        .7 HTTPResponse/.
-        .8 DashARDataAggregatorServerHUDConfigurationResponse.cs.
-        .8 DashARDataAggregatorServerOBDIIResponse.cs.
-        .5 NRSDK/.
-        .5 Scenes/.
-        .6 DashAR HUD - Base Scene.unity.
-        .6 DashAR HUD - First Design.unity.
-        .6 DashAR HUD - Second Design.unity.
-    }
+    \par The author intends on keeping these repositories accessible permanently. However, in such a case where these links shall fail, it is recommended to consult Section \ref{sec:sourcecode}, as the following code listings are the state of the source code files as they were at the submission of this thesis.
+
+    % \section{Project Structure}
+
+    %     \par The following directory tree lists the locations of the primary files of interest for this project.
+
+    %     \dirtree{%
+    %         .1 DashAR/.
+    %         .2 Templates/.
+    %         .3 DAS/.
+    %         .4 data/.
+    %         .5 dashar-data.sqlite3.
+    %         .5 Data.md.
+    %         .4 config.json/.
+    %         .5 config.json.
+    %         .5 config.schema.json.
+    %         .4 Python.md.
+    %         .2 Source/.
+    %         .3 DAS/.
+    %         .4 das\_service.py.
+    %         .4 das\_core/.
+    %         .5 configuration.py.
+    %         .5 das\_extensions.py.
+    %         .5 data\_connector.py.
+    %         .5 helper.py.
+    %         .5 obdii\_interpreter.py.
+    %         .4 data/.
+    %         .5 config.json.
+    %         .5 hud/.
+    %         .6 base.json.
+    %         .6 default.json.
+    %         .4 private/.
+    %         .5 dashar-data.sqlite3.
+    %         .5 hud/.
+    %         .6 example.json.
+    %         .3 HUD/.
+    %         .4 Assets/.
+    %         .5 DashAR/.
+    %         .6 Origin.cs.
+    %         .6 Objects/.
+    %         .7 DashARConfiguration.cs.
+    %         .7 DashARDataAggregatorServer.cs.
+    %         .7 DashARDevice.cs.
+    %         .7 DashARHUD.cs.
+    %         .7 DashARHUDBaseWidget.cs.
+    %         .7 DashARHUDTray.cs.
+    %         .7 DashARHUDTrayAnchor.cs.
+    %         .7 DashARHUDWidget.cs.
+    %         .7 DashARStateMachine.cs.
+    %         .7 HTTPResponse/.
+    %         .8 DashARDataAggregatorServerHUDConfigurationResponse.cs.
+    %         .8 DashARDataAggregatorServerOBDIIResponse.cs.
+    %         .5 NRSDK/.
+    %         .5 Scenes/.
+    %         .6 DashAR HUD - Base Scene.unity.
+    %         .6 DashAR HUD - First Design.unity.
+    %         .6 DashAR HUD - Second Design.unity.
+    %     }
 
 
     \section{Source Code and Configurations}
+        \label{sec:sourcecode}
         \subsection{DAS API}
             \par The following source code and configuration files are some of the primary files that comprise the \gls{das} \gls{api} of the DashAR system. These are the components that run on the \gls{ics}.
 

@@ -2,3 +2,50 @@
 \label{appendix:build}
 
     \par This process will help build an instance of the DashAR system.
+
+    \section{Prerequisites}
+        \par In order to build an instance of the DashAR System, certain requirements must be met first. These devices must be procured:
+
+        \begin{itemize}
+            \item XREAL Air 2 Pro \gls{ar} Glasses
+            \item XREAL Beam Pro
+            \item Raspberry Pi 5
+            \item Raspberry Pi 5 Power Supply
+            \item Power Inverter (150W or greater)
+            \item Surge Protector
+            \item USB Flash Drive (at least 8 GB, for \gls{os} installation)
+            \item microSD Card (at least 64 GB)
+        \end{itemize}
+
+        \par Additionally, the Ubuntu Server 24.04 \gls{lts} \gls{os} installation media needs to be downloaded.
+
+        \subsection{Raspberry Pi Setup}
+            \par Once the proper hardware and \gls{os} install media is procured, the Raspberry Pi may be configured for use.
+
+            \begin{enumerate}
+                \item Image the USB Flash Drive with the Ubuntu Server 24.04 \gls{lts} installation media. For specific directions on how to achieve this, visit \url{https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager}.
+                \item Connect the Raspberry Pi to power, a keyboard, and an external monitor.
+                \item Install the microSD Card into the Raspberry Pi.
+                \item Connect the USB Flash Drive to the Raspberry Pi.
+                \item Run the \gls{os} installation. For specific directions on how to achieve this, visit \url{https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi}.
+            \end{enumerate}
+
+            \par Once Ubuntu Server is installed on the Raspberry Pi, the software stack can be set up.
+
+            \begin{enumerate}
+                \item Install Python 3.12 (or newer). For specific directions on how to achieve this, visit \url{https://wiki.python.org/moin/BeginnersGuide/Download}
+                \item Install Apache. For specific directions on how to achieve this, visit \url{https://ubuntu.com/tutorials/install-and-configure-apache}.
+            \end{enumerate}
+
+            \par Once these packages have been installed, they may be configured for use. Python requires a virtual environment to be created. For specific directions on how to achieve this, visit \url{https://docs.python.org/3.12/library/venv.html}. Once the virtual environment is set up, it is ready for specific module installations, which will be covered in Section (TODO: specify section).
+
+            \par To properly configure Apache for use with DashAR, a site configuration must be created and activated. For specific directions on how to achieve this, visit \url{https://manpages.ubuntu.com/manpages/focal/en/man8/a2ensite.8.html}. The configuration file must be specified as seen in Listing \ref{scl:apacheconf}.
+
+            \begin{singlespacecode}
+                \lstinputlisting[caption={dashar-apache.conf},label={scl:apacheconf},language=HTML]{./../../DashAR/Source/Miscellaneous/dashar-apache.conf}
+            \end{singlespacecode}
+
+            \par Once Apache has been configured for use, the DashAR System may be installed!
+
+    \section{DashAR Installation and Setup}
+        \par (TODO: write about installation and setup process.)
