@@ -1,7 +1,7 @@
 \chapter{Build Instructions}
 \label{appendix:build}
 
-    \par This process will help build an instance of the DashAR system.
+    \par This process will help build an instance of the DashAR system. Please note: due to changing circumstances around today's technology, these steps may change over time. With this in mind, an up-to-date copy of these instructions will be hosted both in the DashAR-Docs repository.
 
     \section{Prerequisites}
         \par In order to build an instance of the DashAR System, certain requirements must be met first. These devices must be procured:
@@ -33,11 +33,12 @@
             \par Once Ubuntu Server is installed on the Raspberry Pi, the software stack can be set up.
 
             \begin{enumerate}
-                \item Install Python 3.12 (or newer). For specific directions on how to achieve this, visit \url{https://wiki.python.org/moin/BeginnersGuide/Download}
+                \item Install Python 3.12. For specific directions on how to achieve this, visit \url{https://wiki.python.org/moin/BeginnersGuide/Download}
                 \item Install Apache. For specific directions on how to achieve this, visit \url{https://ubuntu.com/tutorials/install-and-configure-apache}.
+                \item Configure Git. For specific directions on how to achieve this, for GitHub repositories, visit \url{https://docs.github.com/en/get-started/git-basics/set-up-git}
             \end{enumerate}
 
-            \par Once these packages have been installed, they may be configured for use. Python requires a virtual environment to be created. For specific directions on how to achieve this, visit \url{https://docs.python.org/3.12/library/venv.html}. Once the virtual environment is set up, it is ready for specific module installations, which will be covered in Section (TODO: specify section).
+            \par Once these packages have been installed, they may be configured for use. Python requires a virtual environment to be created. For specific directions on how to achieve this, visit \url{https://docs.python.org/3.12/library/venv.html}. Once the virtual environment is set up, it is ready for specific module installations, which will be covered in Subsection \ref{subsec:icssetup}.
 
             \par To properly configure Apache for use with DashAR, a site configuration must be created and activated. For specific directions on how to achieve this, visit \url{https://manpages.ubuntu.com/manpages/focal/en/man8/a2ensite.8.html}. The configuration file must be specified as seen in Listing \ref{scl:apacheconf}.
 
@@ -45,7 +46,106 @@
                 \lstinputlisting[caption={dashar-apache.conf},label={scl:apacheconf},language=HTML]{./../../DashAR/Source/Miscellaneous/dashar-apache.conf}
             \end{singlespacecode}
 
-            \par Once Apache has been configured for use, the DashAR System may be installed!
+            \par This configuration file is also available in the DashAR repository, under Miscellaneous Sources directory. Once Apache has been configured for use, the DashAR System may be installed.
 
-    \section{DashAR Installation and Setup}
-        \par (TODO: write about installation and setup process.)
+        \subsection{Development System Setup}
+            \par In order to build and deploy the \gls{hud} application, and to easily make changes to the system, a set of tools must be installed on a development system. This can be any computer running Windows or macOS. Most Linux distributions can be used to modify and build the system. However, the tooling around the \gls{hud} application has not been tested in Linux.
+
+            \par The following software needs to be installed on a development system:
+
+            \begin{itemize}
+                \item Python 3.12. It is recommended to use the same version that was installed on the Raspberry Pi.
+                \item Unity Hub, and Unity Engine/Editor 2022.3.24 \gls{lts}. This specific version supports the necessary \gls{nrsdk} version needed later in the process. For specific directions on how to achieve this, visit \url{https://unity.com/download}. Additional documentation on the Unity Engine can be found at \url{https://docs.unity3d.com/2022.3/Documentation/Manual/index.html}.
+                \item An \gls{ide} which supports C\# code. Visual Studio 2022 Community is highly recommended, if developing on Windows. For specific directions on how to achieve this, visit \url{https://visualstudio.microsoft.com/vs/community/}. If using macOS or Linux, Visual Studio Code with the Unity and C\# extensions is recommended. For specific directions on how to achieve this, visit \url{https://code.visualstudio.com/docs/setup/setup-overview}.
+                \item Android Studio. This is recommended for the management of the Android \gls{sdk} used by the XREAL Beam Pro device. For specific directions on how to achieve this, visit \url{https://developer.android.com/studio}.
+            \end{itemize}
+
+            \par Once the development tooling is installed, the specific Android \gls{sdk} and \gls{nrsdk} versions may be installed. For the Android \gls{sdk}, \gls{api} Level 33, also known as Android 13.0 Tiramisu, as well as the Platform and Build Tools are necessary for deployment to the XREAL Beam Pro. For specific directions on how to achieve this, visit \url{https://developer.android.com/studio/intro/update#sdk-manager}.
+
+            \par With the development system ready to use, the DashAR System may be deployed.
+
+    \section{DashAR Deployment and Setup}
+        \subsection{ICS Setup}
+            \label{subsec:icssetup}
+            \par To deploy the \gls{das} \gls{api} onto the \gls{ics}, the following steps must be followed:
+
+            \begin{itemize}
+                \item Verify that your Raspberry Pi is connected to an Ethernet connection. This will allow for direct access to the Raspberry Pi after the WiFi configuration is changed.
+                \item Either through direct interaction with the Raspberry Pi, or over \gls{ssh}, clone the DashAR repository onto the device via Git.
+                \item Navigate to the Miscellaneous directory: DashAR/Source/Miscellaneous/
+                \item Run the shell script entitled ``Setup-DashAR.sh''. This script will set up the directories under DashAR/Source/DAS/ for the system to work. It will also set up the Wi-Fi to behave as an \gls{ap}. In turn, the XREAL Beam Pro will be able to wirelessly connect to the Raspberry Pi. A source code listing of this script can be found in Listing \ref{scl:setupdasharsh}.
+                \item Schedule the shell script ``Start-DashAR.sh'' to run at every reboot. For specific directions on how to achieve this, visit \url{https://manpages.ubuntu.com/manpages/focal/man5/crontab.5.html}. The crontab configuration is shown in Listing \ref{scl:crontab}. Modification will be required to point to the correct locations, both in the crontab file and the ``Start-DashAR.sh'' file.
+            \end{itemize}
+
+            \begin{singlespacecode}
+                \lstinputlisting[caption={Setup-DashAR.sh},label={scl:setupdasharsh},language=bash]{./../../DashAR/Source/Miscellaneous/Setup-DashAR.sh}
+            \end{singlespacecode}
+
+            \begin{singlespacecode}
+                \lstinputlisting[caption={crontab-e.txt},label={scl:crontab},language=bash]{./../../DashAR/Source/Miscellaneous/crontab-e.txt}
+            \end{singlespacecode}
+
+            \par Once the DashAR software is installed on the \gls{ics}, it's important to ensure that the correct Python modules are installed. The requirements.txt can be seen in Listing \ref{scl:pythonrequirementstxt}. An explanation of the requirements.txt file and its use can be found at \url{https://pip.pypa.io/en/stable/user_guide/#requirements-files}.
+
+            \begin{itemize}
+                \item obd version 0.7.2: the module for interfacing with \gls{obdii}.
+                \item tornado version 6.4.1: the module for hosting the HTTP server for the \gls{das} \gls{api}.
+            \end{itemize}
+
+            \begin{singlespacecode}
+                \lstinputlisting[caption={das\_service-requirements.txt},label={scl:pythonrequirementstxt},language=Python]{./../../DashAR/Source/Miscellaneous/das_service-requirements.txt}
+            \end{singlespacecode}
+
+            \par Regarding the Wi-Fi setup, it is important to verify the Raspberry Pi's \gls{ipv4} address, so the \gls{hud} application will function correctly. Unfortunately, early attempts for an auto-lookup function of the server's \gls{ipv4} address within the \gls{hud} application were unsuccessful. A future release will hopefully enable this functionality, making this step obsolete.
+
+            \par To get the server's \gls{ipv4} address, connect to the \gls{ap} emitted by the Raspberry Pi, named ``DashAR-Network'', using any Wi-Fi enabled device. The default password is ``ConnectToDashAR''. When connected, check the assigned gateway's \gls{ipv4} address. The gateway is also the Raspberry Pi. The subnet mask applied, by default, is 255.255.255.0 (in \gls{cidr} notation, /24). Most likely, the gateway \gls{ipv4} address will be 192.168.3.1.
+
+            \par Once the server's \gls{ipv4} address is retrieved, remember it when configuring the \gls{hud} application.
+
+            \par Finally, connect the \gls{obdii}-to-\gls{usb} interface device to the Raspberry Pi. Then, run the command ``ls /dev/ttyUSB*''. This will be the access path for the \gls{obdii} interface. Edit the config.json file in the DAS data directory, updating the key ``OBDII\_ELM327\_DEVICE\_PATH'' with the device path retrieved. The path most likely will be /dev/ttyUSB0 or /dev/ttyUSB1.
+
+            \par With the \gls{ics} now configured, this portion of the DashAR System is now ready for use!
+
+        \subsection{AR Subsystem Setup}
+            \par Two deployment options exist for deploying the \gls{hud} application onto the \gls{ar} Subsystem within the DashAR System. The first option: deploy from a pre-built binary, designed for Android and the \gls{arm} architecture. This binary is distributed as a \gls{apk} file (.apk) via Releases in GitHub. The second option: build and deploy the application from the sources.
+
+            \par The caveat with the pre-built binary is the \gls{ipv4} address of the Raspberry Pi is hard-coded to 192.168.3.1. If the Raspberry Pi's assigned \gls{ipv4} address is assigned 192.168.3.1, then the solution should be rather ``plug-and-play''. If not, the second deployment option is needed.
+
+            \par Two deployment methods exist for the pre-built binary. It can either be downloaded directly to the XREAL Beam Pro, and installed from the File Manager. Another option is to deploy it via the \gls{adb}. The ``download and install'' method may require additional security bypasses authorized by the user through Android.
+
+            \par For \gls{adb} deployments, Developer Mode must be enabled on the XREAL Beam Pro. For specific directions on how to achieve this, visit \url{https://developer.android.com/studio/debug/dev-options#enable}. The text to tap multiple times for XREAL Beam Pro is ``Build Number''. Once enabled, either wireless debugging or USB debugging must be utilized. For more information about \gls{adb} and how to use these debugging modes, visit \url{https://developer.android.com/tools/adb}, and \url{https://developer.android.com/tools/adb#move} for specific directions on installation of apps.
+
+            \par When building from the sources, the project must be opened in the Unity Editor on the development machine. The \gls{hud} application Unity project can be found in the Sources directory, under ``HUD''. Once opened, a few additional packages need to be installed to properly build the project.
+
+            \par First, the \gls{nrsdk} needs to be added to the project. The \gls{sdk} would have been included in the sources, but XREAL applies their own license to the software, making it illegal to distribute independently. Also, due to limited access to the prior versions of the \gls{sdk}, an archival link, established via archive.org, is provided for the specific version needed for DashAR (\gls{nrsdk} 2.3.0). The download is accessible at \url{https://web.archive.org/web/20241215002030/https://nreal-public.nreal.ai/download/NRSDKForUnity_2.3.0_Release_20240909/NRSDKForUnityAndroid_2.3.0.unitypackage}. For specific release notes on this version, visit \url{https://web.archive.org/web/20241004045606/https://docs.xreal.com/Release%20Note/NRSDK%202.3.0}. For specific directions on how to achieve this, visit \url{https://web.archive.org/web/20240918012324/https://docs.xreal.com/Getting%20Started%20with%20NRSDK}.
+
+            \par Once the \gls{nrsdk} is installed to the project, additional packages need to be installed. For specific directions on how to achieve this, visit \url{https://docs.unity3d.com/2022.3/Documentation/Manual/upm-ui-quick.html}.
+
+            \begin{enumerate}
+                \item Newtonsoft Json (com.unity.nuget.newtonsoft-json) version 3.2.1
+                \item TextMeshPro (com.unity.textmeshpro) version 3.0.6
+            \end{enumerate}
+
+            \par Newtonsoft Json is used for parsing the JSON configuration files retrieved from the \gls{das} \gls{api}. TextMeshPro is used for displaying text on the face of the widgets.
+
+            \par Once these packages are installed, the ``build and deploy'' process integrated into Unity Editor can be followed. For specific directions on how to achieve this, visit \url{https://docs.unity3d.com/Manual/android-debugging-on-an-android-device.html}. Please note: the XREAL Beam Pro needs to be on the same Wi-Fi network as the development machine for this to work. Additionally, the Unity Scene named ``DashAR HUD - Base Scene'' needs to be the only scene in the ``Scences In Build'' list.
+
+\section{DashAR in Action}
+    \par After all steps previously mentioned have been successfully completed, the DashAR System should be ready for use! To run the DashAR System, the following steps must be followed:
+
+    \begin{enumerate}
+        \item Connect the \gls{obdii}-to-\gls{usb} (ELM327) interface device to the target automobile's \gls{obdii} port, and one of the \gls{usb}-A ports on the Raspberry Pi. \gls{usb} 3.0 is recommended. These are the ports with the blue plastic supporting the female connector's pins.
+        \item Establish power connectivity. Connect the \gls{usb}-C connector of power supply to the Raspberry Pi, the 120V plug of the power supply into the surge protector, and the 120V plug of the surge protector into the power inverter. Alternatively, the power supply's 120V plug may be connected directly to the power inverter.
+        \item Connect the Power Inverter to one of the target automobile's 12V auxiliary power outlet. Regarding the power inverter type, it's recommended to use one that produces a pure sine wave, instead of one that produces a ``stepped'' sine wave. The stepped sine wave power inverter will work, but at the risk of damaging the Raspberry Pi.
+        \item Start the automobile.
+        \item The initialization process takes a couple of minutes, as the Raspberry Pi has to boot, set up the network infrastructure, establish a connection to the \gls{obdii} port, and start the \gls{das} \gls{api}.
+        \item While waiting for the \gls{ics} to finish startup, the \gls{ar} Subsystem can be started. Power on the XREAL Beam Pro.
+        \item Connect the XREAL Beam Pro to the Wi-Fi network emitted by the Raspberry Pi.
+        \item Connect the XREAL \gls{ar} Glasses to the XREAL Beam Pro using the provided \gls{usb}-C cable. There is a dedicated port on the XREAL Beam Pro for the glasses, indicated with a glasses icon.
+        \item Wear the XREAL \gls{ar} glasses. XREAL's Nebula interface should open automatically. If Nebula does not automatically open, on the home screen, select ``My Glasses'', then ``Enter AR Space''.
+        \item The \gls{hud} application should be displayed in the grid of applications shown in the Nebula interface. Using the XREAL Beam Pro as a remote, use the virtual pointer to select the \gls{hud} application.
+        \item After a few seconds, the \gls{hud} application will open, and the defined \gls{hud} configuration (most likely base.json and default.json) will be loaded.
+        \item The HUD should automatically begin updating the widgets with real-time data collected from the automobile's \gls{obdii} port, as well as the XREAL Beam Pro, such as the compass and time. Please note: for the compass to function properly, the XREAL Beam Pro should be placed in the middle of the automobile, with the screen facing toward the roof, and the camera-end of the device facing the front of the automobile.
+    \end{enumerate}
+
+    \par Congratulations! You have successfully built and deployed the DashAR System!
