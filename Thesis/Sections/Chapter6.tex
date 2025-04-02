@@ -1,4 +1,4 @@
-\chapter{Future Works and Conclusions}
+\chapter{Dilemmas, Future Works and Conclusions}
 \label{chap:future}
 
 \begin{center}
@@ -6,4 +6,78 @@
     - Walt Disney \cite{Disney2001}
 \end{center}
 
-\par Chapter 6 here...
+\par Recalling from Chapter \ref{chap:background}, the first automotive instrument: the speedometer, was created in 1902 by German Engineer Otto Schulze. In the 123 years that have passed since its introduction, the world has seen many evolutionary changes, in various aspects of daily life. The evolution of the automobile: originally considered a horseless carriage, has evolved into a supercomputer on wheels, offering many gauges and data points, accessible via the instrument cluster or \gls{obdii}. The invention and evolution of the computer: an invention which debuted in its modern form some 40 years after the invention of the speedometer, greatly contributed to automobile manufacturers' ability to make cheaper, feature-rich, and more robust automobiles. The evolution of the computer also led to the electronic \gls{hud}, which previously had been strictly optical, for military applications. In parallel to its development, modern, electronic-based \gls{xr} technology evolved, introducing a new method for \gls{hci} and entertainment. Now, with the DashAR System, a convergence of these closely aligned, but somewhat disjointed technologies has occurred.
+
+\par The research performed and discussed in this paper has resulted in a proof-of-concept software system, spanning three distinct hardware subsystems. This software system provides users a new approach to automotive \glspl{hud}: a dynamic interface through \gls{ar} technology. However, being a proof-of-concept system does not mean the DashAR is flawless.
+
+\section{Dilemmas}
+    \subsection{Time Constraints}
+        \par The biggest dilemma faced in this project was time. Due to portions of the project taking longer than anticipated, time became heavily constrained. In turn, features and functions originally planned for the system had to be removed. Since these features were initially planned, they make good candidates for future work that can begin quickly. For example, some examples of ``slipped'' features include system extensions and a \gls{hud} Configurator application.
+
+    \subsection{ICS and DAS API Technical Challenges}
+        \par Additional dilemmas faced during this research are in regards to technical challenges with the \gls{ics} and \gls{ar} subsystems. For the \gls{ics} and \gls{das} \gls{api}, the primary dilemma with hardware was the ability to gracefully power down the device after use. Ideally, the \gls{ics} device would power down if no requests were received after an arbitrary amount of time. However, for many automobiles, as soon as the automobile is powered down, the power supply to the auxiliary power outlets is stopped. Since the \gls{ics} is powered over this type of outlet, it will lose power immediately, resulting in a non-graceful shutdown. This can potentially cause corruption of the storage medium connected to the device, or even damage the device itself.
+
+        \par Some potential solutions include the incorporation of an \gls{ups} or a power bank. A \gls{ups} is ideal, as it can intelligently power off a connected device as soon as external power is lost. This satisfies the previous concern of graceful shutdown.
+
+        \par For the Raspberry Pi in particular, a few \gls{ups} solutions exist. However, these solutions are bulky and in some cases, potentially dangerous. Some solutions expose the batteries to the outside of the case of a Raspberry Pi. This can be problematic, especially if the assembly is placed on a metallic surface.
+
+        \par A safer solution would be a battery bank, which contains the battery cells within an enclosure. Unfortunately, battery banks lack the electronics that enable graceful shutdowns, which defeats the purpose of the battery. Additionally, the battery bank may or may not accept an external power source when in use, which would mean the battery is usable until all energy has depleted.
+
+        \par Fortunately, the Raspberry Pi can be gracefully shut down by pressing its power button. A couple of workaround exist using this method, one incorporates a battery bank, the other does not:
+
+        \begin{itemize}
+            \item Without using a battery bank, press the power button once driving has concluded, and before turning off the automobile. This will delay the user from exiting their automobile immediately after parking, but would achieve graceful shutdown.
+            \item With a battery bank, press the power button once driving has concluded. This can be performed before or after the automobile has been turned off.
+        \end{itemize}
+
+        \par Another problem faced is in regards to internet connectivity. Currently, the \gls{ics} cannot connect to the internet, in order to access third-party \glspl{api} and data. The solutions here are to incorporate a \gls{usb} cellular modem or a hotspot tethered over Ethernet. A Wi-Fi hotspot is not an option, as the Wi-Fi chip on board the Raspberry Pi can only act as an \gls{ap} in operation. It cannot behave as both a \gls{ap} and a network client at the same time. Unfortunately, cellular modems and hotspots can be cost prohibitive, as this requires dedicated service from a cellular provider like AT\&T or Verizon (in the \gls{us}) which can be costly.
+
+        \par Finally, a noticeable problem faced with no clear solution as of yet is in regards to connectivity. While a reliable connection can be established between the \gls{ics} and \gls{ar} subsystems, the connection between the \gls{ics} and an automobile's \gls{obdii} port seems less reliable. On some occasions, the automobile would refuse to connect to the \gls{obdii}-to-\gls{usb} interface adapter, resulting in no data streaming in from the automobile. While not tested, some hypothesized solutions could be trying a different type of \gls{obdii} interface adapter. However, it was indeterminate if the issue was related to this adapter or a specific automobile used for testing.
+
+
+    \subsection{AR Subsystem and HUD Technical Challenges}
+        \par Regarding the \gls{ar} Subsystem, some challenges arose regarding an optimized approach to data requests. DashAR currently operates on a client-server model, which is synchronous. The \gls{hud} application polls the \gls{das} \gls{api} on a fixed, reasonably arbitrary frequency for new data. However, the underlying software used to build the \gls{das} \gls{api} is asynchronous. A potential change that could improve DashAR is to switch to an inherent asynchronous data request methodology, like \gls{pubsub}. In a \gls{pubsub} model, an initial connection is established between the \gls{ar} Subsystem and the \gls{ics}. After this connection is established, the \gls{hud} application would no longer need to poll for data. Instead, as new data is retrieved by the \gls{das} \gls{api}, it would transmit these updates to the \gls{hud}. This can also help the \gls{hud} application know when activity as ceased on the \gls{ics}, and in turn, could automatically close.
+
+        \par Another problem involving the \gls{hud} application is the ability to enforce a distraction-free environment. Since the \gls{hud} application is, technically, a third-party application on an Android-based device, some of the features at the \gls{os} level, that would allow the application to overrule other applications in their ability to run, are inaccessible due to security concerns. If facilities were made available within Android that could allow an application to run in a ``distraction-free'' state, then this would be achievable.
+
+        \par Finally, a concern regarding safe operation of an automobile comes to mind. While the standard operation of the automobile while wearing the \gls{ar} glasses is less of a concern, what is more concerning is the environment in which the \gls{hud} is utilized. Ideally, the \gls{ar} glasses would be usable in any condition: daylight, nighttime, clear weather, rain, snow, fog, etcetera. However, given that the \gls{ar} glasses are very much like a pair of sunglasses, the safest operation can only be achieved during clear conditions and daylight. A potential solution for this problem would be to use a pair of \gls{ar} glasses that have no lenses in them. Thus, removing the concern of their tint while driving.
+
+\section{Future Works}
+    \par While time and technical constraints prevented DashAR from reaching its absolute potential, the research and development that was conducted in this project has provided a trajectory that shows where automotive \glspl{hud} can go. There are many opportunities for future work for this research, involving expansion of functionality, to applications in other modes of transportation.
+
+    \subsection{Execution of UX Test Plan}
+        \par A natural place for future work to begin is with the \gls{ux} test plan. Since this testing was not achievable during this research but a test plan was developed, a researcher could easily take this research, and expand on it.
+
+    \subsection{HUD Configuration Application}
+        \par In order for DashAR to feel like a full-featured, production ready system, some additional functionality is needed. While \gls{hud} customization is achievable through direction manipulation of the configuration files, it is definitely not the ideal approach. It limits the customizations to those with an affinity for automobiles and computing. A method for bridging this gap, allowing the general end use the ability to customize their \gls{hud} layouts would be through a \gls{hud} Configurator application. This app would be a web-based, hosted on the \gls{ics}. This would allow for direct access into the core configuration files of the \gls{das} \gls{api} very easily. Additionally, it removes any requirements to have a device capable of running a platform-native app, such as those specifically designed for Linux, Windows, macOS, iOS, or Android. It also removes any potential need for a cross-platform app, like those written in JavaScript and rendered through the Electron app framework. A web-based app would allow \gls{hud} customizations from any device with a web browser and Wi-Fi capabilities, that can connect directly to the \gls{ics} device's hosted Wi-Fi network. The \gls{hud} Configurator app would also allow for multiple \gls{hud} layouts to be defined and modified. Then, based on the user's specific use case or preference, they could switch between \gls{hud} layouts before they start their drive.
+
+    \subsection{DashAR Extensions}
+        \par Another feature originally planned for this initial development of DashAR is the concept of system extensions. Extensions would provide developers a way to develop modules, in Python, which would connect to \gls{das} \gls{api}'s core interface. In turn, these modules could result in various expansions to the system, including, but not limited to:
+
+        \begin{itemize}
+            \item Integration of third-party services (i.e. navigation assistance, weather data for the local area, trip tracking, etc.)
+            \item Assistance for novice drivers (i.e. road sign recognition, reminders on how to navigate certain traffic patterns and conditions, etc.)
+            \item Object Detection (i.e. pedestrians entering roadway, foreign objects, other automobiles, etc.)
+            \item Multi-perspective Views (i.e. blind spot views, rear views, overhead views, etc.)
+        \end{itemize}
+
+        \par Some extensions may require additional hardware in order to function correctly. For example, object detection and  multi-perspective views would require the introduction of camera arrays and other sensors, such as \gls{lidar} or \gls{radar} sensors. These cameras and sensors are critical in determining the distance between the automobile and surrounding objects, as well as providing a view that can be interpreted by special \gls{cv} software. More information can be gleaned from this data, when incorporating \gls{ml} technology into the processing pipeline. \gls{cv} and \gls{ml} can help make object detection more accurate, as well as the potential to identify specific types of objects.
+
+    \subsection{Operational Expansion}
+        \par Although the pre-developed \gls{hud} layouts feature the same types of data (i.e. speed, RPMs, Fuel Level, Direction, and Time), DashAR has the to expand beyond this. Other data is over \gls{obdii}, including, but not limited to:
+
+        \begin{itemize}
+            \item Temperatures (e.g. Engine Coolant, Intake Air, Ambient Air, etc.)
+            \item Sensor Readings (e.g. Oxygen for combustion, Fuel System status and rail pressure, Evaporator System pressure, etc.)
+            \item \gls{ecu} Error Codes (i.e. codes behind the ``Check Engine'' indicator)
+            \item Fuel Statistics (e.g. Fuel Type, Ethanol Percentage)
+            \item Statistics Relevant when Hauling Additional Loads (e.g. Engine Load, Absolute Load, etc.)
+        \end{itemize}
+
+        \par Many of these data points are readily available, if the \gls{hud} configuration is defined to use it. In some cases, minor changes to the \gls{das} \gls{api} may be needed to facilitate the fetching of the data. Through the use of extensions, data can be retrieved beyond the \gls{obdii} and the \gls{ar} subsystem's compute device. For example, a hypothetical scenario may be related to military operations. If a soldier was navigating an area of operation, an extension could be utilized that offers a view of a map of that area, plus their position within the area. This may help with navigation through areas where roadways are not clearly defined, if at all.
+
+    \subsection{Intelligent Operation}
+        \par In addition to the previously mentioned \gls{cv} and \gls{ml} applications, the automobile could potentially be operated more intelligently while using DashAR. With the proper calculations, it may be possible to alert drivers when they are accelerating at a pace which could damage their automobile or cause safety concerns. Additionally, for truck drivers hauling loads, if the engine's load exceeds defined limits, the system could alert the driver before permanent damage occurs.
+
+\section{Conclusions}
+    \par Ultimately, DashAR was designed from the start to offer improvements to drivers of automobiles over the existing instrument clusters and \gls{hud} options. This research has proven that an \gls{ar}-based \gls{hud} is technically feasible, and offers a foundation for future work to made it grow to its full potential. While some features were not achievable in this research, a good faith effort was made to produce a functional system capable of growth. Where this research ends up going is up to the academic research community at large, as well as software developers looking to contribute to the project.

@@ -6,37 +6,166 @@
     - Thomas A. Edison \cite{Gelb2008}
 \end{center}
 
-\par Some introductory paragraph...
+\par With the implementation of DashAR completed, testing and verification of the developed processes and subsystems are in order. Throughout the development process, integration and unit tests were performed, as new features were introduced. However, it was not until the system was in a stable, usable state where user testing could be performed.
 
-\section{Testing}
-    \par Ideally, during the development of this project, a test plan would have been applied to verify the usefulness of this kind of system. However, due to time constraints, extensive testing was not achievable. However, self-directed testing of the system was performed on two occasions, each using different iterations of the \gls{hud} interface.
+\section{Self-Directed Usability Testing}
+    \par Ideally, during the development of this project, a user test plan would have been established and applied to verify the usefulness of this kind of system. However, due to time constraints, extensive user testing was not achievable. However, self-directed testing of the system was performed, using the first iteration of the \gls{hud} interface.
 
-    \subsection{Usability Tests}
-        \subsubsection{Test 1 (Sunday, November 10th, 2024)}
-            \par Usability Test 1 occurred on Sunday, November 10th, 2024, starting at 3:10 PM \gls{cst}. The test ran for approximately 7 minutes. The first \gls{hud} interface iteration (Figure \ref{fig:dasharhuduiversion1}) was tested on public roads in Auburn, Kentucky. A map of the route with directional indication is visible in Figure \ref{fig:dasharusabilitytest1map}.
+    \par The usability test occurred on Sunday, November 10th, 2024, starting at 3:10 PM \gls{cst}. The test ran for approximately 7 minutes. The first \gls{hud} interface iteration (Figure \ref{fig:dasharhuduiversion1}) was tested on public roads in Auburn, Kentucky. A map of the route with directional indication is visible in Figure \ref{fig:dasharusabilitytestmap}.
 
-            \begin{figure}[h!]
-                \vspace{0.5cm}
-                \centering
-                \includegraphics[scale=0.3]{./Support/Images/DashAR-TestRoute-2024-11-10.png}
-                \caption{DashAR Usability Test 1 Mapped Route}
-                \label{fig:dasharusabilitytest1map}
-            \end{figure}
+    \begin{figure}[h!]
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[scale=0.3]{./Support/Images/DashAR-TestRoute-2024-11-10.png}
+        \caption{DashAR Usability Test Mapped Route}
+        \label{fig:dasharusabilitytestmap}
+    \end{figure}
 
-            \par During the test, weather conditions were fair, and traffic conditions were normal for the area: light, and with minimal stopping. The route started in the parking lot of a local market. From there, the automobile was driven onto West Main Street. After brief continuation on that street, a right turn was made onto \glsxtrshort{us} Highway 68-80's eastbound lanes. The automobile traveled for 3 miles, then turned right onto East Main Street. The automobile drove another 3 miles down Main Street, through downtown Auburn, until the route was completed at the right-hand turn onto \gls{us} Highway 68-80, encountered previously.
+    \par During the test, weather conditions were fair, and traffic conditions were normal for the area: light, and with minimal stopping. The route started in the parking lot of a local market. From there, the automobile was driven onto West Main Street. After brief continuation on that street, a right turn was made onto \glsxtrshort{us} Highway 68-80's eastbound lanes. The automobile traveled for 3 miles, then turned right onto East Main Street. The automobile drove another 3 miles down Main Street, through downtown Auburn, until the route was completed at the right-hand turn onto \gls{us} Highway 68-80, encountered previously.
 
-            \par This first brief test proved successful. The system was able to update values in near real time, as the \gls{ar} subsystem polled the \gls{das} \gls{api} every five frames. The data displayed in the \gls{hud} interface was compared to those visible in the automobile's instrument cluster.
+    \par This first brief test proved successful. The system was able to update values in near real time, as the \gls{ar} subsystem polled the \gls{das} \gls{api} every five frames. The data displayed in the \gls{hud} interface was compared to those visible in the automobile's instrument cluster.
 
-            \par The only widget that did not immediately update was the fuel level widget. This was due to the previously mentioned dilemma around fuel level calculations, resulting in a delayed calculation that only provided results after 1,000 calls to the \gls{api}. Under normal operation, the fuel level would be displayed as a hyphen until the first 1,000 \gls{api} calls could be made. However, before this usability testing formally began, the automobile ran with the system in place, allow the first 1,000 data points to be collected beforehand, resulting in a calculation of 20\% full. On the portion of the route down the 3 mile stretch of Main Street, the fuel level re-calculated, and displayed a drop of 1\%.
+    \par The only widget that did not immediately update was the fuel level widget. This was due to the previously mentioned dilemma around fuel level calculations, resulting in a delayed calculation that only provided results after 1,000 calls to the \gls{api}. Under normal operation, the fuel level would be displayed as a hyphen until the first 1,000 \gls{api} calls could be made. However, before this usability testing formally began, the automobile ran with the system in place, allow the first 1,000 data points to be collected beforehand, resulting in a calculation of 20\% full. On the portion of the route down the 3 mile stretch of Main Street, the fuel level re-calculated, and displayed a drop of 1\%.
 
-            \par An issue of note during this test was regarding the compass widget's output. Since the compass data is retrieved directly from the \gls{ar} subsystem's compute device, placement of this device within the cabin of the automobile was critical for successful operation. The device must be placed with the screen facing upwards, and with the \gls{usb}-C ports facing the rear of the automobile. This would allow the device's magnetometer to be oriented correctly, mimicking the direction of the automobile. Any other orientation would result in errant compass readings. An improvement that could be made to resolve this issue in the future would be to either capture the compass data from the \gls{ics} device, since it is natually fixed in place within the automobile, or by defining a specific setup configuration for how the \gls{ar} subsystem compute device should be oriented during operation.
+    \par An issue of note during this test was regarding the compass widget's output. Since the compass data is retrieved directly from the \gls{ar} subsystem's compute device, placement of this device within the cabin of the automobile was critical for successful operation. The device must be placed with the screen facing upwards, and with the \gls{usb}-C ports facing the rear of the automobile. This would allow the device's magnetometer to be oriented correctly, mimicking the direction of the automobile. Any other orientation would result in errant compass readings. An improvement that could be made to resolve this issue in the future would be to either capture the compass data from the \gls{ics} device, since it is naturally fixed in place within the automobile, or by defining a specific setup configuration for how the \gls{ar} subsystem compute device should be oriented during operation.
 
-            \par Another issue of note was related to the communication between the \gls{ar} subsystem and the \gls{ics} device. At some point after testing formally concluded, it was observed that the two subsystems stopped communicating, resulting in the \gls{hud} not updating. This, in turn, stopped the \gls{das} \gls{api} from collecting \gls{obdii} data from the automobile. Unfortunately, the issue was not reproducible after multiple attempts. However, it revealed a circumstance within the system that had not been explored deeply: error handling when communications fail.
+    \par Another issue of note was related to the communication between the \gls{ar} subsystem and the \gls{ics} device. At some point after testing formally concluded, it was observed that the two subsystems stopped communicating, resulting in the \gls{hud} not updating. This, in turn, stopped the \gls{das} \gls{api} from collecting \gls{obdii} data from the automobile. Unfortunately, the issue was not reproducible after multiple attempts. However, it revealed a circumstance within the system that had not been explored deeply: error handling when communications fail.
 
-            \par Ideally, if the subsystems fail to communicate with each other, over an extensive period of time, the \gls{ar} subsystem would clear the \gls{hud} interface from display, to prevent the user from interpreting the data as the current, instantaneous reading. Additionally, the \gls{hud} application would display an error to the user, in a non-invasive manner, stating there is a problem and the \gls{ar} glasses should be removed until the driver can safely stop the automobile.
+    \par Ideally, if the subsystems fail to communicate with each other, over an extensive period of time, the \gls{ar} subsystem would clear the \gls{hud} interface from display, to prevent the user from interpreting the data as the current, instantaneous reading. Additionally, the \gls{hud} application would display an error to the user, in a non-invasive manner, stating there is a problem and the \gls{ar} glasses should be removed until the driver can safely stop the automobile.
 
-        \subsubsection{Test 2 (Day of Week, Month, Day, Year)}
-            \par This is where Test 2 data will go.
+\section{User Experience Test Plan}
+    \par As previously stated, due to time constraints, formal \gls{ux} testing could not be fully applied against users to verify the effectiveness of DashAR when in use. However, in preparation for future work, as either direct continuation of this research or through extensions of this research, a \gls{ux} test plan is established and provided.
 
-    \subsection{User Experience Tests}
-        \par Subsection about the UX testing plan.
+    \subsection{Objectives}
+        \par In the \gls{ux} test plan, the following objectives were defined:
+
+        \begin{itemize}
+            \item Evaluate the usability of the DashAR System, from system setup to utilization.
+            \item Evaluate how well the \gls{hud} interface aligns with user expectations.
+            \item Identify pain points, inefficiencies, and areas of improvement, from system setup to utilization.
+            \item Validate the effectiveness of the \gls{hud} interface in real-world scenarios.
+        \end{itemize}
+
+        \par The objectives would help researchers glean results from both quantitative and qualitative data, collected from subjects which met defined criteria. These subjects would be the target audience of the DashAR System, and, ideally, would find the greatest benefit from a system like this.
+
+        \subsection{Research Methods}
+            \label{sec:researchmethods}
+            \par A mixed-method (i.e. using qualitative and quantitative data) approach is ideal for this project. How the DashAR System influences someones driving can be analyzed through quantitative (e.g. ``eyes-on-the-road'' time, distraction limitation, accurate real-time updates, system setup time, etc.) and qualitative (e.g. the subject's perception of the system, comfort using the system, ease-of-use of the system, etc.) data.
+
+            \subsubsection{User Interviews and Surveys}
+            \par The initial testing would be achieve through user interviews and surveys. The objective of this step is the gather insights into the user's expectations, needs, and behaviors when learning about and experiencing a new \gls{hud} system. 20 representative users would be targeted for semi-structured interviews, while a detailed survey containing the interview questions would be distributed to a broader audience. In both cases, subjects must meet the following criteria:
+
+            \begin{itemize}
+                \item At least 21 years of age.
+                \item At least 5 years of experience with automobile operation.
+                \item Possess legal, government-issued identification which permits the operation of an automobile on public roads (i.e. Driver's License, \gls{cdl}, REAL ID, etc.)
+                \item Have a valid insurance policy related to automobile operation.
+            \end{itemize}
+
+            \par This criteria was selected because it ensures that subjects have had ample time and experience driving on public roads, and are familiar with traffic patterns, the concept of ``right of way'', and other relevant knowledge. Additionally, it validates from a legal perspective that subjects are permitted to operate automobiles in public, which is essential for testing usage in real-world scenarios. Finally, it ensures researchers and subjects are released from any liability, if an accident were to occur during testing.
+
+            \par For subjects participating via surveys, the presentation and data collection of the surveys should be achieved through a reputable survey platform, such as Qualtrics or Google Forms. These platforms have methods for ensuring survey results have not been modified, outside of any potential modification by the subject, if that functionality is enabled.
+
+            \par Questions during the interview and on the surveys should address the points of interest of this research study. These include:
+
+            \begin{itemize}
+                \item Is the subject familiar with the concept of a \gls{hud}?
+                \item Does the subject have prior experience utilizing a \gls{hud}, either in an automobile or in more traditional settings where \glspl{hud} may be applied, such as military aircraft?
+                \item Does the subject understand the purpose of each gauge within a traditional instrument cluster?
+                \item Does the subject have prior experience utilizing an \gls{ar} apparatus?
+                \item Does the subject have experience setting up electronic appliances, like computers, stereos, and televisions?
+                \item Is the subject familiar with \gls{obdii} and its purpose?
+                \item Has the subject ever used, or witnessed use of, an \gls{obdii} reader/scanner?
+            \end{itemize}
+
+            \par These questions are designed to note any preconceived notions subjects may have regarding automobiles, \glspl{hud}, and \gls{ar} technology, as this may lead to inherent biases. Once the subjects are interviewed or their surveys are collected, information regarding DashAR of this new approach to automotive \glspl{hud}, and the incorporation of \gls{ar} technology in the form of glasses should be dispensed.
+
+            \subsubsection{Heuristic Evaluation}
+                \par Either in parallel, or following the initial user interviews, an evaluation of the heuristical aspects of the research should be performed. A panel of \gls{ux} experts, being individuals who have either worked in the \gls{ux} field for an extended period of time, who posses certifications from a reputable institution (such as the Nielsen Norman Group), have a masters or doctoral degree with a focus on \gls{ux} from a reputable post-secondary educational institution. This panel of experts will use the 10 Usability Heuristics as defined by Jakob Nielsen \cite{Nielsen2024}. These usability heuristics are:
+
+                \begin{itemize}
+                    \item Visibility of System Status (i.e. system feedback and responsiveness.)
+                    \item Match Between the System and the Real World (i.e. natural words, phrases, and concepts around the subject of the system.)
+                    \item User Control and Freedom (i.e. users have the ability to leave a state of the system without permanent consequence.)
+                    \item Consistency and Standards (i.e. clear, unambiguous meaning in words and phrases.)
+                    \item Error Prevention (i.e. eliminate conditions that cause errors, or provide users the ability to confirm an action with relevant information.)
+                    \item Recognition Rather than Recall (i.e. make information presentation intuitive, don't make the user remember specific steps to achieve a task.)
+                    \item Flexibility and Efficiency of Use (i.e. providing shortcuts for experienced users, while retaining ease-of-use for users of any level of experience.)
+                    \item Aesthetic and Minimalist Design (i.e. only display relevant information, keep the user's focus on the active context.)
+                    \item Help Users Recognize, Diagnose, and Recover from Errors (i.e. provide error messages to the users in non-technical language, provide shortcuts to resolve the error.)
+                    \item Help and Documentation (i.e. design a system in such a way where functionality needs no explanation. Provide documentation on how to achieve specific tasks, if necessary.)
+                \end{itemize}
+
+                \par Based on the results of this evaluation, adjustments may need necessary to DashAR and its design, to make it more user-friendly and effective. This evaluation, in conjunction with the user interviews, will provide a bigger picture to the perception of the system.
+
+            \subsubsection{Usability Testing}
+                \par After the initial evaluations and interviews are complete, usability testing can begin. The objective of the usability test is to assess DashAR's efficiency, effectiveness, and user satisfaction. This extends from the setup process of the system, to the utilization of the system. At least 20 subjects, meeting the previously defined criteria for interviews, are to be tested with the system. The usability test goes as follows:
+
+                \begin{enumerate}
+                    \item The subject is provided with the resources necessary to construct the DashAR System. This includes: \
+                        \begin{itemize}
+                            \item Raspberry Pi 5
+                            \item Raspberry Pi 5 Power Supply
+                            \item \gls{obdii}-to-\gls{usb} Interface Cable
+                            \item Surge Protector
+                            \item 12V-to-120V Power Inverter
+                            \item XREAL Beam Pro
+                            \item XREAL Air 2 Pro
+                        \end{itemize}
+                    \item The subject assembles and installs the system into an automobile, either their own automobile or a provided automobile. A time limit of 30 minutes should be set as a baseline. However, the subject should not be stopped if they take longer than 30 minutes.
+                    \item The subject utilizes the system on a predefined route, either in public or on a closed circuit road course.
+                    \item The subjects shuts down and disassembles the system at the conclusion of the utilization. A time limit of three minutes should be set as a baseline for shutdown disassembly.
+                \end{enumerate}
+
+                \par While the test is in progress, a ``think-aloud'' approach is used. This approach allows the subject to express their step-by-step process when engaging with the system. In turn, the researcher can glean how the system makes the user feel, as well as quantitative aspects, such as task success rate, time on task, and error rate. Tooling for collecting data during these tests include Morae: a platform that allows for recording testing sessions \cite{Morae2025}, and Lookback.io: a platform which allows for remote usability testing \cite{Lookback.io2025}.
+
+            \subsubsection{A/B Testing}
+                \par Although the DashAR System supports \gls{hud} customization, it is not expected that the subjects will be familiar with this. Additionally, since the facilities do not currently exist to customize the \gls{hud} in an intuitive way, it is best to provide examples of the \glspl{hud}. With that said, A/B testing becomes an option, for evaluating potential default \gls{hud} configurations.
+
+                \par For A/B testing on DashAR, two designs will be presented to the subjects: the initial design (indicated as ``Design A'', as seen in Figure \ref{fig:dasharhuduiversion1unity}), and the second iteration (indicated as ``Design B'', as seen in Figure \ref{fig:dasharhuduiversion2unity}). These two designs provide identical data points, namely speed, RPMS, fuel level, time, and a compass. Tooling like VWO can assist with integration of data collection facilities for the platform within the \gls{hud} application \cite{Wingify2025}.
+
+                \par With the A/B testing, some subjects are presented with Design A, and others are presented with Design B. In turn, the subjects' responses to either design are recorded, and analyzed for those specific designs' usefulness and ability to progress the subject further along in tasks completion. In the case of A/B testing for DashAR, testing will reveal the optimal widget sizing and positioning, as well as text size on the widgets.
+
+            \subsubsection{Eye-Tracking Testing}
+                \par Finally, given the ``eyes-on-the-road'' metric that is most interesting with a solution like DashAR, eye-tracking analysis is critical. Utilizing software like Tobii Eye Tracker can help researchers track the eye positioning of the subjects as they operate the automobile \cite{Tobii2025}. The success of improved ``eyes-on-the-road'' time is determined based on the subject's ability to retain eye contact on the road for a significant period of time, while being able to read the values from the \gls{hud} and comprehend their meaning.
+
+                \par For example, if a subject was traveling 65 miles per hour, and the researcher asked ``How fast are you going?'', the subject should be able to respond: ``The current speed is 65 miles per hour.'', since they can see their speed in the \gls{hud}. The researcher could then make a request of the subject: ``Please slow the automobile down to 52 miles per hour.'' If the \gls{hud} is functioning as expected, the subject should be able to keep their eyes on the road the entire time, with full awareness of their speed. In this case, the specific speed to achieve is arbitrary, but a non-typical speed (i.e. a speed not generally listed as a speed limit) would be ideal for this testing. If the subject can achieve this without having to look down at the instrument cluster, this would be considered a successful test of the \glspl{hud} effectiveness.
+
+    \subsection{Data Analysis}
+        \par After obtaining all of the relevant information from test subjects and \gls{ux} experts, the collected data can be analyzed. For qualitative data, a thematic analysis can be undertaken, to glean information, such as:
+
+        \begin{itemize}
+            \item How did the subject feel about the \gls{hud} interface, and the DashAR System's approach?
+            \item Did the subject find the \gls{hud} intuitive to use?
+            \item What would the subject change about the layout of the \gls{hud}?
+            \item What additional data points not shown would the subject like to see within the \gls{hud}?
+        \end{itemize}
+
+        \par For quantitative data, statistical analysis is undertaken. There exists many quantitative data points generated by this testing that can be analyzed, both with and without using DashAR. This includes, but is not limited to:
+
+        \begin{itemize}
+            \item ``Eyes-on-the-road'' Time
+            \item Count of Speed Limit Violations
+            \item Recalling passing objects
+            \item Reading and reciting instantaneous data displayed by the \gls{hud}
+        \end{itemize}
+
+        \par For example, if the ``eyes-on-the-road'' time metric is being analyzed, a researcher records how many times the subject looks away from the road and the duration of each of those diversions, with and without using DashAR. Then, after the data is collected, the researcher converts the data into a standardized machine-readable format, such as \gls{dsv} or \gls{json}. Once converted, data science tools, such as Python (with the Pandas and SciPy modules) and \gls{ibm}'s \gls{spss} can be used to interpret the data, providing insights to potential improvements, or detriments, DashAR introduces to the subject, and their ability to drive safely.
+
+    \subsection{Legal Concerns and Ethical Considerations}
+        \par With any project, there are always concerns about the legality and ethics involved with the testing and development of the research. The research into DashAR is no different. One of the biggest concerns is related to the legality of utilizing \gls{ar} technology while driving on public roads, especially in the \gls{us}. As of 2024, there are not many explicit laws against the use of \gls{ar} technology while driving. However, in some \gls{us} states, there are general umbrella laws against distracted driving. By definition, \gls{ar} technology could potentially fall into this category, as it could ``divert the driver's attention from the driving the vehicle.'' \cite{KNI2024}. However, where the legal aspects become gray is that some \gls{us} state laws prohibit certain content from being rendered in technology like \gls{ar} while driving, such as videos and television programs \cite{KNI2024}. Therefore, since DashAR is not rendering any video content, it is potentially okay. A potential solution which would address these concerns would be the utilization of a closed loop circuit, which are generally used for automobile racing. Since these are private roads, they are not subject to the same legal scrutiny. However, since it is a controlled environment, real-world traffic conditions can not be tested.
+
+        \par Regarding the research and testing, two more legal and ethical concerns arise: informed consent and data privacy. Informed consent relates to the interview, survey, and usability testing of the research. It is imperative for the researchers to explain the purposes of the testing, as well as how collected data will be used. Additionally, from a safety aspect, since heavy machinery is involved, a waiver should be provided releasing the researchers from any legal concerns, if an accident were to occur. As previously stated in Section \ref{sec:researchmethods}, possession of insurance policies by researchers, the subjects, or both, in relation to automobile operation, may also be necessary to cover potential damages, if an accident were to occur.
+
+        \par Regarding data privacy, during the informed consent process, it should be stated by the researchers that the data collection that occurs with this research is anonymous and securely stored. Some demographics, like age, gender, years of automobile operation experience, etcetera, may be utilized, to determine correlations in those specifc areas. However, personal identification will not be achievable.
+
+    \subsection{Expected Outcomes}
+        \par Based on the defined research and testing methods, the expected outcomes of the studies are related to:
+
+        \begin{itemize}
+            \item Insights into DashAR's usability and effectiveness as a tool for improving ``eyes-on-the-road'' time while driving.
+            \item Identification of issues related to DashAR's design and implementation, from the setup process, to utilization, to shutdown.
+            \item Recommendations for future iterations of DashAR, either captured from subjects directly, or through analysis of the data.
+        \end{itemize}
+
+        \par These outcomes, along with the entire \gls{ux} test plan, encompass the primary, but currently unproven purpose of DashAR: a potential solution for reducing distracted driving occurrences. Only through \gls{ux} testing can this be confirmed. In the meantime, the DashAR System remains experimental, and offers a glimpse into what the future of automotive instrumentation could be.

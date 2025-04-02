@@ -308,7 +308,10 @@
 }
 
 \newenvironment{abbreviations}{
-    \newpage
+   \begingroup
+   \clearpage
+}{
+    \endgroup
 }
 
 \newenvironment{toc}{}{}
@@ -462,6 +465,7 @@
    \end{center}
    \begingroup
       \let\clearpage\relax
+      \let\cleardoublepage\relax
       \renewcommand{\glossarypreamble}{\vspace{-3.5\baselineskip}} % Reduces space before glossary list
       % \setlength{\glslistdottedwidth}{0pt} % Ensures no extra spacing due to dotted lines
       \begin{spacing}{1.5}
